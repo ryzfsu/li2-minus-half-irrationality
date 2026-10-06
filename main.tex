@@ -1,0 +1,1817 @@
+\documentclass{amsart}
+\usepackage{amssymb,mathtools,array,longtable}
+\usepackage[hidelinks]{hyperref}
+\setlength{\textwidth}{36pc}
+\setlength{\textheight}{53pc}
+\setlength{\oddsidemargin}{\dimexpr(\paperwidth-\textwidth)/2-1in\relax}
+\setlength{\evensidemargin}{\oddsidemargin}
+\setlength{\topmargin}{\dimexpr(\paperheight-\textheight-\headheight-\headsep)/2-1in\relax}
+\hypersetup{pdftitle={Irrationality of the dilogarithm at -1/2},pdfauthor={Ruiyi Zhang}}
+
+\makeatletter
+\def\LT@makecaption#1#2#3{\LT@mcol\LT@cols c{\hbox to\z@{\hss
+  \parbox[t]\textwidth{\normalsize\@tempcnta=64 \@makecaption{#2}{#3}}\hss}}}
+\makeatother
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{proposition}[lemma]{Proposition}
+\numberwithin{equation}{section}
+\numberwithin{table}{section}
+
+\newcommand{\Li}{\operatorname{Li}}
+\newcommand{\Z}{\mathbb{Z}}
+\makeatletter
+\newcommand{\captionof}[1]{\def\@captype{#1}\caption}
+\makeatother
+
+\begin{document}
+
+\title{Irrationality of the dilogarithm at $-1/2$}
+\author{Ruiyi Zhang}
+\address{Independent Researcher, Columbia, Maryland, USA}
+\email{ryzfsu@gmail.com}
+\subjclass[2020]{Primary 11J72; Secondary 33B30}
+\keywords{dilogarithm, irrationality, interpolation determinant, vector equilibrium, Pad\'e approximation}
+
+\begin{abstract}
+We prove that $\operatorname{Li}_2(-1/2)$ is irrational. Irrationality of
+$\operatorname{Li}_2(1/s)$ was known for integers $s\le-5$ and $s\ge6$ by
+work of Hata and of Rhin and Viola, and Prellberg recently proved it for
+$s=-4,5,-3$. We define polynomials $G_m(T)$ with rational coefficients by an
+interpolation determinant. The rank of this determinant modulo primes
+$p$ with $m/5<p<5m/4$
+bounds the denominators of the coefficients. A concavity inequality for a
+logarithmic energy bounds $G_m(\operatorname{Li}_2(-1/2))$. The only
+interval-arithmetic step is the potential certificate. The exact data in
+Table~\ref{tab:arithmetic}, the coefficients of $G_4$, and the $9\times9$
+determinant modulo $11$ are printed and hand-checkable. A congruence modulo
+$11$ shows that $G_m$ has no rational zero for $m=4\cdot11^t$.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}\label{sec:intro}
+
+For $|z|\le1$ let $\Li_2(z)=\sum_{k\ge1}z^k/k^2$.
+Hata \cite[Theorem~1.1]{Ha} proved that $\Li_2(1/s)$ is irrational
+for every integer $s\le-5$ and every $s\ge7$.
+Rhin and Viola settled $s=6$ by their permutation group method
+\cite[Section~6]{RV05}, and later treated negative arguments
+\cite[Theorem~2.1 and Section~4]{RV19}.
+Viola and Zudilin \cite{VZ} introduced a six-parameter family of double
+integrals for dilogarithmic values.
+In 2024 Calegari, Dimitrov and Tang
+\cite[Remark~2.8.2 and Section~15.2]{CDT} listed the integers still open:
+$s\in\{-4,-3,-2,2,3,4,5\}$.
+Prellberg's 2026 preprint \cite[Theorem~1.1]{Pr} proves the cases $s=-4,5,-3$.
+We prove the case $s=-2$.
+
+\begin{theorem}\label{thm:main}
+The number $\Li_2(-1/2)$ is irrational.
+\end{theorem}
+
+By Landen's identity \cite[(25.12.3)]{DLMF},
+$\Li_2(1/3)+\Li_2(-1/2)=-\frac12\log^2(2/3)$, so the case $s=3$ does not
+follow from Theorem~\ref{thm:main}.
+
+Put $\beta=\Li_2(-1/2)$ and $m=4n$. Section~\ref{sec:determinant} defines
+$G_m(T)\in\mathbb Q[T]$ by an interpolation determinant.
+Sections~\ref{sec:divisor} and~\ref{sec:analytic} give, for all large $m$,
+\begin{gather}
+\deg G_m\le m\ \text{by Lemma~\ref{lem:moment-identity}},\qquad
+D_m^*G_m(T)\in\Z[T],
+\qquad D_m^*\in\mathbb Q_{>0},\notag
+\\
+\limsup_{\substack{m\to\infty\\4\mid m}}
+  \frac{\log D_m^*}{m^2}\le\tau<4.33,
+\qquad
+\log|G_m(\beta)|\le-4.36m^2+870m\log m,\label{eq:intro-rates}\\
+\tau=\frac{1881503}{369600}-\frac{53}{48}\log2,
+\qquad 4.36-\tau>0.0347.\notag
+\end{gather}
+If $\beta=u/q_0$ with $q_0>0$, then $q_0^mD_m^*G_m(\beta)\in\Z$.
+Section~\ref{sec:nonvanishing} shows that it is nonzero for
+$m=4\cdot11^t$, $t\ge1$, and \eqref{eq:intro-rates} shows that it tends
+to zero.
+
+Lemma~\ref{lem:reference-bound} is computer-assisted: it uses interval
+arithmetic (Appendix~\ref{app:ver}). The other finite data are printed in
+Tables~\ref{tab:g4-coefficients}, \ref{tab:g-mod-eleven}
+and~\ref{tab:arithmetic} and in \eqref{eq:g4-mod-matrix}; they were also
+rechecked in exact rational arithmetic.
+
+\section{The determinant}\label{sec:determinant}
+
+Put $a=-2$. For $n\ge1$ let
+\begin{equation*}
+\begin{gathered}
+m=4n,\qquad \sigma=k=h=n,\qquad L=m+h,\\
+I=\{\sigma+k,\ldots,\sigma+k+m-1\},\quad
+J=\{\sigma,\ldots,\sigma+2m+h-1\},\quad
+\Lambda=\{1,\ldots,h\},
+\end{gathered}
+\end{equation*}
+all ordered increasingly. For $j\ge0$ put
+\[
+t_j=\sum_{u=1}^{j}\frac{a^{j-u}}u,\qquad
+b_j=\sum_{u=1}^{j}\frac{a^{j-u}}{u^2};\qquad t_0=b_0=0.
+\]
+For $i\in I$, $j\in J$ and $\ell\in\Lambda$ let
+\begin{equation*}
+\begin{gathered}
+C_{ij}=\begin{cases}(a^i-a^j)/(j-i),&i\ne j,\\0,&i=j,\end{cases}
+\quad
+B_{ij}=\begin{cases}(t_i-t_j)/(j-i),&i\ne j,\\b_i,&i=j,\end{cases}\\
+A_{ij}=a^i\delta_{ij},\qquad V_{\ell j}=\frac1{j+\ell},\qquad
+M_{ij}=\int_0^1\!\int_0^1\frac{x^iy^j}{2+xy}\,dx\,dy,
+\end{gathered}
+\end{equation*}
+and put
+\begin{equation}\label{eq:determinant}
+G_m(T)=\det\begin{pmatrix}C\\B-TA\\V\end{pmatrix},
+\end{equation}
+a determinant of size $2m+h$. For an indeterminate $a$ the same formulas
+define
+\[
+G_m(T;a)=\det\begin{pmatrix}C(a)\\B(a)-TA(a)\\V\end{pmatrix}
+\in\mathbb Q[a,T];\qquad G_m(T)=G_m(T;-2).
+\]
+
+\begin{lemma}\label{lem:moment-identity}
+One has $G_m\in\mathbb Q[T]$, $\deg G_m\le m$, and
+\begin{equation}\label{eq:moment-identity}
+M=B+\log(3/2)C-\beta A,\qquad
+G_m(\beta)=\det\begin{pmatrix}C\\M\\V\end{pmatrix}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Write $\lambda=\log(3/2)$ and
+\[
+\mathfrak m_j=\int_0^1\frac{u^j}{2+u}\,du,\qquad
+\mathfrak n_j=\int_0^1\frac{u^j\log(1/u)}{2+u}\,du.
+\]
+Polynomial division and the geometric series give
+\begin{equation*}
+\begin{gathered}
+\mathfrak m_0=\lambda,\quad \mathfrak n_0=-\beta,\qquad
+\mathfrak m_j=a\mathfrak m_{j-1}+\frac1j,\quad
+\mathfrak n_j=a\mathfrak n_{j-1}+\frac1{j^2}\quad(j\ge1),\\
+\mathfrak m_j=a^j\lambda+t_j,\qquad \mathfrak n_j=b_j-a^j\beta.
+\end{gathered}
+\end{equation*}
+The substitution $u=xy$ gives
+\[
+M_{ij}=\frac{\mathfrak m_i-\mathfrak m_j}{j-i}\quad(i\ne j),\qquad M_{ii}=\mathfrak n_i.
+\]
+Hence the first identity in \eqref{eq:moment-identity}. Add $\lambda$
+times each $C$ row to the corresponding row of $B-\beta A$. Only the $m$
+middle rows depend on $T$, and their coefficients are rational.
+\end{proof}
+
+Put $r=3/5$ and
+\[
+\gamma_+(\theta)=re^{i\theta}\quad(0\le\theta\le\pi),\qquad
+\gamma_-(\theta)=re^{i\theta}\quad(\pi\le\theta\le2\pi).
+\]
+With the real intervals oriented increasingly, let
+\begin{equation*}
+\Gamma=[-2,-r]+[r,1]+(c_\Gamma-1)\gamma_++c_\Gamma\gamma_-,\qquad
+c_\Gamma=\frac{\log2+i\pi}{2\pi i},
+\end{equation*}
+a linear combination of paths. For every integer $d$,
+\begin{equation}\label{eq:laurent-moments}
+\int_\Gamma z^{d-1}\,dz=
+\begin{cases}
+(1-a^d)/d,&d\ne0,\\
+0,&d=0.
+\end{cases}
+\end{equation}
+For $d\ne0$ integrate $z^d/d$ on each path. For $d=0$ the real intervals
+give $-\log2$ and the arcs give $i\pi(2c_\Gamma-1)=\log2$.
+
+For $u=(u_1,\ldots,u_d)$ put $\Delta(u)=\prod_{i<j}(u_j-u_i)$. Use variables
+$x=(x_1,\ldots,x_m)$, $v=(v_1,\ldots,v_L)$ and $z=(z_1,\ldots,z_m)$.
+
+\begin{lemma}\label{lem:integral-identity}
+With product differentials $dx\,dv\,dz$,
+\begin{equation}\label{eq:integral-identity}
+G_m(\beta)=
+\frac{2^{3m^2/2-m}}{(m!)^2L!}
+\int_{[0,1]^m}\int_{[0,1]^L}\int_{\Gamma^m}
+ \Phi(x,v,z)\,dz\,dv\,dx,
+\end{equation}
+where
+\begin{equation*}
+\Phi(x,v,z)=
+\frac{\Delta(x)^2\Delta(v)^2\Delta(z)^2
+\displaystyle\prod_{d=1}^{m}\prod_{b=1}^{L}(z_d-v_b)
+\displaystyle\prod_{i'=1}^{m}x_{i'}^{\sigma+k+h}
+\prod_{b=1}^{L}v_b^\sigma\prod_{d=1}^{m}z_d^{-m-k}}
+{\displaystyle\prod_{i'=1}^{m}\prod_{b=1}^{L}(2+x_{i'}v_b)}.
+\end{equation*}
+\end{lemma}
+
+\begin{proof}
+By \eqref{eq:laurent-moments},
+$C_{ij}=a^i\int_\Gamma z^{j-i-1}\,dz$.
+Put $f_i(v)=\int_0^1x^i/(2+xv)\,dx$. Then
+\[
+M_{ij}=\int_0^1f_i(v)v^j\,dv,\qquad
+V_{\ell j}=\int_0^1v^{\ell-1}v^j\,dv.
+\]
+Set $e_\Delta=m(m-1)/2$ and
+$\mathbf w=(z_1,\ldots,z_m,v_1,\ldots,v_L)$.
+Multilinearity in the rows and antisymmetrization, applied to the $L$ rows
+$[M;V]$, then to the $m$ rows $C$, and then to the $m$ functions $f_i$, give
+\begin{equation*}
+G_m(\beta)=\frac1{(m!)^2L!}
+\int_{[0,1]^m\times[0,1]^L\times\Gamma^m}
+D_zD_{zv}D_xD_{xv}\,dx\,dv\,dz,
+\end{equation*}
+where
+\begin{align*}
+D_z&=\det(a^iz_d^{-i-1})_{i\in I,\,1\le d\le m}
+ =(-1)^{e_\Delta}a^{m(\sigma+k)+e_\Delta}\Delta(z)\prod_dz_d^{-\sigma-k-m},\\
+D_{zv}&=\det(\mathbf w_b^j)_{1\le b\le 2m+h,\,j\in J}
+=(-1)^{mL}\Delta(z)\Delta(v)
+  \prod_dz_d^\sigma\prod_bv_b^\sigma\prod_{d,b}(z_d-v_b),\\
+D_x&=\det(x_{i'}^i)_{i\in I,\,1\le i'\le m}
+ =\Delta(x)\prod_{i'}x_{i'}^{\sigma+k},\\
+D_{xv}&=\det\begin{pmatrix}
+((2+x_{i'}v_b)^{-1})_{1\le i'\le m,\,1\le b\le L}\\
+(v_b^{\ell-1})_{1\le\ell\le h,\,1\le b\le L}
+\end{pmatrix}
+ =\frac{a^{e_\Delta}\Delta(x)\Delta(v)\prod_{i'}x_{i'}^h}
+{\prod_{i',b}(2+x_{i'}v_b)}.
+\end{align*}
+The last equality follows from the Cauchy--Vandermonde identity. Explicitly,
+for $t_{i'}=2/x_{i'}$,
+\[
+\det\begin{pmatrix}((2+x_{i'}v_b)^{-1})_{i',b}\\(v_b^{\ell-1})_{\ell,b}\end{pmatrix}
+=\prod_{i'}x_{i'}^{-1}
+\det\begin{pmatrix}((t_{i'}+v_b)^{-1})_{i',b}\\(v_b^{\ell-1})_{\ell,b}\end{pmatrix}.
+\]
+The Cauchy--Vandermonde identity is
+\[
+\det\begin{pmatrix}
+((t_{i'}+v_b)^{-1})_{i',b}\\(v_b^{\ell-1})_{\ell,b}
+\end{pmatrix}
+=\frac{\Delta(t)\Delta(v)}{\prod_{i',b}(t_{i'}+v_b)}.
+\]
+This is the standard Cauchy--Vandermonde identity; see \cite{Krat}.
+Combining this Cauchy--Vandermonde identity with the preceding row-scaling
+identity gives the displayed formula for $D_{xv}$; continuity covers
+$x_{i'}=0$.
+We verify the identity by induction on $m$. At the induction
+step fix $i'$, let $v'=(v_1,\ldots,v_{L-1})$, and let $\widehat t_{i'}$
+denote $t$ with $t_{i'}$ omitted. After multiplying by $v_L+t_{i'}$, the
+residue of the quotient at $v_L=-t_{i'}$ is
+\[
+ (-1)^{i'+L}
+ \frac{\Delta(\widehat t_{i'})\Delta(v')}
+ {\prod_{j\ne i'}\prod_{b<L}(t_j+v_b)}.
+\]
+By induction this is the signed complementary minor on the determinant
+side, so the residues agree. After subtracting them, the difference is a
+polynomial in $v_L$ of degree at most $h-1$ and vanishes at the other
+$L-1$ variables; here $L-1=m+h-1\ge h$. For $h=0$ it tends to zero at
+infinity. The case $m=0$ is the Vandermonde identity.
+
+The product of the four factors is
+$(-1)^{e_\Delta+mL}a^{m(\sigma+k)+2e_\Delta}\Phi$. Since
+$m=4n$, both signs are positive and
+$m(\sigma+k)+2e_\Delta=3m^2/2-m$.
+\end{proof}
+
+An exact calculation gives
+\begin{equation}\label{eq:g4-polynomial}
+16336404000000000\,G_4(T)=\sum_{j=0}^4p_jT^j,
+\end{equation}
+with the coefficients in Table~\ref{tab:g4-coefficients}.
+\begin{table}[ht]
+\centering
+\caption{The integer coefficients in \eqref{eq:g4-polynomial}.}
+\label{tab:g4-coefficients}
+\begin{tabular}{cr}
+$j$&$p_j$\\\hline
+$0$ & $1110544836657482146420241$\\
+$1$ & $9902753530700468230399560$\\
+$2$ & $33113649760730054563219200$\\
+$3$ & $49212514324793465856000000$\\
+$4$ & $27426807951407972352000000$\\
+\end{tabular}
+\end{table}
+
+\section{The divisor}\label{sec:divisor}
+Put
+\[
+N_{\mathrm{den}}=10n-1,\qquad U=11n-1,\qquad d_\ell=\operatorname{lcm}(1,\ldots,\ell),
+ \qquad \mathcal D_m=d_{N_{\mathrm{den}}}^{3m}d_U^n.
+\]
+For $F\in\mathbb Q[T]$ let $v_p(F)=\min_j v_p([T^j]F)$.
+
+\begin{lemma}\label{lem:common-denominator}
+For an indeterminate $a$,
+\begin{equation}\label{eq:lcm-clearer}
+ P_m(a,T):=\mathcal D_mG_m(T;a)\in\Z[a,T].
+\end{equation}
+\end{lemma}
+\begin{proof}
+The denominators of a $C$ entry divide $d_{N_{\mathrm{den}}}$. An off-diagonal $B$ entry is
+a difference of harmonic sums divided by $j-i$, so its denominator divides
+$d_{N_{\mathrm{den}}}^2$; so does that of $b_i$. The denominators of a $V$ entry divide
+$d_U$.
+\end{proof}
+
+\subsection{Residue classes}
+For $\rho>0$ and $0\le x<\rho$ let
+\begin{align}\label{eq:residue-sets}
+ K(x,\rho)&=\{k\ge0:1/2\le x+k\rho<3/2\},\\
+ \mathcal L(x,\rho)&=\{l\ge0:1/4\le x+l\rho<5/2\},\notag
+\\
+ W(x,\rho)&=\{w\ge1:0<w\rho-x\le1/4\},\notag
+\end{align}
+and
+\begin{equation}\label{eq:residue-rank}
+ \mathfrak r(x,\rho)=\min(2|K|+|W|,|\mathcal L|)
+       -\mathbf1_{\{K=\{0\},\,\mathcal L=\{0,1\},\,W=\varnothing\}},
+ \qquad \mathfrak c(\rho)=1+\int_0^\rho \mathfrak r(x,\rho)\,dx.
+\end{equation}
+
+\begin{lemma}\label{lem:residue-bound}
+Let $p$ be an odd prime with $p^2>U$, and let $a=-2$. Then
+\begin{equation}\label{eq:inner-valuation}
+ v_p(G_m)\ge-m-\sum_{u=0}^{p-1}\mathfrak r(u/m,p/m)=-m\mathfrak c(p/m).
+\end{equation}
+\end{lemma}
+\begin{proof}
+Multiply the $C,B,V$ rows by $p,p^2,p$. Write $i=u+kp$, $j=u+lp$ with
+$0\le u<p$. Only the harmonic terms with $p$ in the denominator survive
+modulo $p$, and $a^p\equiv a\pmod p$, so
+\[
+ pt_{u+kp}\equiv a^ut_k,\qquad p^2b_{u+kp}\equiv a^ub_k\pmod p.
+\]
+The scaled $C$ and $B$ entries vanish modulo $p$ between distinct residue
+classes modulo $p$. For a cross-class $B$ entry, the numerator is $p$-integral after
+the row scaling and the remaining factor $p/(j-i)$ is zero modulo $p$;
+within a class, for $j\ne i$, $j-i=p(l-k)$ with $0<|l-k|<p$, so the
+quotient denominator is a unit; diagonal entries have their displayed
+separate values. Thus within a class they reduce to $a^uC_{kl}$ and
+$a^uB_{kl}$, and
+$-p^2TA\equiv0$. A $V$ row reduces to zero unless $\ell+u=pw$; then its
+entry is $1/(l+w)$, without the factor $a^u$. All displayed denominators
+are units because $p^2>U$. So, after permutations, the reduction has blocks
+with $2|K|+|W|$ rows and $|\mathcal L|$ columns.
+
+For $K=\{0\}$, $\mathcal L=\{0,1\}$, $W=\varnothing$ the block, with its rows
+divided by the unit $a^u$, is
+\begin{equation}\label{eq:rank-one-block}
+ \begin{pmatrix}0&1-a\\0&-1\end{pmatrix}
+ =\begin{pmatrix}0&3\\0&-1\end{pmatrix},
+\end{equation}
+of rank one for every odd $p$. Every other block has rank at most the
+minimum of its dimensions. So the rank is at most
+$R=\sum_u \mathfrak r(u/m,p/m)$.
+The matrix has $2m+n$ rows. Row operations over $\Z_{(p)}$, independent of
+$T$, make its last $2m+n-R$ rows divisible by $p$. Subtracting the scaling
+exponent $3m+n$ gives the first inequality in \eqref{eq:inner-valuation}.
+
+Every boundary in \eqref{eq:residue-sets} has the form $x=c_0+b\rho$ with
+$4c_0,b\in\Z$. At $\rho=p/m$, $m=4n$, it lies in $m^{-1}\Z$. The $K,\mathcal L$
+conditions are closed on the left and open on the right in $x$, and the
+$W$ condition is $w\rho-1/4\le x<w\rho$. So $\mathfrak r$ is constant on
+each $[u/m,(u+1)/m)$, and
+\begin{equation}\label{eq:lattice-sum}
+ \sum_{u=0}^{p-1}\mathfrak r(u/m,p/m)=m\int_0^{p/m}\mathfrak r(x,p/m)\,dx.\qedhere
+\end{equation}
+\end{proof}
+
+For $1/5<\rho<5/4$ only $0\le k\le7$, $0\le l\le12$ and $1\le w\le2$
+occur. The sets in \eqref{eq:residue-sets} change only on the lines
+\begin{equation}\label{eq:subdivision-lines}
+\begin{gathered}
+ x=0,\quad x=\rho,\quad
+ x=1/2-k\rho,\quad x=3/2-k\rho\quad(0\le k\le7),\\
+ x=1/4-l\rho,\quad x=5/2-l\rho\quad(0\le l\le12),\\
+ x=w\rho-1/4,\quad x=w\rho\quad(1\le w\le2).
+\end{gathered}
+\end{equation}
+Cut $(1/5,5/4)$ at the values of $\rho$ where two of these lines meet in
+$0\le x\le\rho$, and let $\mathcal C$ be the set of these cut points. On
+each resulting interval the order of the lines in
+$0<x<\rho$ is fixed, so the sets \eqref{eq:residue-sets} are constant on
+each $x$-interval between consecutive lines, and $\mathfrak c$ is affine.
+At both endpoints of each row, its five printed lines
+$\ell_1,\ldots,\ell_5$, in their printed order, satisfy
+\[
+ 0\le \ell_1(\rho)\le \ell_2(\rho)\le\cdots\le\ell_5(\rho)\le\rho.
+\]
+Every other distinct line in \eqref{eq:subdivision-lines} is $\le0$ at
+both endpoints or $\ge\rho$ at both endpoints. Affineness and distinctness
+make the ordering strict in the interior, apart from boundary lines; hence
+no intersection in $0\le x\le\rho$ is omitted.
+Table~\ref{tab:arithmetic} lists the $44$ intervals, the five lines in
+$0<x<\rho$ in increasing order, the values of $\mathfrak r$ on the six
+$x$-intervals, $\mathfrak c(\rho)$ and $\int \mathfrak c$. Each row can be checked by hand from
+\eqref{eq:residue-rank}; the table was computed and rechecked in exact
+rational arithmetic (Appendix~\ref{app:ver}). Summation gives
+\begin{equation}\label{eq:inner-integral}
+ \int_{1/5}^{5/4}\mathfrak c(\rho)\,d\rho=\frac{1121513}{369600}.
+\end{equation}
+The configuration of \eqref{eq:rank-one-block} occupies
+$5/2-2\rho\le x<\rho-1/4$ for $11/12<\rho<1$, and
+$1/2\le x<\rho-1/4$ for $1\le\rho<5/4$. Its contribution to
+\eqref{eq:inner-integral} is
+\begin{equation*}
+ -\int_{11/12}^{1}(3\rho-11/4)\,d\rho
+ -\int_1^{5/4}(\rho-3/4)\,d\rho=-\frac5{48}.
+\end{equation*}
+
+\subsection{Larger primes}
+For $p>5n$ define row potentials $\lambda_C=0$, $\lambda_B(i)$,
+$\lambda_V(\ell)$ and column potentials $\chi(j)$ by
+\begin{equation*}
+\begin{aligned}
+5n<p<6n:&\quad
+ (\lambda_B,\lambda_V,\chi)
+ =(1+\mathbf1_{i\ge p},\,1,\,\mathbf1_{j\ge p+2n}),\\
+6n\le p<8n:&\quad
+ (\lambda_B,\lambda_V,\chi)
+ =(\mathbf1_{i+p<10n},\,1,\,\mathbf1_{j\ge p}),\\
+8n\le p<10n:&\quad
+ (\lambda_B,\lambda_V,\chi)=(0,\,1,\,\mathbf1_{j\ge p}),\\
+10n\le p\le11n-1:&\quad
+ (\lambda_B,\lambda_V,\chi)=(0,\,\mathbf1_{p-\ell\in J},\,0),
+\end{aligned}
+\end{equation*}
+and put
+\begin{equation*}
+ E_p^{\rm out}=
+ \begin{cases}
+ 19n-2p,&5n<p<8n,\\
+ 11n-p,&8n\le p\le U.
+ \end{cases}
+\end{equation*}
+
+\begin{lemma}\label{lem:outer-bound}
+For an odd prime $5n<p\le U$ one has $v_p(G_m)\ge-E_p^{\rm out}$.
+\end{lemma}
+\begin{proof}
+A $C$ entry has a pole only at $j=i+p$, of order at most one. A $B$ entry
+has pole order at most
+\[
+ \mathbf1_{\max(i,j)\ge p}
+ +\mathbf1_{\{\max(i,j)\ge p,\ i\equiv j\pmod p\}},
+\]
+including the double pole of $b_i$ for $i\ge p$. A $V$ entry has a simple
+pole when $p\mid j+\ell$. As $p^2>U$, there are no higher powers.
+
+In the first range every $B$ row has potential at least one, and two if
+$i\ge p$. A collision $j=i+p$ has $j\ge p+2n$, and its column gives the
+second unit. In the second range all $i<p$. The columns $j\ge p$ cover the
+simple $B$ poles and the $C$ poles; a collision needs $i+p<10n$, and its
+row gives the other unit. In the third range $i<p$ and $i+p\ge10n$, so
+only simple $B$ poles remain. In these three ranges every $V$ row has
+potential one, which covers $j+\ell=p$ and $j+\ell=2p$. In the fourth range
+$i,j<p$, only $V$ poles remain, and the rows with $\lambda_V=1$ are those
+containing one. So $\lambda_{\rm row}+\chi_j$ dominates every pole order.
+Multiply each row and column by $p$ to the power of its potential. The
+potentials add up to $(10n-p)+n+(8n-p)$, $(8n-p)+n+(10n-p)$, $n+(10n-p)$
+and $11n-p$ in the four ranges.
+\end{proof}
+
+\subsection{The factor at two}
+\begin{lemma}\label{lem:formal-divisor}
+Let $N_m=\lceil53m^2/48\rceil-m$. Then
+\begin{equation}\label{eq:formal-divisor}
+ P_m(a,T)\in a^{N_m}\Z[a,T].
+\end{equation}
+\end{lemma}
+\begin{proof}
+Work in $\mathbb Q[[a]][T]$. Write
+\[
+ S_j(a)=\sum_{u\ge1}\frac{a^u}{u^j},\qquad
+ v_k(i)=\begin{cases}(i-k)^{-1},&i\ne k,\\0,&i=k,\end{cases}
+ \quad z_k(i)=v_k(i)^2,\quad e_k(i)=\mathbf1_{i=k}.
+\]
+Subtract $S_1(a)$ times each $C$ row from the paired row of $B-TA$.
+Comparison of coefficients, including the diagonal, gives
+\begin{equation}\label{eq:formal-expansion}
+\begin{aligned}
+\begin{pmatrix}C\\B-TA-S_1C\end{pmatrix}
+&=\sum_{k\ge0}a^k
+ \binom{v_k(I)}{-z_k(I)-(T+S_2)e_k(I)}e_k(J)^t\\
+&\quad+\sum_{k\ge0}a^k\binom{e_k(I)}{v_k(I)}v_k(J)^t
+ +\sum_{k\ge0}a^k\binom{0}{-e_k(I)}z_k(J)^t.
+\end{aligned}
+\end{equation}
+For example, the off-diagonal lower entry is
+$\sum_{k\ge0}a^kv_k(i)v_k(j)-(a^i+a^j)/(i-j)^2$, and the diagonal entry is
+$\sum_{k\ge0}a^kv_k(i)^2-a^i(T+S_2)=b_i-Ta^i$. Each coefficient of $a$
+involves finitely many terms.
+
+Expand along the $n$ rows of $V$, and expand each remaining $2m$-row minor
+by the rank-one summands in \eqref{eq:formal-expansion}. A nonzero term
+selects $2m=8n$ distinct rank-one summands. At weight $k$ at most
+\begin{equation*}
+ c_k=1+\mathbf1_{k\in J}+\mathbf1_{k\in I}
+\end{equation*}
+occur: the first summand needs $k\in J$, the third needs $k\in I$. All
+entries, including $T+S_2$, have nonnegative order in $a$. So every term
+has order at least the sum of the $8n$ smallest available weights.
+This use of the infinite expansion is coefficientwise: modulo
+$a^{N_m+1}$ only finitely many $k$ occur, so Cauchy--Binet applies to a
+finite truncation and then gives the asserted formal divisibility.
+
+There is one weight at each $0\le k<n$, two at each $n\le k<2n$, and three
+at each $2n\le k<6n$. Write $5n=3d+\epsilon_0$, $0\le\epsilon_0<3$. The minimum available-weight sum is
+\begin{align*}
+ \sum_{k=0}^{n-1}k+2\sum_{k=n}^{2n-1}k
+ +3\sum_{k=2n}^{2n+d-1}k+\epsilon_0(2n+d)
+ &=\frac{53n^2}{3}-4n+\frac{\epsilon_0(3-\epsilon_0)}6\\
+ &=\left\lceil\frac{53n^2}{3}\right\rceil-4n=N_m.
+\end{align*}
+The minors of $V$ do not depend on $a,T$, so $a^{N_m}\mid G_m(T;a)$ in
+$\mathbb Q[a,T]$. By \eqref{eq:lcm-clearer}, division by the monic
+$a^{N_m}$ gives \eqref{eq:formal-divisor}.
+\end{proof}
+
+\subsection{Summation over primes}
+\begin{lemma}\label{lem:integerization}
+For every $m=4n$, there is a rational number $D_m^*>0$ with
+$D_m^*G_m(T)\in\Z[T]$ and
+\[
+ \log D_m^*\le\tau m^2+o(m^2),\qquad
+ \tau=\frac{1881503}{369600}-\frac{53}{48}\log2
+ =4.325296633153372\ldots,
+\]
+so that $4.36-\tau>0.0347$.
+\end{lemma}
+\begin{proof}
+Put $e_0(p)=3m\lfloor\log_pN\rfloor+n\lfloor\log_pU\rfloor=v_p(\mathcal D_m)$.
+For odd $p$, with the first line taking precedence, let
+\begin{equation}\label{eq:prime-exponents}
+ E_p=\begin{cases}
+ e_0(p),&p\le m/5\ \text{or}\ p^2\le U\ \text{or}\
+                p/m\in\mathcal C\ \text{or}\ p=5m/4,\\
+ m\mathfrak c(p/m),&m/5<p<5m/4,\\
+ E_p^{\rm out},&5m/4<p\le U,\\
+ 0,&p>U,
+ \end{cases}
+\end{equation}
+and
+\[
+ D_m^*=2^{e_0(2)-N_m}\prod_{p\ {\rm odd}}p^{E_p}.
+\]
+By \eqref{eq:lattice-sum}, $m\mathfrak c(p/m)\in\Z$. Lemmas~\ref{lem:common-denominator},
+\ref{lem:residue-bound}, \ref{lem:outer-bound} and~\ref{lem:formal-divisor}
+give $v_p(D_m^*G_m)\ge0$ for every $p$. The exponent at two may be
+negative.
+
+For all sufficiently large $m$, $p>m/5$ implies $p^2>U$. Put
+\[
+ \vartheta(y)=\sum_{p\le y}\log p,\qquad
+ \eta_{\rm PNT}(X)=\sup_{y\ge X}|\vartheta(y)/y-1|.
+\]
+By the prime number theorem, $\eta_{\rm PNT}(X)\to0$.
+For an affine $f$ on $[t_0,t_1]\subset[1/5,11/4]$, Stieltjes integration by
+parts gives
+\begin{equation*}
+ m\sum_{t_0m<p<t_1m} f(p/m)\log p
+ =m^2\int_{t_0}^{t_1} f(\rho)\,d\rho
+  +O\bigl(\eta_{\rm PNT}(m/5)m^2+m\log m\bigr).
+\end{equation*}
+There are finitely many pieces, and the excluded primes at cut points
+contribute $O(m\log m)$. For $p\le m/5$ the first powers contribute
+$(13m/4)\vartheta(m/5)=(13/20)m^2+o(m^2)$, and the higher powers, including
+those of two,
+\[
+ O\Bigl(m\sum_{j=2}^{\lfloor\log_2U\rfloor}\vartheta(U^{1/j})\Bigr)
+ =O(m^{3/2}\log(3m)).
+\]
+Subtract $N_m\log2$ once. For $p>5m/4$ the exponent is $m\mathfrak c_{\rm out}(p/m)$
+with
+\[
+ \mathfrak c_{\rm out}(\rho)=\begin{cases}
+ 19/4-2\rho,&5/4<\rho<2,\\
+ 11/4-\rho,&2\le\rho\le11/4,
+ \end{cases}
+ \qquad
+ \int_{5/4}^{11/4}\mathfrak c_{\rm out}(\rho)\,d\rho=\frac98+\frac9{32}=\frac{45}{32}.
+\]
+With \eqref{eq:inner-integral},
+\[
+ \frac{13}{20}+\frac{1121513}{369600}+\frac{45}{32}
+ -\frac{53}{48}\log2=\tau.
+\]
+The total error is
+$O(\eta_{\rm PNT}(m/5)m^2+m^{3/2}\log(3m))=o(m^2)$.
+\end{proof}
+
+\section{Analytic estimate}\label{sec:analytic}
+
+In \eqref{eq:integral-identity} there are $m$, $L=5m/4$ and $m$ variables
+$x$, $v$, $z$. Let
+\[
+ \mathcal K_x=\mathcal K_v=[0,1],\qquad
+ \mathcal K_z=[-2,-r]\cup[r,1]\cup\{z:|z|=r\}.
+\]
+For $i\in\{x,v,z\}$, let
+\[
+ \mathcal K_i^+=\{q\in\mathbb C:\operatorname{dist}(q,\mathcal K_i)\le3/4096\}.
+\]
+The sets $\mathcal K_z^+$ avoid zero, and $\log|2+xv|$ is bounded on
+$\mathcal K_x^+\times\mathcal K_v^+$.
+For positive measures $\mu=(\mu_x,\mu_v,\mu_z)$ of masses $(1,5/4,1)$ put
+\begin{align*}
+ I(\sigma,\sigma')&=\iint\log|u-v|\,d\sigma(u)\,d\sigma'(v),\qquad
+ D(\sigma,\sigma')=\iint\log|2+uv|\,d\sigma(u)\,d\sigma'(v),\\
+ \mathcal Q(\mu)&=I(\mu_x,\mu_x)+I(\mu_v,\mu_v)+I(\mu_z,\mu_z)
+                +I(\mu_v,\mu_z)-D(\mu_x,\mu_v),
+\\
+ \mathcal E(\mu)&=\frac32\log2+\mathcal Q(\mu)
+ +\frac34\int\log|u|\,d\mu_x
+ +\frac14\int\log|u|\,d\mu_v
+ -\frac54\int\log|u|\,d\mu_z.
+\end{align*}
+For a fixed $\nu$ let
+$\mathcal U_i(q)=\int\log|q-t|\,d\nu_i(t)$,
+$D_i(q)=\int\log|2+qt|\,d\nu_i(t)$, and
+\begin{align*}
+ F_x(q)&=2\mathcal U_x(q)-D_v(q)+\tfrac34\log|q|,\\
+ F_v(q)&=2\mathcal U_v(q)+\mathcal U_z(q)-D_x(q)+\tfrac14\log|q|,
+\\
+ F_z(q)&=2\mathcal U_z(q)+\mathcal U_v(q)-\tfrac54\log|q|.
+\end{align*}
+
+\begin{lemma}\label{lem:concavity}
+On triples of positive measures $\mu=(\mu_x,\mu_v,\mu_z)$ of masses
+$(1,5/4,1)$ with finite absolute logarithmic self-integrals and
+$\operatorname{supp}\mu_x\subseteq\mathcal K_x^+$,
+$\operatorname{supp}\mu_v\subseteq\mathcal K_v^+$, and
+$\operatorname{supp}\mu_z\subseteq\mathcal K_z^+$, respectively, the functional
+$\mathcal Q$ is concave. The same statement applies when all supports lie
+in the smaller sets $\mathcal K_x,\mathcal K_v,\mathcal K_z$.
+\begin{equation}\label{eq:dual-inequality}
+ \mathcal E(\mu)\le\frac32\log2-\mathcal Q(\nu)
+            +\int F_x\,d\mu_x+\int F_v\,d\mu_v+\int F_z\,d\mu_z.
+\end{equation}
+\end{lemma}
+\begin{proof}
+For positive compactly supported measures $\eta_1,\eta_2$ in a disk $D$
+strictly containing their supports, the Green kernel of $D$ is
+$-\log|u-v|$ plus a bounded term. Cauchy--Schwarz for its energy, together
+with the finite absolute self-integrals, gives absolute logarithmic
+cross-integrability. Thus signed differences of the measures used below have
+finite absolute logarithmic energy.
+
+For a real signed measure $\sigma=\sigma_+-\sigma_-$ of mass zero, with
+positive compactly supported parts of finite absolute logarithmic
+self-integrals, write $I_{\rm ST}=-I$ for the sign convention in
+Saff--Totik. Their positivity lemma gives
+\[
+ \|\sigma\|^2=-I(\sigma,\sigma)\ge0.
+\]
+\cite[Lemma~I.1.8]{ST}. For smooth $\sigma$, the identity
+\[
+ -I(\sigma,\sigma)=\frac1{2\pi}\int_{\mathbb C}
+ |\nabla\mathcal U^\sigma|^2\,dA
+\]
+follows from $\Delta\mathcal U^\sigma=2\pi\sigma$ and integration by
+parts. The boundary term vanishes because the mass is zero. Approximation
+extends this Dirichlet-integral formula to the stated finite-energy
+measures. Put
+$\langle\sigma,\sigma'\rangle=-I(\sigma,\sigma')$.
+
+Let $(\sigma_x,\sigma_v,\sigma_z)$ have mass zero in each coordinate, and
+first let the $v$-support avoid zero. Put $R(v)=-2/v$. Then
+\begin{align*}
+ \log|2+xv|&=\log|x-R(v)|+\log|v|,\\
+ \log|R(v)-R(z)|&=\log2+\log|v-z|-\log|v|-\log|z|,
+\end{align*}
+and the one-variable terms integrate to zero. With $\sigma'_x=\sigma_x$,
+$\sigma'_v=R_*\sigma_v$ and $\sigma'_z=-R_*\sigma_z$,
+\begin{align*}
+ \mathcal Q(\sigma)
+ &=-\|\sigma'_x\|^2-\|\sigma'_v\|^2-\|\sigma'_z\|^2
+          +\langle \sigma'_x,\sigma'_v\rangle+\langle \sigma'_v,\sigma'_z\rangle\\
+ &=-\tfrac12\bigl(\|\sigma'_x-\sigma'_v\|^2+\|\sigma'_v-\sigma'_z\|^2+\|\sigma'_x\|^2+\|\sigma'_z\|^2\bigr)\le0.
+\end{align*}
+The $z$-supports here avoid zero. In general fix a probability $\lambda$
+with smooth density supported in $[1/2,3/4]$, and put
+\[
+ \sigma_{v,\zeta}
+ =\sigma_v|_{\{|v|>\zeta\}}
+   -\sigma_v(\{|v|>\zeta\})\lambda.
+\]
+It has mass zero and support away from zero, so
+$\mathcal Q(\sigma_x,\sigma_{v,\zeta},\sigma_z)\le0$. Finite energy excludes
+an atom at zero, so the coefficient of $\lambda$ tends to zero as
+$\zeta\to0$. The cross-integrability just proved makes the logarithmic
+kernels integrable against the total variations, and the potential of
+$\lambda$ is bounded on compact sets. Dominated convergence in the original
+coordinates gives
+\[
+ \mathcal Q(\sigma_x,\sigma_{v,\zeta},\sigma_z)
+ \longrightarrow\mathcal Q(\sigma_x,\sigma_v,\sigma_z)\le0.
+\]
+The kernel $\log|2+xv|$ is bounded on the sets specified above. For the
+reference and the smoothed measures below also
+$\int|\log|v||\,d|\sigma_v|(v)<\infty$: the reference has bounded interval
+density, and the smoothed measures stay away from zero. With
+\[
+ |\log|R(v)-R(w)||\le\log2+|\log|v-w||+|\log|v||+|\log|w||
+\]
+and the first kernel identity, dominated convergence also applies to the
+inverted pairings.
+
+Expand $\mathcal Q(\nu+\sigma)$ with $\sigma=\mu-\nu$. The quadratic part
+is nonpositive and $d\mathcal Q_\nu(\nu)=2\mathcal Q(\nu)$. Adding the
+linear terms gives \eqref{eq:dual-inequality}.
+\end{proof}
+
+\begin{lemma}[computer-assisted]\label{lem:reference-bound}
+There is a positive $\nu$ of masses $(1,5/4,1)$, with $50$, $52$, $62$
+constant-density intervals on $[0,1]$, $[0,1]$, $[-2,-3/5]$ and $157$
+Poisson kernels on $|z|=3/5$, all with rational data, such that
+\begin{equation*}
+ F_x\le K_x=-4.626,\qquad F_v\le K_v=-4.480,
+ \qquad F_z\le K_z=-0.090
+\end{equation*}
+on $[0,1]$, $[0,1]$ and $[-2,-3/5]\cup[3/5,1]\cup\{|z|=3/5\}$, $\mathcal Q(\nu)$
+satisfies \eqref{eq:Q-enclosure}, and, on the disk $|q|\le\delta=1/250$,
+\begin{equation}\label{eq:endpoint-bounds}
+ F_x(q)<-6.2823007011,\qquad F_v(q)<-4.4935082437.
+\end{equation}
+The interval densities are at most $131,153,43$, and the Poisson densities
+\eqref{eq:poisson-density} add up to at most $24$.
+\end{lemma}
+\begin{proof}
+The rational data of $\nu$ are printed in Tables~\ref{tab:reference-intervals}
+and~\ref{tab:reference-poisson}. An interval entry $(t_0,t_1,w)$ is
+$w\,dt/(t_1-t_0)$ on $[t_0,t_1]$. A Poisson entry
+$(c,w)$, $|c|<r$, is
+\[
+ \frac{w(r^2-|c|^2)}{2\pi|re^{i\theta}-c|^2}\,d\theta
+ \qquad(0\le\theta\le2\pi).
+\]
+The file \nolinkurl{anc/analytic/reference.json} repeats these tables for
+the verification program.
+The weights are positive, the three masses are exact, and the Poisson
+entries are invariant under conjugation. An interval has potential
+\[
+ \frac{w}{t_1-t_0}\operatorname{Re}\{f(q-t_0)-f(q-t_1)\},\qquad f(u)=u\log u-u,
+\]
+with $u\log|u|-u$ on the real line. A Poisson entry has potential
+\begin{equation}\label{eq:poisson-potential}
+ w\begin{cases}
+ \log|r^2-q\overline c|-\log r,&|q|\le r,\\
+ \log|q-c|,&|q|\ge r.
+ \end{cases}
+\end{equation}
+Let $U_P(q)$ denote the Poisson contribution to the $z$-potential. Put
+\[
+ M_P=\sum_c w_c=\frac{26460009509}{40000000000},\qquad
+ W_P:=M_P\log(151/250).
+\]
+Since $r+\delta=151/250$, the 157 Poisson rows give
+\[
+ \sup_{|q|\le\delta}U_P(q)\le W_P.
+\]
+Real interval energies use $g(u)=\tfrac12u^2\log|u|-\tfrac34u^2$, with
+$g''(u)=\log|u|$. For the denominator,
+\[
+\log(2+xv)=\log2+
+\sum_{j=1}^{420}\frac{(-1)^{j+1}(xv/2)^j}{j}+R_{420},
+\qquad |R_{420}|\le\frac{2(1/2)^{421}}{421}.
+\]
+The pair decomposition and its outward enclosures are printed in
+Table~\ref{tab:q-certificate}. Since the total $x$--$v$ mass is $5/4$,
+the integrated remainder is at most
+\[
+\frac54\frac{2(1/2)^{421}}{421}
+=\frac{5}{2\cdot421\cdot2^{421}}<1.10\times10^{-129}.
+\]
+
+The bounds for $F_x,F_v,F_z$ are proved by subdivision in Arb ball
+arithmetic \cite{Arb}. On a real subinterval, each interval-potential
+component is quasi-convex: away from $t_0,t_1$, its derivative has the sign of
+$\log|q-t_0|-\log|q-t_1|$, which changes from negative to positive at
+$(t_0+t_1)/2$, while the negative denominator term is convex. Each
+Poisson-entry potential is treated quasi-convexly across $|q|=r$ by comparing
+its one-sided derivative signs at $q=\pm r$; a row containing $r=3/5$
+includes evaluation at $q=r$ explicitly. Thus the component maximum is
+bounded by the relevant endpoint values. On a subarc of the circle, the
+largest distance to a pole is at an endpoint or at the antipodal point.
+Interval sign tests exclude the antipodal point when possible. If
+it lies on the subarc, or if a sign test is inconclusive, the full-circle
+upper bound is used; otherwise the endpoint values suffice. Table~\ref{tab:analytic-bounds}
+covers the real paths and the upper semicircle; conjugation covers the lower one.
+On the subintervals
+meeting zero the positive term $\frac34\log|q|$ or $\frac14\log|q|$ is
+increasing in $|q|$ and equals $-\infty$ at zero. For a real pole $t$ and
+$q=re^{i\theta}$,
+$|re^{i\theta}-t|^2=r^2+t^2-2rt\cos\theta$; this is monotone in
+$\theta\in[0,\pi]$ for each fixed sign of $t$, which justifies the endpoint
+or antipodal alternatives.
+
+On $|q|\le\delta$ use $|q-t|\le|t|+\delta$, $|2+qt|\ge2-\delta$ and
+$\log|r^2-q\overline c|-\log r\le\log(r+\delta)$ with the same primitives;
+this gives \eqref{eq:endpoint-bounds}. An interval has density
+$w/(t_1-t_0)$. With respect to arclength, a Poisson entry has density at
+most
+\begin{equation}\label{eq:poisson-density}
+H_c=\frac{w(r+|c|)}{2\pi r(r-|c|)}.
+\end{equation}
+The endpoint majorants and disk bounds are printed in
+Table~\ref{tab:endpoint-certificate}; the density checks are printed in
+Table~\ref{tab:density-certificate}. These density checks are rational, by an integer square-root bound for
+each $|c|^2$ and by $\pi>333/106$, which follows from Machin's formula:
+\[
+ 16\left(\frac15-\frac1{3\cdot5^3}
+       +\frac1{5\cdot5^5}-\frac1{7\cdot5^7}\right)-\frac4{239}
+ =\frac{333}{106}+\frac{3418213}{41563593750}.\qedhere
+\]
+\end{proof}
+
+For this $\nu$ put
+\[
+ \alpha=\mathcal Q(\nu)-\tfrac32\log2-K_x-\tfrac54K_v-K_z;
+\]
+by \eqref{eq:alpha-enclosure}, $\alpha>4.365$.
+
+\begin{lemma}\label{lem:potential-modulus}
+Put $(H_x,H_v,H_z)=(131,153,67)$. If $0<d=|q-q'|\le1/16$, then
+\begin{equation*}
+ |\mathcal U_i(q)-\mathcal U_i(q')|\le8H_i d(1+|\log d|).
+\end{equation*}
+\end{lemma}
+\begin{proof}
+Let $E\subset\mathbb R$ be a measurable set of measure $\ell_E\le9/5$ containing
+the real support. By the triangle inequality,
+\[
+ |\log|q-t|-\log|q'-t||
+ \le\log\Bigl(1+\frac d{|q-t|}\Bigr)
+      +\log\Bigl(1+\frac d{|q'-t|}\Bigr).
+\]
+Replacing $q$ or $q'$ by its real part increases each integral. Symmetric
+decreasing rearrangement gives
+\[
+ \int_E\log\Bigl(1+\frac d{|q-t|}\Bigr)\,dt
+ \le2\int_0^{\ell_E/2}\log(1+d/t)\,dt
+ \le2d\Bigl(1+\log\Bigl(1+\frac{\ell_E}{2d}\Bigr)\Bigr),
+\]
+so
+\[
+ \int_E|\log|q-t|-\log|q'-t||\,dt
+ \le4d\Bigl(1+\log\Bigl(1+\frac{\ell_E}{2d}\Bigr)\Bigr)
+ \le4d\Bigl(1+\log\Bigl(1+\frac9{10d}\Bigr)\Bigr)
+ <8d(1+|\log d|),
+\]
+by $d^2+9d/5\le149/1280<1$. The interval components have disjoint
+interiors, so multiply by the density bound. By
+\eqref{eq:poisson-potential}, a Poisson component is Lipschitz with
+constant at most $w/(r-|c|)$, and by \eqref{eq:poisson-density}
+\[
+ \frac{w}{r-|c|}=\frac{2\pi r}{r+|c|}H_c\le2\pi H_c<8H_c.
+\]
+Summation and $43+24=67$ give the bound for $\mathcal U_z$.
+\end{proof}
+
+\begin{lemma}\label{lem:analytic-bound}
+If $m=4n\ge64$, then
+\begin{equation*}
+ \log|G_m(\beta)|\le-4.36m^2+870m\log m.
+\end{equation*}
+\end{lemma}
+\begin{proof}
+Expand $\Gamma^m$ in \eqref{eq:integral-identity} into products of its four
+oriented pieces. On each piece use normalized arclength, and keep its
+coefficient and tangent phase until taking absolute values. Since
+$|c_\Gamma-1|=|c_\Gamma|$, the absolute weights add up to
+\begin{equation*}
+ \varkappa=(2-r)+(1-r)+2\pi r|c_\Gamma|
+   =\frac95+\frac35\sqrt{\pi^2+\log^2 2},
+\end{equation*}
+so the paths contribute a factor at most $\varkappa^m$. Only positive
+measures enter Lemma~\ref{lem:concavity}.
+
+Put $\epsilon=m^{-2}$ and $\eta=3\epsilon$. Replace every atom $u$ by the
+uniform measure of mass $1/m$ on the circle
+$u+2i\epsilon+\epsilon e^{i\theta}$. The resulting $\mu_x,\mu_v,\mu_z$
+have masses $(1,5/4,1)$ and finite energy. The common translation
+preserves differences, so by subharmonicity in each variable averaging
+increases every positive logarithmic pair. Each circle has energy
+$\log\epsilon$, so removing the diagonal adds
+\begin{equation*}
+ -(m+5m/4+m)\log\epsilon=\frac{13}{2}m\log m.
+\end{equation*}
+The positive endpoint terms also increase, since
+\begin{equation}\label{eq:circle-mean-endpoint}
+ \frac1{2\pi}\int_0^{2\pi}
+ \log|u+2i\epsilon+\epsilon e^{i\theta}|\,d\theta
+ =\log|u+2i\epsilon|\ge\log u\quad(u>0).
+\end{equation}
+If an original factor vanishes, there is nothing to prove.
+
+For $m\ge64$ the negative kernels satisfy the derivative bounds
+\begin{equation}\label{eq:smooth-derivatives}
+ L_D=\frac{101}{100},\qquad L_z=\frac{167}{100},\qquad
+ \frac{1+\eta}{2-2\eta-\eta^2}<L_D,\qquad\frac1{r-\eta}<L_z,
+\end{equation}
+since a displacement of at most $\eta$ in each coordinate gives
+$|2+xv|\ge2-2\eta-\eta^2$ and $|z|\ge r-\eta$. So the negative terms
+contribute at most
+\begin{equation*}
+ A_0=6\cdot\frac54 L_D+3\cdot\frac54 L_z=\frac{1107}{80}.
+\end{equation*}
+Discard the factorials and $2^{-m}$ in \eqref{eq:integral-identity}. Then
+the logarithm of the integrand, with its prefactor, is at most
+\begin{equation}\label{eq:smoothed-integrand}
+ m^2\mathcal E(\mu)+\frac{13}{2}m\log m+A_0.
+\end{equation}
+
+We bound the three fields in \eqref{eq:dual-inequality} on the smoothed
+measures. Put $\omega=1+\log(m^2/3)$.
+Lemma~\ref{lem:potential-modulus} with $d\le3\epsilon$ gives the
+coefficients
+\begin{gather*}
+ C_x=16H_x=2096,\qquad
+ C_v=16H_v+8H_z=2984,\qquad
+ C_z=16H_z+8H_v=2296,\\
+ C_x+\tfrac54C_v+C_z=8122,
+\end{gather*}
+and a weighted error at most $3\cdot8122\,\epsilon\omega$.
+
+For an $x$ or $v$ center $u<\delta-3\epsilon$ the whole circle lies in
+$|q|<\delta$, where \eqref{eq:endpoint-bounds} applies. Otherwise
+$u\ge\delta-3\epsilon\ge\delta/2$, and \eqref{eq:circle-mean-endpoint}
+gives
+\[
+ \log|u+2i\epsilon|-\log u
+ =\frac12\log(1+4\epsilon^2/u^2)
+ \le\frac{8\epsilon^2}{\delta^2}.
+\]
+So the positive terms add at most $(17/16)8\epsilon^2/\delta^2$. By
+\eqref{eq:smooth-derivatives}, the negative terms in the three fields add
+at most $A_0\epsilon$. At $m=64$, and hence for all larger $m$,
+\begin{equation*}
+ \frac{17}{16}\frac{8\epsilon}{\delta^2}+A_0
+ \le\frac{265625}{2048}+\frac{1107}{80}<200.
+\end{equation*}
+So the total smoothing error is at most
+$(3\cdot8122+200)\epsilon\omega=24566\epsilon\omega<26000\epsilon\omega$.
+Insert the lower endpoint $q_-$ of \eqref{eq:Q-enclosure} in
+\eqref{eq:dual-inequality}. As
+\[
+ -\alpha<\frac32\log2-q_-+K_x+\frac54K_v+K_z<-4.36,
+\]
+we get $m^2\mathcal E(\mu)\le-4.36m^2+26000\omega$. With
+\eqref{eq:smoothed-integrand} and the path factor,
+\[
+ \log|G_m(\beta)|\le-4.36m^2+26000(1+\log(m^2/3))
+              +\frac{13}{2}m\log m+m\log \varkappa+A_0.
+\]
+Divided by $m\log m$, no positive term increases for $m\ge64$. At $m=64$
+their sum is
+\begin{equation*}
+ C_*=
+ \frac{26000(1+\log(64^2/3))}{64\log64}
+ +\frac{13}{2}+\frac{\log \varkappa}{\log64}
+ +\frac{1107}{80\cdot64\log64}
+ <810<870.\qedhere
+\end{equation*}
+\end{proof}
+
+\section{Nonvanishing}\label{sec:nonvanishing}
+
+Let $\Z_{(11)}=\{u/v\in\mathbb Q:11\nmid v\}$, and let $v_{11}$ be the
+$11$-adic valuation, $v_{11}(0)=+\infty$.
+
+\begin{lemma}\label{lem:g-mod-eleven}
+For $m=4$,
+\begin{equation}\label{eq:g-mod-eleven}
+G_4(T)\equiv g(T):=4+2T+7T^2+3T^3+9T^4\pmod {11},
+\end{equation}
+and $g$ has no root in $\mathbb F_{11}$.
+\end{lemma}
+
+\begin{proof}
+Here $I=\{2,\ldots,5\}$, $J=\{1,\ldots,9\}$, $\Lambda=\{1\}$, and all
+denominators are prime to $11$. Modulo $11$ the matrix
+\eqref{eq:determinant} is
+\begin{equation}\label{eq:g4-mod-matrix}
+\setlength{\arraycolsep}{3.5pt}
+\begin{pmatrix}
+5&0&1&5&1&7&0&2&3\\
+3&1&0&9&1&9&8&0&7\\
+5&5&9&0&4&9&4&6&0\\
+2&1&1&4&0&3&4&3&10\\
+8&1+7T&8&2&2&5&6&0&1\\
+8&8&3+8T&7&10&4&0&5&9\\
+4&2&7&3+6T&2&8&5&10&5\\
+9&2&10&2&9+10T&3&1&9&3\\
+6&4&3&9&2&8&7&5&10
+\end{pmatrix}.
+\end{equation}
+Its determinant is $g(T)$. Reduction of \eqref{eq:g4-polynomial}, where
+$16336404000000000\equiv4\pmod{11}$, gives the same polynomial.
+Table~\ref{tab:g-mod-eleven} lists the values of $g$; none is zero.
+\end{proof}
+
+\begin{table}[ht]
+\caption{The polynomial $g$ over $\mathbb F_{11}$.}\label{tab:g-mod-eleven}
+\centering
+\begin{tabular}{c|rrrrrrrrrrr}
+$w$ & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10\\
+$g(w)$ & 4 & 3 & 6 & 3 & 2 & 7 & 7 & 9 & 5 & 5 & 4
+\end{tabular}
+\end{table}
+
+\begin{lemma}\label{lem:nonvanishing}
+For every $\xi\in\mathbb Q$ and every integer $t\ge1$,
+$G_{4\cdot11^t}(\xi)\ne0$.
+\end{lemma}
+
+\begin{proof}
+Put $Q_t=11^t$, $m_t=4Q_t$ and $h=\sigma=k=Q_t$, and
+\begin{equation}\label{eq:scaled-polynomial}
+P_t(W)=Q_t^{3m_t+h}G_{m_t}(W/Q_t^2).
+\end{equation}
+This is the determinant obtained after $T=W/Q_t^2$ by multiplying the $C$,
+$B$ and $V$ rows by $Q_t$, $Q_t^2$ and $Q_t$. Every nonzero index,
+difference and Cauchy denominator has absolute value less than $11Q_t$,
+hence $11$-adic valuation at most $t$. So $Q_tt_i$, $Q_t^2b_i$ and all
+entries of the scaled matrix lie in $\Z_{(11)}[W]$; in particular
+$P_t\in\Z_{(11)}[W]$ and $\deg P_t\le m_t$.
+
+Let $a=-2$ and $0\le u<Q_t$. Only the summation indices divisible by $Q_t$
+survive, and $a^{Q_t}\equiv a\pmod{11}$, so
+\begin{equation*}
+Q_t t_{Q_t j+u}\equiv a^ut_j,
+\qquad Q_t^2b_{Q_t j+u}\equiv a^ub_j\pmod {11}.
+\end{equation*}
+The scaled $C$ and $B$ entries vanish modulo $11$ between distinct residue
+classes modulo $Q_t$. In the class $u$ write $i=Q_t i_0+u$, $j=Q_t j_0+u$; then
+$2\le i_0\le5$ and $1\le j_0\le9$. The only $V$ row in this class is
+$\ell=Q_t-u$, with
+\[
+\frac{Q_t}{j+\ell}=\frac{1}{j_0+1};
+\]
+Cross-class $C$ and $B$ entries have $11$-adic valuation at least $1$;
+within a class the nonzero differences $j_0-i_0$ satisfy $|j_0-i_0|\le7<11$
+and are units. All other scaled $V$ entries vanish modulo $11$. So, after permutations,
+the matrix has $Q_t$ diagonal blocks
+\[
+\begin{bmatrix}
+a^u C_4\\ a^u(B_4-WA_4)\\ V_4
+\end{bmatrix},\qquad 0\le u<Q_t,
+\]
+where the subscript $4$ refers to $G_4$. Each block has eight rows with the
+factor $a^u$. Hence
+\begin{equation}\label{eq:block-congruence}
+P_t(W)\equiv\varepsilon_t(-2)^{4Q_t(Q_t-1)}g(W)^{Q_t}\pmod {11},
+\qquad \varepsilon_t\in\{1,-1\}.
+\end{equation}
+The constant coefficient and the coefficient of $W^{m_t}$ are $11$-adic
+units, and $\deg P_t=m_t$.
+
+Take $W=Q_t^2\xi$. If $v_{11}(W)>0$, the constant term is the unique term
+of least valuation in $P_t(W)$. If $v_{11}(W)=0$, then
+\eqref{eq:block-congruence} and Lemma~\ref{lem:g-mod-eleven} give
+$P_t(W)\not\equiv0\pmod {11}$. If $v_{11}(W)<0$, write
+$P_t(W)=\sum_{j=0}^{m_t}c_jW^j$. Here $v_{11}(c_{m_t})=0$ and
+$v_{11}(c_j)\ge0$, so
+\[
+v_{11}(c_jW^j)>m_t v_{11}(W)=v_{11}(c_{m_t}W^{m_t})
+\qquad(0\le j<m_t),
+\]
+and the leading term is the unique term of least valuation. In all three
+cases $P_t(W)\ne0$, and by \eqref{eq:scaled-polynomial}
+$G_{m_t}(\xi)\ne0$.
+\end{proof}
+
+\section{Proof of Theorem~\ref{thm:main}}\label{sec:proof}
+
+Suppose $\beta=u/q_0$ with $u\in\Z$ and $q_0\in\Z_{>0}$. By
+Lemmas~\ref{lem:moment-identity} and~\ref{lem:integerization},
+\[
+Z_m:=q_0^mD_m^*G_m(u/q_0)\in\Z.
+\]
+By Lemma~\ref{lem:nonvanishing}, $Z_m\ne0$ for $m=4\cdot11^t$, $t\ge1$.
+By Lemmas~\ref{lem:integerization} and~\ref{lem:analytic-bound},
+\begin{equation*}
+\log|Z_m|\le-(4.36-\tau)m^2+870m\log m+o(m^2)+m\log q_0.
+\end{equation*}
+As $4.36-\tau>0.0347$, the right-hand side tends to $-\infty$ along this
+sequence. So $0<|Z_m|<1$ for large $t$, which is impossible.
+\qed
+
+\appendix
+
+\section{Arithmetic integration}\label{app:arithmetic}
+In Table~\ref{tab:arithmetic} the second column lists the lines
+\eqref{eq:subdivision-lines} in $0<x<\rho$, in increasing order of $x$; the
+third column lists $\mathfrak r$ on the six $x$-intervals they cut from
+$[0,\rho)$. Then $\mathfrak c(\rho)=1+\sum\mathfrak r\cdot(\text{length})$. In the
+last three rows the fifth value includes the correction $-1$ of
+\eqref{eq:residue-rank}. By \eqref{eq:prime-exponents}, the values of $\mathfrak c$ at the cut points are not
+used. Of the lines
+\eqref{eq:subdivision-lines}, $25$ meet $0<x<\rho$ for some
+$\rho\in(1/5,5/4)$; $27$ meet the closed interval after adding $x=0$ and
+$x=\rho$. The table has $44\cdot6=264$ regions and $66$ distinct
+triples $(K,\mathcal L,W)$.
+
+\begingroup
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.05}
+\begin{longtable}{@{}lllll@{}}
+\caption{Exact arithmetic integration.}\label{tab:arithmetic}\\
+\hline
+$\rho$ & lines in $0<x<\rho$ & $\mathfrak r$ & $\mathfrak c(\rho)$ & $\int \mathfrak c\,d\rho$\\
+\hline
+\endfirsthead
+\hline
+$\rho$ & lines in $0<x<\rho$ & $\mathfrak r$ & $\mathfrak c(\rho)$ & $\int \mathfrak c\,d\rho$\\
+\hline
+\endhead
+$(1/5,9/44)$ & $1/4-\rho,\,5/2-12\rho,\,3/2-7\rho,\,1/2-2\rho,\,2\rho-1/4$ & $11,11,11,9,11,11$ & $3+\rho$ & $1409/96800$\\
+$(9/44,5/24)$ & $5/2-12\rho,\,1/4-\rho,\,3/2-7\rho,\,1/2-2\rho,\,2\rho-1/4$ & $11,10,11,9,11,11$ & $21/4-10\rho$ & $841/69696$\\
+$(5/24,11/52)$ & $3/2-7\rho,\,1/4-\rho,\,1/2-2\rho,\,2\rho-1/4,\,5/2-11\rho$ & $10,9,9,11,11,10$ & $4-4\rho$ & $493/48672$\\
+$(11/52,3/14)$ & $3/2-7\rho,\,1/4-\rho,\,1/2-2\rho,\,5/2-11\rho,\,2\rho-1/4$ & $10,9,9,11,10,10$ & $4-4\rho$ & $573/66248$\\
+$(3/14,7/32)$ & $1/4-\rho,\,1/2-2\rho,\,5/2-11\rho,\,2\rho-1/4,\,3/2-6\rho$ & $9,9,11,10,10,10$ & $5/2+3\rho$ & $1411/100352$\\
+$(7/32,2/9)$ & $1/4-\rho,\,1/2-2\rho,\,5/2-11\rho,\,3/2-6\rho,\,2\rho-1/4$ & $9,9,11,10,9,10$ & $17/4-5\rho$ & $1813/165888$\\
+$(2/9,9/40)$ & $1/4-\rho,\,5/2-11\rho,\,1/2-2\rho,\,3/2-6\rho,\,2\rho-1/4$ & $9,9,9,10,9,10$ & $9/4+4\rho$ & $283/32400$\\
+$(9/40,5/22)$ & $5/2-11\rho,\,1/4-\rho,\,1/2-2\rho,\,3/2-6\rho,\,2\rho-1/4$ & $9,9,9,10,9,10$ & $9/4+4\rho$ & $347/48400$\\
+$(5/22,11/48)$ & $1/4-\rho,\,1/2-2\rho,\,3/2-6\rho,\,2\rho-1/4,\,5/2-10\rho$ & $9,9,10,9,10,9$ & $19/4-7\rho$ & $3329/557568$\\
+$(11/48,1/4)$ & $1/4-\rho,\,1/2-2\rho,\,3/2-6\rho,\,5/2-10\rho,\,2\rho-1/4$ & $9,9,10,9,9,9$ & $2+5\rho$ & $307/4608$\\
+$(1/4,11/40)$ & $\rho-1/4,\,5/2-9\rho,\,3/2-5\rho,\,1/2-\rho,\,1/4$ & $8,9,8,7,8,9$ & $9/2-5\rho$ & $51/640$\\
+$(11/40,5/18)$ & $5/2-9\rho,\,\rho-1/4,\,3/2-5\rho,\,1/2-\rho,\,1/4$ & $8,8,8,7,8,9$ & $7/4+5\rho$ & $451/51840$\\
+$(5/18,9/32)$ & $\rho-1/4,\,3/2-5\rho,\,1/2-\rho,\,1/4,\,5/2-8\rho$ & $8,8,7,8,9,8$ & $17/4-4\rho$ & $451/41472$\\
+$(9/32,2/7)$ & $\rho-1/4,\,3/2-5\rho,\,1/2-\rho,\,5/2-8\rho,\,1/4$ & $8,8,7,8,7,8$ & $17/4-4\rho$ & $349/25088$\\
+$(2/7,7/24)$ & $\rho-1/4,\,3/2-5\rho,\,5/2-8\rho,\,1/2-\rho,\,1/4$ & $8,8,7,7,7,8$ & $9/4+3\rho$ & $349/18816$\\
+$(7/24,3/10)$ & $3/2-5\rho,\,\rho-1/4,\,5/2-8\rho,\,1/2-\rho,\,1/4$ & $8,6,7,7,7,8$ & $4-3\rho$ & $83/3200$\\
+$(3/10,11/36)$ & $\rho-1/4,\,5/2-8\rho,\,1/2-\rho,\,1/4,\,3/2-4\rho$ & $6,7,7,7,8,7$ & $5/2+2\rho$ & $559/32400$\\
+$(11/36,5/16)$ & $5/2-8\rho,\,\rho-1/4,\,1/2-\rho,\,1/4,\,3/2-4\rho$ & $6,6,7,7,8,7$ & $5/2+2\rho$ & $449/20736$\\
+$(5/16,9/28)$ & $\rho-1/4,\,1/2-\rho,\,3/2-4\rho,\,1/4,\,5/2-7\rho$ & $6,7,7,7,7,7$ & $5/4+6\rho$ & $353/12544$\\
+$(9/28,1/3)$ & $\rho-1/4,\,1/2-\rho,\,3/2-4\rho,\,5/2-7\rho,\,1/4$ & $6,7,7,7,6,7$ & $7/2-\rho$ & $533/14112$\\
+$(1/3,11/32)$ & $\rho-1/4,\,5/2-7\rho,\,3/2-4\rho,\,1/2-\rho,\,1/4$ & $6,7,6,5,6,7$ & $9/2-4\rho$ & $151/4608$\\
+$(11/32,7/20)$ & $5/2-7\rho,\,\rho-1/4,\,3/2-4\rho,\,1/2-\rho,\,1/4$ & $6,6,6,5,6,7$ & $7/4+4\rho$ & $251/12800$\\
+$(7/20,5/14)$ & $5/2-7\rho,\,3/2-4\rho,\,\rho-1/4,\,1/2-\rho,\,1/4$ & $6,6,4,5,6,7$ & $7/2-\rho$ & $881/39200$\\
+$(5/14,3/8)$ & $3/2-4\rho,\,\rho-1/4,\,1/2-\rho,\,1/4,\,5/2-6\rho$ & $6,4,5,6,7,6$ & $6-8\rho$ & $43/784$\\
+$(3/8,11/28)$ & $1/2-\rho,\,\rho-1/4,\,5/2-6\rho,\,1/4,\,3/2-3\rho$ & $4,6,6,5,6,5$ & $15/4-2\rho$ & $167/3136$\\
+$(11/28,2/5)$ & $1/2-\rho,\,5/2-6\rho,\,\rho-1/4,\,1/4,\,3/2-3\rho$ & $4,6,5,5,6,5$ & $15/4-2\rho$ & $207/9800$\\
+$(2/5,5/12)$ & $5/2-6\rho,\,1/2-\rho,\,\rho-1/4,\,1/4,\,3/2-3\rho$ & $4,4,5,5,6,5$ & $7/4+3\rho$ & $119/2400$\\
+$(5/12,7/16)$ & $1/2-\rho,\,\rho-1/4,\,3/2-3\rho,\,1/4,\,5/2-5\rho$ & $4,5,5,5,5,5$ & $1/2+6\rho$ & $49/768$\\
+$(7/16,9/20)$ & $1/2-\rho,\,3/2-3\rho,\,\rho-1/4,\,1/4,\,5/2-5\rho$ & $4,5,4,5,5,5$ & $9/4+2\rho$ & $251/6400$\\
+$(9/20,11/24)$ & $1/2-\rho,\,3/2-3\rho,\,\rho-1/4,\,5/2-5\rho,\,1/4$ & $4,5,4,5,4,5$ & $9/2-3\rho$ & $251/9600$\\
+$(11/24,1/2)$ & $1/2-\rho,\,3/2-3\rho,\,5/2-5\rho,\,\rho-1/4,\,1/4$ & $4,5,4,4,4,5$ & $7/4+3\rho$ & $17/128$\\
+$(1/2,11/20)$ & $1/4,\,\rho-1/4,\,5/2-4\rho,\,3/2-2\rho,\,1/2$ & $4,4,5,4,3,4$ & $19/4-3\rho$ & $127/800$\\
+$(11/20,9/16)$ & $1/4,\,5/2-4\rho,\,\rho-1/4,\,3/2-2\rho,\,1/2$ & $4,4,4,4,3,4$ & $2+2\rho$ & $249/6400$\\
+$(9/16,7/12)$ & $5/2-4\rho,\,1/4,\,\rho-1/4,\,3/2-2\rho,\,1/2$ & $4,3,4,4,3,4$ & $17/4-2\rho$ & $149/2304$\\
+$(7/12,5/8)$ & $5/2-4\rho,\,1/4,\,3/2-2\rho,\,\rho-1/4,\,1/2$ & $4,3,4,2,3,4$ & $6-5\rho$ & $143/1152$\\
+$(5/8,2/3)$ & $3/2-2\rho,\,1/4,\,\rho-1/4,\,1/2,\,5/2-3\rho$ & $3,2,2,3,4,3$ & $19/4-3\rho$ & $15/128$\\
+$(2/3,11/16)$ & $3/2-2\rho,\,1/4,\,\rho-1/4,\,5/2-3\rho,\,1/2$ & $3,2,2,3,3,3$ & $11/4$ & $11/192$\\
+$(11/16,3/4)$ & $3/2-2\rho,\,1/4,\,5/2-3\rho,\,\rho-1/4,\,1/2$ & $3,2,2,2,3,3$ & $11/4$ & $11/64$\\
+$(3/4,5/6)$ & $5/2-3\rho,\,1/4,\,1/2,\,\rho-1/4,\,3/2-\rho$ & $2,2,2,3,3,3$ & $1/2+3\rho$ & $23/96$\\
+$(5/6,7/8)$ & $1/4,\,1/2,\,\rho-1/4,\,3/2-\rho,\,5/2-2\rho$ & $2,2,3,3,3,2$ & $3$ & $1/8$\\
+$(7/8,11/12)$ & $1/4,\,1/2,\,3/2-\rho,\,\rho-1/4,\,5/2-2\rho$ & $2,2,3,2,3,2$ & $19/4-2\rho$ & $71/576$\\
+$(11/12,1)$ & $1/4,\,1/2,\,3/2-\rho,\,5/2-2\rho,\,\rho-1/4$ & $2,2,3,2,1,2$ & $19/4-2\rho$ & $17/72$\\
+$(1,9/8)$ & $1/4,\,5/2-2\rho,\,3/2-\rho,\,1/2,\,\rho-1/4$ & $2,2,2,0,1,2$ & $15/4-\rho$ & $43/128$\\
+$(9/8,5/4)$ & $5/2-2\rho,\,1/4,\,3/2-\rho,\,1/2,\,\rho-1/4$ & $2,1,2,0,1,2$ & $6-3\rho$ & $39/128$\\
+\hline
+\end{longtable}
+\endgroup
+
+\begin{align*}
+\int_{1/5}^{5/4}\mathfrak c(\rho)\,d\rho&=1121513/369600,&
+\int_{5/4}^{11/4}\mathfrak c_{\rm out}(\rho)\,d\rho&=45/32,\\
+\frac{13}{4}\cdot\frac15&=13/20,&
+\text{sum}&=1881503/369600,\\
+\text{coefficient of }\log2&=53/48,&
+\text{contribution of \eqref{eq:rank-one-block}}&=-5/48.
+\end{align*}
+
+\section{Numerical values}\label{app:numerical}
+
+The bounds in Table~\ref{tab:analytic-bounds} are rounded upward. The
+rational enclosures are
+\begin{align}
+ q_-:=-4.911220867982619
+ &<\mathcal Q(\nu)<
+ -4.911220867982618,\label{eq:Q-enclosure}\\
+ 4.365058361177462
+ &<\alpha<
+ 4.365058361177465,\label{eq:alpha-enclosure}\\
+ 3.730290307027085
+ &<\varkappa<3.730290307027087;\notag
+\end{align}
+the lower bound for $\alpha$ holds with $q_-$ in place of $\mathcal Q(\nu)$.
+
+\begin{table}[ht]
+\centering\small
+\caption{Upper bounds for $F_x,F_v,F_z$ in Lemma~\ref{lem:reference-bound}.}
+\label{tab:analytic-bounds}
+\begin{tabular}{lrrrr}
+\hline
+support&subintervals&depth&upper bound&$K$\\
+\hline
+$x\in[0,1]$ & 1164 & 15 & $-4.6260004267$ & $-4.626$\\
+$v\in[0,1]$ & 1272 & 16 & $-4.4800027327$ & $-4.480$\\
+$z\in[-2,-3/5]$ & 658 & 14 & $-0.0900423691$ & $-0.090$\\
+$z\in[3/5,1]$ & 4 & 2 & $-0.3671210997$ & $-0.090$\\
+$|z|=3/5,\ \operatorname{Im} z\ge0$ & 693 & 11 & $-0.0900220839$ & $-0.090$\\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[ht]
+\centering\small
+\caption{Constants in Lemmas~\ref{lem:reference-bound}--\ref{lem:analytic-bound}.}
+\label{tab:analytic-constants}
+\begin{tabular}{ll}
+\hline
+quantity&value\\
+\hline
+intervals on $x$, $v$, $z$; Poisson kernels & $(50,52,62,157)$\\
+$(K_x,K_v,K_z)$&$(-4.626,-4.480,-0.090)$\\
+$\delta$&$1/250$\\
+$\sup_{|q|\le\delta}F_x(q)$&$<-6.2823007011$\\
+$\sup_{|q|\le\delta}F_v(q)$&$<-4.4935082437$\\
+$(H_x,H_v,H_{z,\mathrm{real}},H_{z,\mathrm{circle}})$&$(131,153,43,24)$\\
+subintervals in Table~\ref{tab:analytic-bounds}&$3791$\\
+precision (decimal digits)&$90$\\
+series terms&$420$\\
+series remainder per pair&$<8.78\times10^{-130}$\\
+\hline
+$H_z$&$67$\\
+$(C_x,C_v,C_z)$&$(2096,2984,2296)$\\
+$C_x+\tfrac54C_v+C_z$&$8122$\\
+$(L_D,L_z)$&$(101/100,167/100)$\\
+$A_0$&$1107/80$\\
+$\tfrac{17}{16}\cdot8\epsilon/\delta^2+A_0$ at $m=64$&$<200$\\
+$3(C_x+\tfrac54C_v+C_z)+200$&$24566$\\
+$C_*$&$<810$\\
+endpoint-disk precision (bits)&$100$\\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Printed interval data}\label{app:printed-data}
+Tables~\ref{tab:q-certificate}--\ref{tab:density-certificate} give the
+numerical enclosures used in Lemma~\ref{lem:reference-bound}. Every displayed
+interval is outward rounded. The static row checks compare each upper endpoint
+with the printed bound.
+\begin{table}[ht]
+\centering\scriptsize
+\caption{The pair decomposition and its enclosures.}
+\label{tab:q-certificate}
+Here $I_{zr}$ is the real--real $z$ energy, $I_{zp}$ the real--Poisson
+cross term, and $I_{pp}$ the Poisson self-energy; $I_{vz}=I(\nu_v,\nu_z)$
+includes both the real and Poisson parts of $\nu_z$.
+\begin{tabular}{@{}ll@{}}
+\hline term & outward enclosure\\\hline
+$I_{xx}$ & \texttt{[-1.546417482857900440,-1.546417482857900439]}\\
+$I_{vv}$ & \texttt{[-2.239637943680446541,-2.239637943680446540]}\\
+$I_{zr}$ & \texttt{[-0.162577112801730912,-0.162577112801730911]}\\
+$I_{zp}$ & \texttt{[0.081132573652198143,0.081132573652198144]}\\
+$I_{pp}$ & \texttt{[-0.272227665742282938,-0.272227665742282937]}\\
+$I_{vz}$ & \texttt{[0.206849817575968853,0.206849817575968854]}\\
+$D_{xv}$ & \texttt{[1.059475627780623120,1.059475627780623121]}\\
+$\mathcal{Q}(\nu)=I_{xx}+I_{vv}+I_{zr}+2I_{zp}+I_{pp}+I_{vz}-D_{xv}$ & \texttt{[-4.911220867982618809,-4.911220867982618808]}\\
+\hline
+\end{tabular}
+\end{table}
+For $i\in\{x,v\}$ put
+$A_i(\delta)=\int\log(|t|+\delta)\,d\nu_i(t)$, and put
+$A_{z,\mathrm{real}}(\delta)=\int\log(|t|+\delta)\,d\nu_{z,\mathrm{real}}(t)$.
+Put
+\[
+ D_{x,\mathrm{low}}=\log(2-\delta),\qquad
+ D_{v,\mathrm{low}}=\tfrac54\log(2-\delta).
+\]
+Then $D_i(q)\ge D_{i,\mathrm{low}}$ for $i\in\{x,v\}$ and
+$|q|\le\delta$.
+For $|q|\le\delta$ the displayed endpoint calculation reads
+\[
+F_x(q)\le B_x:=2A_x(\delta)-D_{v,\mathrm{low}}+\tfrac34\log\delta,\qquad
+F_v(q)\le B_v:=2A_v(\delta)+A_{z,\mathrm{real}}(\delta)+W_P
+          -D_{x,\mathrm{low}}+\tfrac14\log\delta.
+\]
+The denominator expansion retains $420$ terms. Since $0\le xv/2\le1/2$ and the total $x$--$v$ mass is $1\cdot(5/4)$, the integrated remainder is bounded by
+\[
+ R_{xv}\le\frac54\,\frac{2(1/2)^{421}}{421}
+ =\frac{5}{2\cdot421\cdot2^{421}}<1.10\times10^{-129}.
+\]
+\begin{table}[ht]
+\centering\scriptsize
+\caption{Endpoint majorants and disk bounds for $\delta=1/250$.}
+\label{tab:endpoint-certificate}
+\begin{tabular}{@{}p{0.48\textwidth}p{0.48\textwidth}@{}}
+\hline quantity & outward enclosure\\\hline
+$A_x(\delta)$ & \texttt{[-0.638636770206138024,-0.638636770206138023]}\\
+$A_v(\delta)$ & \texttt{[-1.118528621477847036,-1.118528621477847035]}\\
+$A_{z,\mathrm{real}}(\delta)$ & \texttt{[0.148575311504214922,0.148575311504214923]}\\
+$W_P:=M_P\log(151/250)$ & \texttt{[-0.333515904969252,-0.333515904969250]}\\
+$M_P=26460009509/40000000000$ (157 Poisson weights) & \\
+$D_{x,\mathrm{low}}$ & \texttt{[0.691145177889270,0.691145177889275]}\\
+$D_{v,\mathrm{low}}$ & \texttt{[0.863931472361588,0.863931472361593]}\\
+$B_x$ & \texttt{[-6.28230070117056,-6.28230070117054]}\\
+$B_v$ & \texttt{[-4.49350824377558,-4.49350824377554]}\\
+\hline
+\end{tabular}
+\end{table}
+\begin{table}[ht]
+\centering\scriptsize
+\caption{Rational density checks from the printed reference tables.}
+\label{tab:density-certificate}
+\begin{tabular}{@{}lll@{}}
+\hline support & exact maximum used & integer upper bound\\\hline
+$x$ & $1772217287/13581647$ & $131$\\
+$v$ & $2076994349/13581647$ & $153$\\
+$z$ real & $4076507975/95071529$ & $43$\\
+$z$ circle & $\sum H_c<24$ by the integer square-root and $\pi>333/106$ checks & $24$\\
+\hline
+\end{tabular}
+\end{table}
+The first three bounds are rational comparisons of rows in
+Table~\ref{tab:reference-intervals}; the fourth is the corresponding rational
+sum over Table~\ref{tab:reference-poisson}.
+\section{Reference measure data}\label{app:reference-data}
+The rational tables specify the reference measure. An interval row $(a,b,w)$
+means $w\,dt/(b-a)$ on $[a,b]$. A Poisson row $(c_1,c_2,w)$ specifies the
+Poisson measure defined in the proof of Lemma~\ref{lem:reference-bound},
+with $c=c_1+ic_2$ and total mass $w$; its logarithmic potential is
+\eqref{eq:poisson-potential}. The ancillary
+JSON is an optional consistency copy of these printed tables.
+\begingroup\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{@{}rllll@{}}
+\caption{Interval data for the reference measure.}\label{tab:reference-intervals}\\
+\hline
+index & support & $a$ & $b$ & $w$\\
+\hline
+\endfirsthead
+\hline
+index & support & $a$ & $b$ & $w$\\
+\hline
+\endhead
+1 & x & $\frac{530698705049}{20000000000000}$ & $\frac{951505843609}{25000000000000}$ & $\frac{11}{1000000000000}$ \\
+2 & x & $\frac{951505843609}{25000000000000}$ & $\frac{2578181461683}{50000000000000}$ & $\frac{7}{125000000000}$ \\
+3 & x & $\frac{2578181461683}{50000000000000}$ & $\frac{3349364905389}{50000000000000}$ & $\frac{33}{500000000000}$ \\
+4 & x & $\frac{3349364905389}{50000000000000}$ & $\frac{8426519384873}{100000000000000}$ & $\frac{4523818023}{500000000000}$ \\
+5 & x & $\frac{8426519384873}{100000000000000}$ & $\frac{5166166492719}{50000000000000}$ & $\frac{16164978747}{1000000000000}$ \\
+6 & x & $\frac{5166166492719}{50000000000000}$ & $\frac{12408009626051}{100000000000000}$ & $\frac{9517172997}{500000000000}$ \\
+7 & x & $\frac{12408009626051}{100000000000000}$ & $\frac{14644660940673}{100000000000000}$ & $\frac{5266343043}{250000000000}$ \\
+8 & x & $\frac{14644660940673}{100000000000000}$ & $\frac{17032709244997}{100000000000000}$ & $\frac{2805946239}{125000000000}$ \\
+9 & x & $\frac{17032709244997}{100000000000000}$ & $\frac{4890482137391}{25000000000000}$ & $\frac{293172753}{12500000000}$ \\
+10 & x & $\frac{4890482137391}{25000000000000}$ & $\frac{1111074417451}{5000000000000}$ & $\frac{4840061623}{200000000000}$ \\
+11 & x & $\frac{1111074417451}{5000000000000}$ & $\frac{1}{4}$ & $\frac{154789091}{6250000000}$ \\
+12 & x & $\frac{1}{4}$ & $\frac{557711309781}{2000000000000}$ & $\frac{25199538621}{1000000000000}$ \\
+13 & x & $\frac{557711309781}{2000000000000}$ & $\frac{15432914190873}{50000000000000}$ & $\frac{2553284359}{100000000000}$ \\
+14 & x & $\frac{15432914190873}{50000000000000}$ & $\frac{16964013367421}{50000000000000}$ & $\frac{25790757407}{1000000000000}$ \\
+15 & x & $\frac{16964013367421}{50000000000000}$ & $\frac{18529523872437}{50000000000000}$ & $\frac{1299471847}{50000000000}$ \\
+16 & x & $\frac{18529523872437}{50000000000000}$ & $\frac{20122741949597}{50000000000000}$ & $\frac{13070488499}{500000000000}$ \\
+17 & x & $\frac{20122741949597}{50000000000000}$ & $\frac{43473690388997}{100000000000000}$ & $\frac{13127986227}{500000000000}$ \\
+18 & x & $\frac{43473690388997}{100000000000000}$ & $\frac{46729843538493}{100000000000000}$ & $\frac{5268275843}{200000000000}$ \\
+19 & x & $\frac{46729843538493}{100000000000000}$ & $\frac{1}{2}$ & $\frac{26402361973}{1000000000000}$ \\
+20 & x & $\frac{1}{2}$ & $\frac{53270156461507}{100000000000000}$ & $\frac{3305536679}{125000000000}$ \\
+21 & x & $\frac{53270156461507}{100000000000000}$ & $\frac{56526309611003}{100000000000000}$ & $\frac{13235441161}{500000000000}$ \\
+22 & x & $\frac{56526309611003}{100000000000000}$ & $\frac{29877258050403}{50000000000000}$ & $\frac{26484444361}{1000000000000}$ \\
+23 & x & $\frac{29877258050403}{50000000000000}$ & $\frac{31470476127563}{50000000000000}$ & $\frac{13243899017}{500000000000}$ \\
+24 & x & $\frac{31470476127563}{50000000000000}$ & $\frac{33035986632579}{50000000000000}$ & $\frac{13241782757}{500000000000}$ \\
+25 & x & $\frac{33035986632579}{50000000000000}$ & $\frac{34567085809127}{50000000000000}$ & $\frac{26473037339}{1000000000000}$ \\
+26 & x & $\frac{34567085809127}{50000000000000}$ & $\frac{1442288690219}{2000000000000}$ & $\frac{13228561001}{500000000000}$ \\
+27 & x & $\frac{1442288690219}{2000000000000}$ & $\frac{3}{4}$ & $\frac{26437395821}{1000000000000}$ \\
+28 & x & $\frac{3}{4}$ & $\frac{3888925582549}{5000000000000}$ & $\frac{5283060053}{200000000000}$ \\
+29 & x & $\frac{3888925582549}{5000000000000}$ & $\frac{20109517862609}{25000000000000}$ & $\frac{13195648853}{500000000000}$ \\
+30 & x & $\frac{20109517862609}{25000000000000}$ & $\frac{82967290755003}{100000000000000}$ & $\frac{13182868973}{500000000000}$ \\
+31 & x & $\frac{82967290755003}{100000000000000}$ & $\frac{85355339059327}{100000000000000}$ & $\frac{5267890361}{200000000000}$ \\
+32 & x & $\frac{85355339059327}{100000000000000}$ & $\frac{87591990373949}{100000000000000}$ & $\frac{26313133347}{1000000000000}$ \\
+33 & x & $\frac{87591990373949}{100000000000000}$ & $\frac{44833833507281}{50000000000000}$ & $\frac{5257393303}{200000000000}$ \\
+34 & x & $\frac{44833833507281}{50000000000000}$ & $\frac{91573480615127}{100000000000000}$ & $\frac{26260716757}{1000000000000}$ \\
+35 & x & $\frac{91573480615127}{100000000000000}$ & $\frac{46650635094611}{50000000000000}$ & $\frac{2623413097}{100000000000}$ \\
+36 & x & $\frac{46650635094611}{50000000000000}$ & $\frac{47421818538317}{50000000000000}$ & $\frac{3275900561}{125000000000}$ \\
+37 & x & $\frac{47421818538317}{50000000000000}$ & $\frac{24048494156391}{25000000000000}$ & $\frac{6544676903}{250000000000}$ \\
+38 & x & $\frac{24048494156391}{25000000000000}$ & $\frac{19469301294951}{20000000000000}$ & $\frac{6536512973}{250000000000}$ \\
+39 & x & $\frac{19469301294951}{20000000000000}$ & $\frac{98296291314453}{100000000000000}$ & $\frac{1631276689}{62500000000}$ \\
+40 & x & $\frac{98296291314453}{100000000000000}$ & $\frac{49519632010081}{50000000000000}$ & $\frac{13022779451}{500000000000}$ \\
+41 & x & $\frac{49519632010081}{50000000000000}$ & $\frac{99572243068691}{100000000000000}$ & $\frac{25800471869}{1000000000000}$ \\
+42 & x & $\frac{99572243068691}{100000000000000}$ & $\frac{9989294616193}{10000000000000}$ & $\frac{2600510817}{100000000000}$ \\
+43 & x & $\frac{9989294616193}{10000000000000}$ & $\frac{9989702065603}{10000000000000}$ & $\frac{101387447}{100000000000}$ \\
+44 & x & $\frac{9989702065603}{10000000000000}$ & $\frac{99908623833539}{100000000000000}$ & $\frac{1749595019}{1000000000000}$ \\
+45 & x & $\frac{99908623833539}{100000000000000}$ & $\frac{19985197843173}{20000000000000}$ & $\frac{644280239}{250000000000}$ \\
+46 & x & $\frac{19985197843173}{20000000000000}$ & $\frac{19989294616193}{20000000000000}$ & $\frac{3342459833}{1000000000000}$ \\
+47 & x & $\frac{19989294616193}{20000000000000}$ & $\frac{19993391389213}{20000000000000}$ & $\frac{4008718139}{1000000000000}$ \\
+48 & x & $\frac{19993391389213}{20000000000000}$ & $\frac{99984322328391}{100000000000000}$ & $\frac{910964729}{200000000000}$ \\
+49 & x & $\frac{99984322328391}{100000000000000}$ & $\frac{999959255059}{1000000000000}$ & $\frac{4774398867}{1000000000000}$ \\
+50 & x & $\frac{999959255059}{1000000000000}$ & $1$ & $\frac{5316651861}{1000000000000}$ \\
+51 & v & $\frac{480367989919}{50000000000000}$ & $\frac{1703708685547}{100000000000000}$ & $\frac{13858434309}{1000000000000}$ \\
+52 & v & $\frac{1703708685547}{100000000000000}$ & $\frac{530698705049}{20000000000000}$ & $\frac{2582377329}{125000000000}$ \\
+53 & v & $\frac{530698705049}{20000000000000}$ & $\frac{951505843609}{25000000000000}$ & $\frac{11378187207}{500000000000}$ \\
+54 & v & $\frac{951505843609}{25000000000000}$ & $\frac{2578181461683}{50000000000000}$ & $\frac{1502528193}{62500000000}$ \\
+55 & v & $\frac{2578181461683}{50000000000000}$ & $\frac{3349364905389}{50000000000000}$ & $\frac{24796480607}{1000000000000}$ \\
+56 & v & $\frac{3349364905389}{50000000000000}$ & $\frac{8426519384873}{100000000000000}$ & $\frac{6324591531}{250000000000}$ \\
+57 & v & $\frac{8426519384873}{100000000000000}$ & $\frac{5166166492719}{50000000000000}$ & $\frac{25649764501}{1000000000000}$ \\
+58 & v & $\frac{5166166492719}{50000000000000}$ & $\frac{12408009626051}{100000000000000}$ & $\frac{404845303}{15625000000}$ \\
+59 & v & $\frac{12408009626051}{100000000000000}$ & $\frac{14644660940673}{100000000000000}$ & $\frac{26113452847}{1000000000000}$ \\
+60 & v & $\frac{14644660940673}{100000000000000}$ & $\frac{17032709244997}{100000000000000}$ & $\frac{328515369}{12500000000}$ \\
+61 & v & $\frac{17032709244997}{100000000000000}$ & $\frac{4890482137391}{25000000000000}$ & $\frac{26427269003}{1000000000000}$ \\
+62 & v & $\frac{4890482137391}{25000000000000}$ & $\frac{1111074417451}{5000000000000}$ & $\frac{13280757619}{500000000000}$ \\
+63 & v & $\frac{1111074417451}{5000000000000}$ & $\frac{1}{4}$ & $\frac{26691316341}{1000000000000}$ \\
+64 & v & $\frac{1}{4}$ & $\frac{557711309781}{2000000000000}$ & $\frac{13410930633}{500000000000}$ \\
+65 & v & $\frac{557711309781}{2000000000000}$ & $\frac{15432914190873}{50000000000000}$ & $\frac{26957166859}{1000000000000}$ \\
+66 & v & $\frac{15432914190873}{50000000000000}$ & $\frac{16964013367421}{50000000000000}$ & $\frac{6775091647}{250000000000}$ \\
+67 & v & $\frac{16964013367421}{50000000000000}$ & $\frac{18529523872437}{50000000000000}$ & $\frac{27253308259}{1000000000000}$ \\
+68 & v & $\frac{18529523872437}{50000000000000}$ & $\frac{20122741949597}{50000000000000}$ & $\frac{27416681441}{1000000000000}$ \\
+69 & v & $\frac{20122741949597}{50000000000000}$ & $\frac{43473690388997}{100000000000000}$ & $\frac{27590343833}{1000000000000}$ \\
+70 & v & $\frac{43473690388997}{100000000000000}$ & $\frac{46729843538493}{100000000000000}$ & $\frac{3471644669}{125000000000}$ \\
+71 & v & $\frac{46729843538493}{100000000000000}$ & $\frac{1}{2}$ & $\frac{27962829423}{1000000000000}$ \\
+72 & v & $\frac{1}{2}$ & $\frac{53270156461507}{100000000000000}$ & $\frac{5631076523}{200000000000}$ \\
+73 & v & $\frac{53270156461507}{100000000000000}$ & $\frac{56526309611003}{100000000000000}$ & $\frac{1133958053}{40000000000}$ \\
+74 & v & $\frac{56526309611003}{100000000000000}$ & $\frac{29877258050403}{50000000000000}$ & $\frac{28512049639}{1000000000000}$ \\
+75 & v & $\frac{29877258050403}{50000000000000}$ & $\frac{31470476127563}{50000000000000}$ & $\frac{14352012457}{500000000000}$ \\
+76 & v & $\frac{31470476127563}{50000000000000}$ & $\frac{33035986632579}{50000000000000}$ & $\frac{2895179599}{100000000000}$ \\
+77 & v & $\frac{33035986632579}{50000000000000}$ & $\frac{34567085809127}{50000000000000}$ & $\frac{29147228949}{1000000000000}$ \\
+78 & v & $\frac{34567085809127}{50000000000000}$ & $\frac{1442288690219}{2000000000000}$ & $\frac{29330189043}{1000000000000}$ \\
+79 & v & $\frac{1442288690219}{2000000000000}$ & $\frac{3}{4}$ & $\frac{14748946677}{500000000000}$ \\
+80 & v & $\frac{3}{4}$ & $\frac{3888925582549}{5000000000000}$ & $\frac{29651492159}{1000000000000}$ \\
+81 & v & $\frac{3888925582549}{5000000000000}$ & $\frac{20109517862609}{25000000000000}$ & $\frac{14895661549}{500000000000}$ \\
+82 & v & $\frac{20109517862609}{25000000000000}$ & $\frac{82967290755003}{100000000000000}$ & $\frac{29918006281}{1000000000000}$ \\
+83 & v & $\frac{82967290755003}{100000000000000}$ & $\frac{85355339059327}{100000000000000}$ & $\frac{7507968041}{250000000000}$ \\
+84 & v & $\frac{85355339059327}{100000000000000}$ & $\frac{87591990373949}{100000000000000}$ & $\frac{30133175201}{1000000000000}$ \\
+85 & v & $\frac{87591990373949}{100000000000000}$ & $\frac{44833833507281}{50000000000000}$ & $\frac{30222548301}{1000000000000}$ \\
+86 & v & $\frac{44833833507281}{50000000000000}$ & $\frac{91573480615127}{100000000000000}$ & $\frac{3787535747}{125000000000}$ \\
+87 & v & $\frac{91573480615127}{100000000000000}$ & $\frac{46650635094611}{50000000000000}$ & $\frac{30366116749}{1000000000000}$ \\
+88 & v & $\frac{46650635094611}{50000000000000}$ & $\frac{47421818538317}{50000000000000}$ & $\frac{7604972321}{250000000000}$ \\
+89 & v & $\frac{47421818538317}{50000000000000}$ & $\frac{24048494156391}{25000000000000}$ & $\frac{15230196013}{500000000000}$ \\
+90 & v & $\frac{24048494156391}{25000000000000}$ & $\frac{19469301294951}{20000000000000}$ & $\frac{3810627207}{125000000000}$ \\
+91 & v & $\frac{19469301294951}{20000000000000}$ & $\frac{98296291314453}{100000000000000}$ & $\frac{30483706899}{1000000000000}$ \\
+92 & v & $\frac{98296291314453}{100000000000000}$ & $\frac{49519632010081}{50000000000000}$ & $\frac{30461131797}{1000000000000}$ \\
+93 & v & $\frac{49519632010081}{50000000000000}$ & $\frac{99572243068691}{100000000000000}$ & $\frac{7551284017}{250000000000}$ \\
+94 & v & $\frac{99572243068691}{100000000000000}$ & $\frac{9989294616193}{10000000000000}$ & $\frac{1904097433}{62500000000}$ \\
+95 & v & $\frac{9989294616193}{10000000000000}$ & $\frac{9989702065603}{10000000000000}$ & $\frac{1188270853}{1000000000000}$ \\
+96 & v & $\frac{9989702065603}{10000000000000}$ & $\frac{99908623833539}{100000000000000}$ & $\frac{82008949}{40000000000}$ \\
+97 & v & $\frac{99908623833539}{100000000000000}$ & $\frac{19985197843173}{20000000000000}$ & $\frac{1509954673}{500000000000}$ \\
+98 & v & $\frac{19985197843173}{20000000000000}$ & $\frac{19989294616193}{20000000000000}$ & $\frac{783374219}{200000000000}$ \\
+99 & v & $\frac{19989294616193}{20000000000000}$ & $\frac{19993391389213}{20000000000000}$ & $\frac{2348887521}{500000000000}$ \\
+100 & v & $\frac{19993391389213}{20000000000000}$ & $\frac{99984322328391}{100000000000000}$ & $\frac{1334479163}{250000000000}$ \\
+101 & v & $\frac{99984322328391}{100000000000000}$ & $\frac{999959255059}{1000000000000}$ & $\frac{5595394787}{1000000000000}$ \\
+102 & v & $\frac{999959255059}{1000000000000}$ & $1$ & $\frac{6230983047}{1000000000000}$ \\
+103 & z & $-2$ & $-\frac{9999714785413}{5000000000000}$ & $\frac{489180957}{200000000000}$ \\
+104 & z & $-\frac{9999714785413}{5000000000000}$ & $-\frac{199978051259747}{100000000000000}$ & $\frac{2196289941}{1000000000000}$ \\
+105 & z & $-\frac{199978051259747}{100000000000000}$ & $-\frac{199953739724491}{100000000000000}$ & $\frac{130941893}{62500000000}$ \\
+106 & z & $-\frac{199953739724491}{100000000000000}$ & $-\frac{199925062313351}{100000000000000}$ & $\frac{921855699}{500000000000}$ \\
+107 & z & $-\frac{199925062313351}{100000000000000}$ & $-\frac{199896384902211}{100000000000000}$ & $\frac{1537127441}{1000000000000}$ \\
+108 & z & $-\frac{199896384902211}{100000000000000}$ & $-\frac{39974414673391}{20000000000000}$ & $\frac{592554089}{500000000000}$ \\
+109 & z & $-\frac{39974414673391}{20000000000000}$ & $-\frac{99927914459221}{50000000000000}$ & $\frac{804636229}{1000000000000}$ \\
+110 & z & $-\frac{99927914459221}{50000000000000}$ & $-\frac{99925062313351}{50000000000000}$ & $\frac{466572663}{1000000000000}$ \\
+111 & z & $-\frac{99925062313351}{50000000000000}$ & $-\frac{199401140296167}{100000000000000}$ & $\frac{11949094627}{1000000000000}$ \\
+112 & z & $-\frac{199401140296167}{100000000000000}$ & $-\frac{99327484814113}{50000000000000}$ & $\frac{11829831253}{1000000000000}$ \\
+113 & z & $-\frac{99327484814113}{50000000000000}$ & $-\frac{39522961568047}{20000000000000}$ & $\frac{5952318039}{500000000000}$ \\
+114 & z & $-\frac{39522961568047}{20000000000000}$ & $-\frac{196285109064657}{100000000000000}$ & $\frac{1484922213}{125000000000}$ \\
+115 & z & $-\frac{196285109064657}{100000000000000}$ & $-\frac{19467156727579}{10000000000000}$ & $\frac{2959269833}{250000000000}$ \\
+116 & z & $-\frac{19467156727579}{10000000000000}$ & $-\frac{24097636488411}{12500000000000}$ & $\frac{1177589427}{100000000000}$ \\
+117 & z & $-\frac{24097636488411}{12500000000000}$ & $-\frac{190621778264911}{100000000000000}$ & $\frac{5849794997}{500000000000}$ \\
+118 & z & $-\frac{190621778264911}{100000000000000}$ & $-\frac{94101436430589}{50000000000000}$ & $\frac{11609193707}{1000000000000}$ \\
+119 & z & $-\frac{94101436430589}{50000000000000}$ & $-\frac{92767366910193}{50000000000000}$ & $\frac{11505113623}{1000000000000}$ \\
+120 & z & $-\frac{92767366910193}{50000000000000}$ & $-\frac{22828598315441}{12500000000000}$ & $\frac{11387043787}{1000000000000}$ \\
+121 & z & $-\frac{22828598315441}{12500000000000}$ & $-\frac{89748737341529}{50000000000000}$ & $\frac{11255100131}{1000000000000}$ \\
+122 & z & $-\frac{89748737341529}{50000000000000}$ & $-\frac{35230841411401}{20000000000000}$ & $\frac{11109018301}{1000000000000}$ \\
+123 & z & $-\frac{35230841411401}{20000000000000}$ & $-\frac{17261330003061}{10000000000000}$ & $\frac{10947966233}{1000000000000}$ \\
+124 & z & $-\frac{17261330003061}{10000000000000}$ & $-\frac{42222479077843}{25000000000000}$ & $\frac{215433561}{20000000000}$ \\
+125 & z & $-\frac{42222479077843}{25000000000000}$ & $-\frac{33}{20}$ & $\frac{1322493667}{125000000000}$ \\
+126 & z & $-\frac{33}{20}$ & $-\frac{16096020831533}{10000000000000}$ & $\frac{648250603}{62500000000}$ \\
+127 & z & $-\frac{16096020831533}{10000000000000}$ & $-\frac{39196960066389}{25000000000000}$ & $\frac{317098009}{31250000000}$ \\
+128 & z & $-\frac{39196960066389}{25000000000000}$ & $-\frac{152500762571221}{100000000000000}$ & $\frac{4952465203}{500000000000}$ \\
+129 & z & $-\frac{152500762571221}{100000000000000}$ & $-\frac{18514666644647}{12500000000000}$ & $\frac{602803971}{62500000000}$ \\
+130 & z & $-\frac{18514666644647}{12500000000000}$ & $-\frac{143656322541129}{100000000000000}$ & $\frac{4683135331}{500000000000}$ \\
+131 & z & $-\frac{143656322541129}{100000000000000}$ & $-\frac{34784208363851}{25000000000000}$ & $\frac{4534307153}{500000000000}$ \\
+132 & z & $-\frac{34784208363851}{25000000000000}$ & $-\frac{13457821904611}{10000000000000}$ & $\frac{875137721}{100000000000}$ \\
+133 & z & $-\frac{13457821904611}{10000000000000}$ & $-\frac{13}{10}$ & $\frac{8414043831}{1000000000000}$ \\
+134 & z & $-\frac{13}{10}$ & $-\frac{12542178095389}{10000000000000}$ & $\frac{2014096333}{250000000000}$ \\
+135 & z & $-\frac{12542178095389}{10000000000000}$ & $-\frac{30215791636149}{25000000000000}$ & $\frac{7678505629}{1000000000000}$ \\
+136 & z & $-\frac{30215791636149}{25000000000000}$ & $-\frac{116343677458871}{100000000000000}$ & $\frac{7280632319}{1000000000000}$ \\
+137 & z & $-\frac{116343677458871}{100000000000000}$ & $-\frac{13985333355353}{12500000000000}$ & $\frac{6863145229}{1000000000000}$ \\
+138 & z & $-\frac{13985333355353}{12500000000000}$ & $-\frac{107499237428779}{100000000000000}$ & $\frac{6426779891}{1000000000000}$ \\
+139 & z & $-\frac{107499237428779}{100000000000000}$ & $-\frac{25803039933611}{25000000000000}$ & $\frac{2986394009}{500000000000}$ \\
+140 & z & $-\frac{25803039933611}{25000000000000}$ & $-\frac{9903979168467}{10000000000000}$ & $\frac{1375785469}{250000000000}$ \\
+141 & z & $-\frac{9903979168467}{10000000000000}$ & $-\frac{19}{20}$ & $\frac{502059841}{100000000000}$ \\
+142 & z & $-\frac{19}{20}$ & $-\frac{22777520922157}{25000000000000}$ & $\frac{1132148811}{250000000000}$ \\
+143 & z & $-\frac{22777520922157}{25000000000000}$ & $-\frac{8738669996939}{10000000000000}$ & $\frac{503912277}{125000000000}$ \\
+144 & z & $-\frac{8738669996939}{10000000000000}$ & $-\frac{16769158588599}{20000000000000}$ & $\frac{353382249}{100000000000}$ \\
+145 & z & $-\frac{16769158588599}{20000000000000}$ & $-\frac{40251262658471}{50000000000000}$ & $\frac{1521295731}{500000000000}$ \\
+146 & z & $-\frac{40251262658471}{50000000000000}$ & $-\frac{9671401684559}{12500000000000}$ & $\frac{2564906577}{1000000000000}$ \\
+147 & z & $-\frac{9671401684559}{12500000000000}$ & $-\frac{37232633089807}{50000000000000}$ & $\frac{2108555487}{1000000000000}$ \\
+148 & z & $-\frac{37232633089807}{50000000000000}$ & $-\frac{35898563569411}{50000000000000}$ & $\frac{420437387}{250000000000}$ \\
+149 & z & $-\frac{35898563569411}{50000000000000}$ & $-\frac{69378221735089}{100000000000000}$ & $\frac{1293146877}{1000000000000}$ \\
+150 & z & $-\frac{69378221735089}{100000000000000}$ & $-\frac{8402363511589}{12500000000000}$ & $\frac{950929581}{1000000000000}$ \\
+151 & z & $-\frac{8402363511589}{12500000000000}$ & $-\frac{6532843272421}{10000000000000}$ & $\frac{661669911}{1000000000000}$ \\
+152 & z & $-\frac{6532843272421}{10000000000000}$ & $-\frac{63714890935343}{100000000000000}$ & $\frac{107457623}{250000000000}$ \\
+153 & z & $-\frac{63714890935343}{100000000000000}$ & $-\frac{12477038431953}{20000000000000}$ & $\frac{257484313}{1000000000000}$ \\
+154 & z & $-\frac{12477038431953}{20000000000000}$ & $-\frac{30672515185887}{50000000000000}$ & $\frac{143377053}{1000000000000}$ \\
+155 & z & $-\frac{30672515185887}{50000000000000}$ & $-\frac{60598859703833}{100000000000000}$ & $\frac{42271621}{500000000000}$ \\
+156 & z & $-\frac{60598859703833}{100000000000000}$ & $-\frac{30074937686649}{50000000000000}$ & $\frac{61123507}{1000000000000}$ \\
+157 & z & $-\frac{30074937686649}{50000000000000}$ & $-\frac{30072085540779}{50000000000000}$ & $\frac{351387}{250000000000}$ \\
+158 & z & $-\frac{30072085540779}{50000000000000}$ & $-\frac{12025585326609}{20000000000000}$ & $\frac{391031}{125000000000}$ \\
+159 & z & $-\frac{12025585326609}{20000000000000}$ & $-\frac{60103615097789}{100000000000000}$ & $\frac{14269}{3125000000}$ \\
+160 & z & $-\frac{60103615097789}{100000000000000}$ & $-\frac{60074937686649}{100000000000000}$ & $\frac{5613821}{1000000000000}$ \\
+161 & z & $-\frac{60074937686649}{100000000000000}$ & $-\frac{60046260275509}{100000000000000}$ & $\frac{309037}{50000000000}$ \\
+162 & z & $-\frac{60046260275509}{100000000000000}$ & $-\frac{60021948740253}{100000000000000}$ & $\frac{6409107}{1000000000000}$ \\
+163 & z & $-\frac{60021948740253}{100000000000000}$ & $-\frac{3000285214587}{5000000000000}$ & $\frac{617203}{100000000000}$ \\
+164 & z & $-\frac{3000285214587}{5000000000000}$ & $-\frac{3}{5}$ & $\frac{6452761}{1000000000000}$ \\
+\hline
+\end{longtable}
+\endgroup
+\begingroup\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{@{}rllll@{}}
+\caption{Poisson data for the circular part of the reference measure.}\label{tab:reference-poisson}\\
+\hline
+index & support & $\operatorname{Re}c$ & $\operatorname{Im}c$ & $w$\\
+\hline
+\endfirsthead
+\hline
+index & support & $\operatorname{Re}c$ & $\operatorname{Im}c$ & $w$\\
+\hline
+\endhead
+1 & $z_\circ$ & $\frac{1228496352177}{2500000000000}$ & $\frac{16417100385729}{50000000000000}$ & $\frac{1}{200000000000}$ \\
+2 & $z_\circ$ & $\frac{12009809764841}{25000000000000}$ & $\frac{34424431884887}{100000000000000}$ & $\frac{9}{1000000000000}$ \\
+3 & $z_\circ$ & $\frac{11721795602803}{25000000000000}$ & $\frac{7195560090883}{20000000000000}$ & $\frac{1}{100000000000}$ \\
+4 & $z_\circ$ & $\frac{22842458896869}{50000000000000}$ & $\frac{37492643094071}{100000000000000}$ & $\frac{11}{1000000000000}$ \\
+5 & $z_\circ$ & $\frac{5554216577751}{12500000000000}$ & $\frac{19483668836207}{50000000000000}$ & $\frac{319352041}{500000000000}$ \\
+6 & $z_\circ$ & $\frac{21567483348221}{50000000000000}$ & $\frac{2525019065597}{6250000000000}$ & $\frac{173410523}{62500000000}$ \\
+7 & $z_\circ$ & $\frac{66864017229}{160000000000}$ & $\frac{66864017229}{160000000000}$ & $\frac{165542397}{62500000000}$ \\
+8 & $z_\circ$ & $\frac{2525019065597}{6250000000000}$ & $\frac{21567483348221}{50000000000000}$ & $\frac{3134952159}{1000000000000}$ \\
+9 & $z_\circ$ & $\frac{19483668836207}{50000000000000}$ & $\frac{5554216577751}{12500000000000}$ & $\frac{134844369}{40000000000}$ \\
+10 & $z_\circ$ & $\frac{37492643094071}{100000000000000}$ & $\frac{22842458896869}{50000000000000}$ & $\frac{45256593}{12500000000}$ \\
+11 & $z_\circ$ & $\frac{7195560090883}{20000000000000}$ & $\frac{11721795602803}{25000000000000}$ & $\frac{955771397}{250000000000}$ \\
+12 & $z_\circ$ & $\frac{34424431884887}{100000000000000}$ & $\frac{12009809764841}{25000000000000}$ & $\frac{4004693717}{1000000000000}$ \\
+13 & $z_\circ$ & $\frac{16417100385729}{50000000000000}$ & $\frac{1228496352177}{2500000000000}$ & $\frac{2082107511}{500000000000}$ \\
+14 & $z_\circ$ & $\frac{31208809973437}{100000000000000}$ & $\frac{50187848928221}{100000000000000}$ & $\frac{1076648351}{250000000000}$ \\
+15 & $z_\circ$ & $\frac{591}{2000}$ & $\frac{2559105068183}{5000000000000}$ & $\frac{1108507217}{250000000000}$ \\
+16 & $z_\circ$ & $\frac{1741221696651}{6250000000000}$ & $\frac{13030386680747}{25000000000000}$ & $\frac{142140453}{31250000000}$ \\
+17 & $z_\circ$ & $\frac{26139261591943}{100000000000000}$ & $\frac{26502589512291}{50000000000000}$ & $\frac{4651574501}{1000000000000}$ \\
+18 & $z_\circ$ & $\frac{76221829567}{312500000000}$ & $\frac{53832052052841}{100000000000000}$ & $\frac{4744445721}{1000000000000}$ \\
+19 & $z_\circ$ & $\frac{22616590852777}{100000000000000}$ & $\frac{54601280371417}{100000000000000}$ & $\frac{2414185377}{500000000000}$ \\
+20 & $z_\circ$ & $\frac{4163595566429}{20000000000000}$ & $\frac{27656020135679}{50000000000000}$ & $\frac{4904191893}{1000000000000}$ \\
+21 & $z_\circ$ & $\frac{18997072399417}{100000000000000}$ & $\frac{55963570653161}{100000000000000}$ & $\frac{4972725611}{1000000000000}$ \\
+22 & $z_\circ$ & $\frac{17155824425739}{100000000000000}$ & $\frac{28277586920887}{50000000000000}$ & $\frac{629314849}{125000000000}$ \\
+23 & $z_\circ$ & $\frac{15296205565559}{100000000000000}$ & $\frac{14271554083421}{25000000000000}$ & $\frac{2545027993}{500000000000}$ \\
+24 & $z_\circ$ & $\frac{13420207145331}{100000000000000}$ & $\frac{5755612947529}{10000000000000}$ & $\frac{2569944791}{500000000000}$ \\
+25 & $z_\circ$ & $\frac{11529838031153}{100000000000000}$ & $\frac{57964410071831}{100000000000000}$ & $\frac{2592193353}{500000000000}$ \\
+26 & $z_\circ$ & $\frac{481356123881}{5000000000000}$ & $\frac{7288827615777}{12500000000000}$ & $\frac{5223998617}{1000000000000}$ \\
+27 & $z_\circ$ & $\frac{1542819592041}{20000000000000}$ & $\frac{7324298913399}{12500000000000}$ & $\frac{5258940541}{1000000000000}$ \\
+28 & $z_\circ$ & $\frac{5792812993477}{100000000000000}$ & $\frac{58815417346327}{100000000000000}$ & $\frac{1057899139}{200000000000}$ \\
+29 & $z_\circ$ & $\frac{3865324937501}{100000000000000}$ & $\frac{58973462363401}{100000000000000}$ & $\frac{2657930209}{500000000000}$ \\
+30 & $z_\circ$ & $\frac{1933697794767}{100000000000000}$ & $\frac{59068357119853}{100000000000000}$ & $\frac{5338252913}{1000000000000}$ \\
+31 & $z_\circ$ & $0$ & $\frac{591}{1000}$ & $\frac{5356869923}{1000000000000}$ \\
+32 & $z_\circ$ & $-\frac{1933697794767}{100000000000000}$ & $\frac{59068357119853}{100000000000000}$ & $\frac{1074367931}{200000000000}$ \\
+33 & $z_\circ$ & $-\frac{3865324937501}{100000000000000}$ & $\frac{58973462363401}{100000000000000}$ & $\frac{67291239}{12500000000}$ \\
+34 & $z_\circ$ & $-\frac{5792812993477}{100000000000000}$ & $\frac{58815417346327}{100000000000000}$ & $\frac{2695647111}{500000000000}$ \\
+35 & $z_\circ$ & $-\frac{1542819592041}{20000000000000}$ & $\frac{7324298913399}{12500000000000}$ & $\frac{5395976833}{1000000000000}$ \\
+36 & $z_\circ$ & $-\frac{481356123881}{5000000000000}$ & $\frac{7288827615777}{12500000000000}$ & $\frac{1079472281}{200000000000}$ \\
+37 & $z_\circ$ & $-\frac{11529838031153}{100000000000000}$ & $\frac{57964410071831}{100000000000000}$ & $\frac{2697796109}{500000000000}$ \\
+38 & $z_\circ$ & $-\frac{13420207145331}{100000000000000}$ & $\frac{5755612947529}{10000000000000}$ & $\frac{2695317323}{500000000000}$ \\
+39 & $z_\circ$ & $-\frac{15296205565559}{100000000000000}$ & $\frac{14271554083421}{25000000000000}$ & $\frac{2691294491}{500000000000}$ \\
+40 & $z_\circ$ & $-\frac{17155824425739}{100000000000000}$ & $\frac{28277586920887}{50000000000000}$ & $\frac{5371424089}{1000000000000}$ \\
+41 & $z_\circ$ & $-\frac{18997072399417}{100000000000000}$ & $\frac{55963570653161}{100000000000000}$ & $\frac{2678583879}{500000000000}$ \\
+42 & $z_\circ$ & $-\frac{4163595566429}{20000000000000}$ & $\frac{27656020135679}{50000000000000}$ & $\frac{5339817089}{1000000000000}$ \\
+43 & $z_\circ$ & $-\frac{22616590852777}{100000000000000}$ & $\frac{54601280371417}{100000000000000}$ & $\frac{1063872139}{200000000000}$ \\
+44 & $z_\circ$ & $-\frac{76221829567}{312500000000}$ & $\frac{53832052052841}{100000000000000}$ & $\frac{5295824221}{1000000000000}$ \\
+45 & $z_\circ$ & $-\frac{26139261591943}{100000000000000}$ & $\frac{26502589512291}{50000000000000}$ & $\frac{5269193571}{1000000000000}$ \\
+46 & $z_\circ$ & $-\frac{1741221696651}{6250000000000}$ & $\frac{13030386680747}{25000000000000}$ & $\frac{2619728893}{500000000000}$ \\
+47 & $z_\circ$ & $-\frac{591}{2000}$ & $\frac{2559105068183}{5000000000000}$ & $\frac{2603278441}{500000000000}$ \\
+48 & $z_\circ$ & $-\frac{31208809973437}{100000000000000}$ & $\frac{50187848928221}{100000000000000}$ & $\frac{5170430831}{1000000000000}$ \\
+49 & $z_\circ$ & $-\frac{16417100385729}{50000000000000}$ & $\frac{1228496352177}{2500000000000}$ & $\frac{2565509397}{500000000000}$ \\
+50 & $z_\circ$ & $-\frac{34424431884887}{100000000000000}$ & $\frac{12009809764841}{25000000000000}$ & $\frac{5088322391}{1000000000000}$ \\
+51 & $z_\circ$ & $-\frac{7195560090883}{20000000000000}$ & $\frac{11721795602803}{25000000000000}$ & $\frac{126057723}{25000000000}$ \\
+52 & $z_\circ$ & $-\frac{37492643094071}{100000000000000}$ & $\frac{22842458896869}{50000000000000}$ & $\frac{2496487847}{500000000000}$ \\
+53 & $z_\circ$ & $-\frac{19483668836207}{50000000000000}$ & $\frac{5554216577751}{12500000000000}$ & $\frac{4940222961}{1000000000000}$ \\
+54 & $z_\circ$ & $-\frac{2525019065597}{6250000000000}$ & $\frac{21567483348221}{50000000000000}$ & $\frac{488399491}{100000000000}$ \\
+55 & $z_\circ$ & $-\frac{66864017229}{160000000000}$ & $\frac{66864017229}{160000000000}$ & $\frac{1206054551}{250000000000}$ \\
+56 & $z_\circ$ & $-\frac{21567483348221}{50000000000000}$ & $\frac{2525019065597}{6250000000000}$ & $\frac{4760895309}{1000000000000}$ \\
+57 & $z_\circ$ & $-\frac{5554216577751}{12500000000000}$ & $\frac{19483668836207}{50000000000000}$ & $\frac{4694049607}{1000000000000}$ \\
+58 & $z_\circ$ & $-\frac{22842458896869}{50000000000000}$ & $\frac{37492643094071}{100000000000000}$ & $\frac{577958261}{125000000000}$ \\
+59 & $z_\circ$ & $-\frac{11721795602803}{25000000000000}$ & $\frac{7195560090883}{20000000000000}$ & $\frac{181987309}{40000000000}$ \\
+60 & $z_\circ$ & $-\frac{12009809764841}{25000000000000}$ & $\frac{34424431884887}{100000000000000}$ & $\frac{894402727}{200000000000}$ \\
+61 & $z_\circ$ & $-\frac{1228496352177}{2500000000000}$ & $\frac{32834200771459}{100000000000000}$ & $\frac{2195305489}{500000000000}$ \\
+62 & $z_\circ$ & $-\frac{50187848928221}{100000000000000}$ & $\frac{31208809973437}{100000000000000}$ & $\frac{430554631}{100000000000}$ \\
+63 & $z_\circ$ & $-\frac{2559105068183}{5000000000000}$ & $\frac{591}{2000}$ & $\frac{1054221267}{250000000000}$ \\
+64 & $z_\circ$ & $-\frac{13030386680747}{25000000000000}$ & $\frac{1741221696651}{6250000000000}$ & $\frac{2062355327}{500000000000}$ \\
+65 & $z_\circ$ & $-\frac{26502589512291}{50000000000000}$ & $\frac{26139261591943}{100000000000000}$ & $\frac{805799493}{200000000000}$ \\
+66 & $z_\circ$ & $-\frac{53832052052841}{100000000000000}$ & $\frac{76221829567}{312500000000}$ & $\frac{7675307}{1953125000}$ \\
+67 & $z_\circ$ & $-\frac{54601280371417}{100000000000000}$ & $\frac{22616590852777}{100000000000000}$ & $\frac{1913514169}{500000000000}$ \\
+68 & $z_\circ$ & $-\frac{27656020135679}{50000000000000}$ & $\frac{4163595566429}{20000000000000}$ & $\frac{3720966921}{1000000000000}$ \\
+69 & $z_\circ$ & $-\frac{55963570653161}{100000000000000}$ & $\frac{18997072399417}{100000000000000}$ & $\frac{1805868511}{500000000000}$ \\
+70 & $z_\circ$ & $-\frac{28277586920887}{50000000000000}$ & $\frac{17155824425739}{100000000000000}$ & $\frac{174966551}{50000000000}$ \\
+71 & $z_\circ$ & $-\frac{14271554083421}{25000000000000}$ & $\frac{15296205565559}{100000000000000}$ & $\frac{3383865867}{1000000000000}$ \\
+72 & $z_\circ$ & $-\frac{5755612947529}{10000000000000}$ & $\frac{13420207145331}{100000000000000}$ & $\frac{3265638507}{1000000000000}$ \\
+73 & $z_\circ$ & $-\frac{57964410071831}{100000000000000}$ & $\frac{11529838031153}{100000000000000}$ & $\frac{1571694973}{500000000000}$ \\
+74 & $z_\circ$ & $-\frac{7288827615777}{12500000000000}$ & $\frac{481356123881}{5000000000000}$ & $\frac{3020584609}{1000000000000}$ \\
+75 & $z_\circ$ & $-\frac{7324298913399}{12500000000000}$ & $\frac{1542819592041}{20000000000000}$ & $\frac{2890212871}{1000000000000}$ \\
+76 & $z_\circ$ & $-\frac{58815417346327}{100000000000000}$ & $\frac{5792812993477}{100000000000000}$ & $\frac{690847589}{250000000000}$ \\
+77 & $z_\circ$ & $-\frac{58973462363401}{100000000000000}$ & $\frac{3865324937501}{100000000000000}$ & $\frac{2615447991}{1000000000000}$ \\
+78 & $z_\circ$ & $-\frac{59068357119853}{100000000000000}$ & $\frac{1933697794767}{100000000000000}$ & $\frac{1253241343}{500000000000}$ \\
+79 & $z_\circ$ & $-\frac{591}{1000}$ & $0$ & $\frac{2042234839}{1000000000000}$ \\
+80 & $z_\circ$ & $-\frac{59068357119853}{100000000000000}$ & $-\frac{1933697794767}{100000000000000}$ & $\frac{1253241343}{500000000000}$ \\
+81 & $z_\circ$ & $-\frac{58973462363401}{100000000000000}$ & $-\frac{3865324937501}{100000000000000}$ & $\frac{2615447991}{1000000000000}$ \\
+82 & $z_\circ$ & $-\frac{58815417346327}{100000000000000}$ & $-\frac{5792812993477}{100000000000000}$ & $\frac{690847589}{250000000000}$ \\
+83 & $z_\circ$ & $-\frac{7324298913399}{12500000000000}$ & $-\frac{1542819592041}{20000000000000}$ & $\frac{2890212871}{1000000000000}$ \\
+84 & $z_\circ$ & $-\frac{7288827615777}{12500000000000}$ & $-\frac{481356123881}{5000000000000}$ & $\frac{3020584609}{1000000000000}$ \\
+85 & $z_\circ$ & $-\frac{57964410071831}{100000000000000}$ & $-\frac{11529838031153}{100000000000000}$ & $\frac{1571694973}{500000000000}$ \\
+86 & $z_\circ$ & $-\frac{5755612947529}{10000000000000}$ & $-\frac{13420207145331}{100000000000000}$ & $\frac{3265638507}{1000000000000}$ \\
+87 & $z_\circ$ & $-\frac{14271554083421}{25000000000000}$ & $-\frac{15296205565559}{100000000000000}$ & $\frac{3383865867}{1000000000000}$ \\
+88 & $z_\circ$ & $-\frac{28277586920887}{50000000000000}$ & $-\frac{17155824425739}{100000000000000}$ & $\frac{174966551}{50000000000}$ \\
+89 & $z_\circ$ & $-\frac{55963570653161}{100000000000000}$ & $-\frac{18997072399417}{100000000000000}$ & $\frac{1805868511}{500000000000}$ \\
+90 & $z_\circ$ & $-\frac{27656020135679}{50000000000000}$ & $-\frac{4163595566429}{20000000000000}$ & $\frac{3720966921}{1000000000000}$ \\
+91 & $z_\circ$ & $-\frac{54601280371417}{100000000000000}$ & $-\frac{22616590852777}{100000000000000}$ & $\frac{1913514169}{500000000000}$ \\
+92 & $z_\circ$ & $-\frac{53832052052841}{100000000000000}$ & $-\frac{76221829567}{312500000000}$ & $\frac{7675307}{1953125000}$ \\
+93 & $z_\circ$ & $-\frac{26502589512291}{50000000000000}$ & $-\frac{26139261591943}{100000000000000}$ & $\frac{805799493}{200000000000}$ \\
+94 & $z_\circ$ & $-\frac{13030386680747}{25000000000000}$ & $-\frac{1741221696651}{6250000000000}$ & $\frac{2062355327}{500000000000}$ \\
+95 & $z_\circ$ & $-\frac{2559105068183}{5000000000000}$ & $-\frac{591}{2000}$ & $\frac{1054221267}{250000000000}$ \\
+96 & $z_\circ$ & $-\frac{50187848928221}{100000000000000}$ & $-\frac{31208809973437}{100000000000000}$ & $\frac{430554631}{100000000000}$ \\
+97 & $z_\circ$ & $-\frac{1228496352177}{2500000000000}$ & $-\frac{32834200771459}{100000000000000}$ & $\frac{2195305489}{500000000000}$ \\
+98 & $z_\circ$ & $-\frac{12009809764841}{25000000000000}$ & $-\frac{34424431884887}{100000000000000}$ & $\frac{894402727}{200000000000}$ \\
+99 & $z_\circ$ & $-\frac{11721795602803}{25000000000000}$ & $-\frac{7195560090883}{20000000000000}$ & $\frac{181987309}{40000000000}$ \\
+100 & $z_\circ$ & $-\frac{22842458896869}{50000000000000}$ & $-\frac{37492643094071}{100000000000000}$ & $\frac{577958261}{125000000000}$ \\
+101 & $z_\circ$ & $-\frac{5554216577751}{12500000000000}$ & $-\frac{19483668836207}{50000000000000}$ & $\frac{4694049607}{1000000000000}$ \\
+102 & $z_\circ$ & $-\frac{21567483348221}{50000000000000}$ & $-\frac{2525019065597}{6250000000000}$ & $\frac{4760895309}{1000000000000}$ \\
+103 & $z_\circ$ & $-\frac{66864017229}{160000000000}$ & $-\frac{66864017229}{160000000000}$ & $\frac{1206054551}{250000000000}$ \\
+104 & $z_\circ$ & $-\frac{2525019065597}{6250000000000}$ & $-\frac{21567483348221}{50000000000000}$ & $\frac{488399491}{100000000000}$ \\
+105 & $z_\circ$ & $-\frac{19483668836207}{50000000000000}$ & $-\frac{5554216577751}{12500000000000}$ & $\frac{4940222961}{1000000000000}$ \\
+106 & $z_\circ$ & $-\frac{37492643094071}{100000000000000}$ & $-\frac{22842458896869}{50000000000000}$ & $\frac{2496487847}{500000000000}$ \\
+107 & $z_\circ$ & $-\frac{7195560090883}{20000000000000}$ & $-\frac{11721795602803}{25000000000000}$ & $\frac{126057723}{25000000000}$ \\
+108 & $z_\circ$ & $-\frac{34424431884887}{100000000000000}$ & $-\frac{12009809764841}{25000000000000}$ & $\frac{5088322391}{1000000000000}$ \\
+109 & $z_\circ$ & $-\frac{16417100385729}{50000000000000}$ & $-\frac{1228496352177}{2500000000000}$ & $\frac{2565509397}{500000000000}$ \\
+110 & $z_\circ$ & $-\frac{31208809973437}{100000000000000}$ & $-\frac{50187848928221}{100000000000000}$ & $\frac{5170430831}{1000000000000}$ \\
+111 & $z_\circ$ & $-\frac{591}{2000}$ & $-\frac{2559105068183}{5000000000000}$ & $\frac{2603278441}{500000000000}$ \\
+112 & $z_\circ$ & $-\frac{1741221696651}{6250000000000}$ & $-\frac{13030386680747}{25000000000000}$ & $\frac{2619728893}{500000000000}$ \\
+113 & $z_\circ$ & $-\frac{26139261591943}{100000000000000}$ & $-\frac{26502589512291}{50000000000000}$ & $\frac{5269193571}{1000000000000}$ \\
+114 & $z_\circ$ & $-\frac{76221829567}{312500000000}$ & $-\frac{53832052052841}{100000000000000}$ & $\frac{5295824221}{1000000000000}$ \\
+115 & $z_\circ$ & $-\frac{22616590852777}{100000000000000}$ & $-\frac{54601280371417}{100000000000000}$ & $\frac{1063872139}{200000000000}$ \\
+116 & $z_\circ$ & $-\frac{4163595566429}{20000000000000}$ & $-\frac{27656020135679}{50000000000000}$ & $\frac{5339817089}{1000000000000}$ \\
+117 & $z_\circ$ & $-\frac{18997072399417}{100000000000000}$ & $-\frac{55963570653161}{100000000000000}$ & $\frac{2678583879}{500000000000}$ \\
+118 & $z_\circ$ & $-\frac{17155824425739}{100000000000000}$ & $-\frac{28277586920887}{50000000000000}$ & $\frac{5371424089}{1000000000000}$ \\
+119 & $z_\circ$ & $-\frac{15296205565559}{100000000000000}$ & $-\frac{14271554083421}{25000000000000}$ & $\frac{2691294491}{500000000000}$ \\
+120 & $z_\circ$ & $-\frac{13420207145331}{100000000000000}$ & $-\frac{5755612947529}{10000000000000}$ & $\frac{2695317323}{500000000000}$ \\
+121 & $z_\circ$ & $-\frac{11529838031153}{100000000000000}$ & $-\frac{57964410071831}{100000000000000}$ & $\frac{2697796109}{500000000000}$ \\
+122 & $z_\circ$ & $-\frac{481356123881}{5000000000000}$ & $-\frac{7288827615777}{12500000000000}$ & $\frac{1079472281}{200000000000}$ \\
+123 & $z_\circ$ & $-\frac{1542819592041}{20000000000000}$ & $-\frac{7324298913399}{12500000000000}$ & $\frac{5395976833}{1000000000000}$ \\
+124 & $z_\circ$ & $-\frac{5792812993477}{100000000000000}$ & $-\frac{58815417346327}{100000000000000}$ & $\frac{2695647111}{500000000000}$ \\
+125 & $z_\circ$ & $-\frac{3865324937501}{100000000000000}$ & $-\frac{58973462363401}{100000000000000}$ & $\frac{67291239}{12500000000}$ \\
+126 & $z_\circ$ & $-\frac{1933697794767}{100000000000000}$ & $-\frac{59068357119853}{100000000000000}$ & $\frac{1074367931}{200000000000}$ \\
+127 & $z_\circ$ & $0$ & $-\frac{591}{1000}$ & $\frac{5356869923}{1000000000000}$ \\
+128 & $z_\circ$ & $\frac{1933697794767}{100000000000000}$ & $-\frac{59068357119853}{100000000000000}$ & $\frac{5338252913}{1000000000000}$ \\
+129 & $z_\circ$ & $\frac{3865324937501}{100000000000000}$ & $-\frac{58973462363401}{100000000000000}$ & $\frac{2657930209}{500000000000}$ \\
+130 & $z_\circ$ & $\frac{5792812993477}{100000000000000}$ & $-\frac{58815417346327}{100000000000000}$ & $\frac{1057899139}{200000000000}$ \\
+131 & $z_\circ$ & $\frac{1542819592041}{20000000000000}$ & $-\frac{7324298913399}{12500000000000}$ & $\frac{5258940541}{1000000000000}$ \\
+132 & $z_\circ$ & $\frac{481356123881}{5000000000000}$ & $-\frac{7288827615777}{12500000000000}$ & $\frac{5223998617}{1000000000000}$ \\
+133 & $z_\circ$ & $\frac{11529838031153}{100000000000000}$ & $-\frac{57964410071831}{100000000000000}$ & $\frac{2592193353}{500000000000}$ \\
+134 & $z_\circ$ & $\frac{13420207145331}{100000000000000}$ & $-\frac{5755612947529}{10000000000000}$ & $\frac{2569944791}{500000000000}$ \\
+135 & $z_\circ$ & $\frac{15296205565559}{100000000000000}$ & $-\frac{14271554083421}{25000000000000}$ & $\frac{2545027993}{500000000000}$ \\
+136 & $z_\circ$ & $\frac{17155824425739}{100000000000000}$ & $-\frac{28277586920887}{50000000000000}$ & $\frac{629314849}{125000000000}$ \\
+137 & $z_\circ$ & $\frac{18997072399417}{100000000000000}$ & $-\frac{55963570653161}{100000000000000}$ & $\frac{4972725611}{1000000000000}$ \\
+138 & $z_\circ$ & $\frac{4163595566429}{20000000000000}$ & $-\frac{27656020135679}{50000000000000}$ & $\frac{4904191893}{1000000000000}$ \\
+139 & $z_\circ$ & $\frac{22616590852777}{100000000000000}$ & $-\frac{54601280371417}{100000000000000}$ & $\frac{2414185377}{500000000000}$ \\
+140 & $z_\circ$ & $\frac{76221829567}{312500000000}$ & $-\frac{53832052052841}{100000000000000}$ & $\frac{4744445721}{1000000000000}$ \\
+141 & $z_\circ$ & $\frac{26139261591943}{100000000000000}$ & $-\frac{26502589512291}{50000000000000}$ & $\frac{4651574501}{1000000000000}$ \\
+142 & $z_\circ$ & $\frac{1741221696651}{6250000000000}$ & $-\frac{13030386680747}{25000000000000}$ & $\frac{142140453}{31250000000}$ \\
+143 & $z_\circ$ & $\frac{591}{2000}$ & $-\frac{2559105068183}{5000000000000}$ & $\frac{1108507217}{250000000000}$ \\
+144 & $z_\circ$ & $\frac{31208809973437}{100000000000000}$ & $-\frac{50187848928221}{100000000000000}$ & $\frac{1076648351}{250000000000}$ \\
+145 & $z_\circ$ & $\frac{16417100385729}{50000000000000}$ & $-\frac{1228496352177}{2500000000000}$ & $\frac{2082107511}{500000000000}$ \\
+146 & $z_\circ$ & $\frac{34424431884887}{100000000000000}$ & $-\frac{12009809764841}{25000000000000}$ & $\frac{4004693717}{1000000000000}$ \\
+147 & $z_\circ$ & $\frac{7195560090883}{20000000000000}$ & $-\frac{11721795602803}{25000000000000}$ & $\frac{955771397}{250000000000}$ \\
+148 & $z_\circ$ & $\frac{37492643094071}{100000000000000}$ & $-\frac{22842458896869}{50000000000000}$ & $\frac{45256593}{12500000000}$ \\
+149 & $z_\circ$ & $\frac{19483668836207}{50000000000000}$ & $-\frac{5554216577751}{12500000000000}$ & $\frac{134844369}{40000000000}$ \\
+150 & $z_\circ$ & $\frac{2525019065597}{6250000000000}$ & $-\frac{21567483348221}{50000000000000}$ & $\frac{3134952159}{1000000000000}$ \\
+151 & $z_\circ$ & $\frac{66864017229}{160000000000}$ & $-\frac{66864017229}{160000000000}$ & $\frac{165542397}{62500000000}$ \\
+152 & $z_\circ$ & $\frac{21567483348221}{50000000000000}$ & $-\frac{2525019065597}{6250000000000}$ & $\frac{173410523}{62500000000}$ \\
+153 & $z_\circ$ & $\frac{5554216577751}{12500000000000}$ & $-\frac{19483668836207}{50000000000000}$ & $\frac{319352041}{500000000000}$ \\
+154 & $z_\circ$ & $\frac{22842458896869}{50000000000000}$ & $-\frac{37492643094071}{100000000000000}$ & $\frac{11}{1000000000000}$ \\
+155 & $z_\circ$ & $\frac{11721795602803}{25000000000000}$ & $-\frac{7195560090883}{20000000000000}$ & $\frac{1}{100000000000}$ \\
+156 & $z_\circ$ & $\frac{12009809764841}{25000000000000}$ & $-\frac{34424431884887}{100000000000000}$ & $\frac{9}{1000000000000}$ \\
+157 & $z_\circ$ & $\frac{1228496352177}{2500000000000}$ & $-\frac{16417100385729}{50000000000000}$ & $\frac{1}{200000000000}$ \\
+\hline
+\end{longtable}
+\endgroup
+The interval and Poisson weights sum to masses $1$, $5/4$, and $1$ as stated
+in Lemma~\ref{lem:reference-bound}.
+
+\section{Dyadic subdivisions}\label{app:static-table}
+On each support $s$, the leaves are ordered from left to right. Their
+depths $d_{s,1},\ldots,d_{s,n_s}$ are listed in run-length form: an entry
+$d:r$ means that depth $d$ occurs on $r$ consecutive leaves. Set
+$t_{s,0}=0$ and $t_{s,j}=\sum_{i=1}^j2^{-d_{s,i}}$. The printed sequence
+satisfies $\sum_{j=1}^{n_s}2^{-d_{s,j}}=1$ for each support. On a real
+support $[A_s,B_s]$ the $j$th interval is
+$[A_s+(B_s-A_s)t_{s,j-1},A_s+(B_s-A_s)t_{s,j}]$; on $z_\circ$ it is
+$q=(3/5)e^{i\pi t}$ for $t\in[t_{s,j-1},t_{s,j}]$. On each leaf, the Arb upper bound for
+$\sup F_s$ is strictly below its cap in Table~\ref{tab:analytic-bounds};
+that table keeps the worst leaf for each support. The full leafwise Arb
+upper bounds are in \texttt{anc/verification/analytic/leaves.json.gz}.
+
+\input{anc/analytic/depth_sequences.tex}
+
+\section{Computer checks}\label{app:ver}
+
+Lemma~\ref{lem:reference-bound} is proved by the interval computation of
+\texttt{check\_analytic.py}, in Arb ball arithmetic \cite{Arb} through
+\texttt{python-flint}~0.9.0. The other scripts recheck printed data in exact
+rational arithmetic. Times are for Python~3.12.3 on one core of an ARM64 Linux
+server.
+
+\begin{center}\footnotesize
+\begin{minipage}{\textwidth}\centering
+\captionof{table}{Scripts in \texttt{anc/}; times in seconds.}\label{tab:checks}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.25\textwidth}>{\raggedright\arraybackslash}p{0.62\textwidth}r@{}}
+script & statements checked & time\\\hline
+\texttt{check\_determinant.py}&\eqref{eq:g4-polynomial} and
+Table~\ref{tab:g4-coefficients}; \eqref{eq:laurent-moments} for $d\ne0$ and the four
+determinant evaluations in Lemma~\ref{lem:integral-identity} for small
+sizes.&$<1$\\
+\texttt{check\_arith.py}&the cut points and every entry of
+Table~\ref{tab:arithmetic}; \eqref{eq:inner-integral}, $5/48$, $45/32$ and
+$\tau$; $N_m$ in Lemma~\ref{lem:formal-divisor}; the potentials of
+Lemma~\ref{lem:outer-bound} for $n\le12$.&$<10$\\
+\texttt{check\_analytic.py}&Lemma~\ref{lem:reference-bound}:
+Tables~\ref{tab:analytic-bounds} and~\ref{tab:analytic-constants},
+\eqref{eq:Q-enclosure}, \eqref{eq:alpha-enclosure},
+\eqref{eq:endpoint-bounds}; the constants of
+Lemma~\ref{lem:analytic-bound}.&$<90$\\
+\texttt{check\_mod11.py}&\eqref{eq:g4-mod-matrix},
+\eqref{eq:g-mod-eleven} and Table~\ref{tab:g-mod-eleven}.&$<1$\\\hline
+\end{tabular}
+\end{minipage}
+\end{center}
+
+\section*{Statements and declarations}
+
+\textbf{Competing interests.} The author has no competing interests.
+
+\textbf{Funding.} No funding was received for this work.
+
+\textbf{Data availability.} The scripts of Appendix~\ref{app:ver}, the
+data of the measure $\nu$ and the outputs of the scripts are included in the
+\texttt{anc/} attachment accompanying this manuscript.
+
+\begin{thebibliography}{10}
+
+\bibitem{CDT}
+F.~Calegari, V.~Dimitrov, and Y.~Tang, \emph{The linear independence of $1$,
+$\zeta(2)$, and $L(2,\chi_{-3})$}, preprint (2024), arXiv:2408.15403v2.
+
+\bibitem{DLMF}
+\emph{NIST Digital Library of Mathematical Functions},
+\url{https://dlmf.nist.gov/}, Release 1.2.8 of 2026-09-15, F.~W.~J. Olver
+et al., eds.
+
+\bibitem{Ha}
+M.~Hata, \emph{Rational approximations to the dilogarithm}, Trans. Amer. Math.
+Soc. \textbf{336} (1993), no.~1, 363--387,
+\url{https://doi.org/10.1090/S0002-9947-1993-1147401-5}. MR1147401
+
+\bibitem{Krat}
+C.~Krattenthaler, \emph{Advanced determinant calculus}, S\'eminaire Lotharingien
+de Combinatoire \textbf{42} (1999), Article B42q, 67 pp., arXiv:math/9902004.
+
+\bibitem{Arb}
+F.~Johansson, \emph{Arb: efficient arbitrary-precision midpoint-radius
+interval arithmetic}, IEEE Trans. Comput. \textbf{66} (2017), no.~8,
+1281--1292, \url{https://doi.org/10.1109/TC.2017.2690633}.
+
+\bibitem{Pr}
+T.~Prellberg, \emph{Three irrationality results for the dilogarithm:
+Rhin--Viola and Viola--Zudilin constructions at $-1/4$, $1/5$, and $-1/3$},
+preprint (2026), arXiv:2609.06895v1.
+
+\bibitem{RV05}
+G.~Rhin and C.~Viola, \emph{The permutation group method for the dilogarithm},
+Ann. Sc. Norm. Super. Pisa Cl. Sci. (5) \textbf{4} (2005), no.~3, 389--437,
+\url{https://doi.org/10.2422/2036-2145.2005.3.02}. MR2185863
+
+\bibitem{RV19}
+G.~Rhin and C.~Viola, \emph{Linear independence of $1$, $\mathrm{Li}_1$ and
+$\mathrm{Li}_2$}, Mosc. J. Comb. Number Theory \textbf{8} (2019), no.~1,
+81--96,
+\url{https://doi.org/10.2140/moscow.2019.8.81}. MR3864310
+
+\bibitem{ST}
+E.~B. Saff and V.~Totik, \emph{Logarithmic Potentials with External Fields},
+Grundlehren der Mathematischen Wissenschaften, vol.~316, 1st ed., Springer, 1997,
+doi:10.1007/978-3-662-03329-6,
+Lemma~I.1.8.
+
+\bibitem{VZ}
+C.~Viola and W.~Zudilin, \emph{Linear independence of dilogarithmic values},
+J. Reine Angew. Math. \textbf{736} (2018), 193--223,
+\url{https://doi.org/10.1515/crelle-2015-0030}; preprint version:
+Max-Planck-Institut f\"ur Mathematik Preprint Series 2014 (26),
+\url{https://archive.mpim-bonn.mpg.de/id/eprint/1914/}. MR3769989
+
+\end{thebibliography}
+
+\end{document}

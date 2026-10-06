@@ -1,0 +1,62 @@
+{
+  "G4_integer_coefficients": [
+    1110544836657482146420241,
+    9902753530700468230399560,
+    33113649760730054563219200,
+    49212514324793465856000000,
+    27426807951407972352000000
+  ],
+  "G4_mod11": [
+    4,
+    2,
+    7,
+    3,
+    9
+  ],
+  "G4_multiplier": 16336404000000000,
+  "G4_rational_coefficients": [
+    "158649262379640306631463/2333772000000000",
+    "82522946089170568586663/136136700000000",
+    "9125234171277021209/4501875000",
+    "129158568291744/42875",
+    "10283119755264/6125"
+  ],
+  "G4_values_mod11": [
+    4,
+    3,
+    6,
+    3,
+    2,
+    7,
+    7,
+    9,
+    5,
+    5,
+    4
+  ],
+  "contour_radius_from_tex": "3/5",
+  "extra_exact_targets": [
+    "-3",
+    "1/2",
+    "7"
+  ],
+  "four_determinant_factor_tests": 19,
+  "moment_recurrence_test_range": [
+    1,
+    12
+  ],
+  "nonzero_laurent_moment_range": [
+    -16,
+    16
+  ],
+  "ok": true,
+  "platform": "Linux-6.17.0-1020-oracle-aarch64-with-glibc2.39",
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "scope": "Exact G4 identity; finite rational tests of uniformly proved identities",
+  "seconds": 0.036871,
+  "tex_sha256": {
+    "/tmp/li2-negative-half-paper-v11-work-20261006/release/upload/anc/analytic/depth_sequences.tex": "bdb41cde86bbb99fb5661094da79b8574c14242ce4d263bd673cd3a93e3de872",
+    "/tmp/li2-negative-half-paper-v11-work-20261006/release/upload/main.tex": "29384aab53344fe4326506ec47affcf90d116b664f524ce20ba4f0cc093a52ff"
+  },
+  "zero_laurent_moment": "Retained as zero; the uniform path calculation is in the paper"
+}
