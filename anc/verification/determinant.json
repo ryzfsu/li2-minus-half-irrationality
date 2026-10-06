@@ -53,10 +53,10 @@
   "platform": "Linux-6.17.0-1020-oracle-aarch64-with-glibc2.39",
   "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
   "scope": "Exact G4 identity; finite rational tests of uniformly proved identities",
-  "seconds": 0.036871,
+  "seconds": 0.028796,
   "tex_sha256": {
-    "/tmp/li2-negative-half-paper-v11-work-20261006/release/upload/anc/analytic/depth_sequences.tex": "bdb41cde86bbb99fb5661094da79b8574c14242ce4d263bd673cd3a93e3de872",
-    "/tmp/li2-negative-half-paper-v11-work-20261006/release/upload/main.tex": "29384aab53344fe4326506ec47affcf90d116b664f524ce20ba4f0cc093a52ff"
+    "/tmp/v12regen/anc/analytic/depth_sequences.tex": "bdb41cde86bbb99fb5661094da79b8574c14242ce4d263bd673cd3a93e3de872",
+    "/tmp/v12regen/main.tex": "671245a227ce7103d955afd7f2aa29fbaec082fd845e291a90e2a5e6df931be4"
   },
   "zero_laurent_moment": "Retained as zero; the uniform path calculation is in the paper"
 }

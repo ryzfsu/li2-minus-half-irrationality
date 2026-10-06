@@ -98,7 +98,7 @@ to zero.
 Lemma~\ref{lem:reference-bound} is computer-assisted: it uses interval
 arithmetic (Appendix~\ref{app:ver}). The other finite data are printed in
 Tables~\ref{tab:g4-coefficients}, \ref{tab:g-mod-eleven}
-and~\ref{tab:arithmetic} and in \eqref{eq:g4-mod-matrix}; they were also
+and~\ref{tab:arithmetic} and in \eqref{eq:g4-mod-matrix}. They were also
 rechecked in exact rational arithmetic.
 
 \section{The determinant}\label{sec:determinant}
@@ -260,10 +260,9 @@ The Cauchy--Vandermonde identity is
 \end{pmatrix}
 =\frac{\Delta(t)\Delta(v)}{\prod_{i',b}(t_{i'}+v_b)}.
 \]
-This is the standard Cauchy--Vandermonde identity; see \cite{Krat}.
-Combining this Cauchy--Vandermonde identity with the preceding row-scaling
-identity gives the displayed formula for $D_{xv}$; continuity covers
-$x_{i'}=0$.
+This is the Cauchy--Vandermonde identity \cite{Krat}. With the preceding
+row-scaling identity it gives the displayed formula for $D_{xv}$, and
+continuity covers $x_{i'}=0$.
 We verify the identity by induction on $m$. At the induction
 step fix $i'$, let $v'=(v_1,\ldots,v_{L-1})$, and let $\widehat t_{i'}$
 denote $t$ with $t_{i'}$ omitted. After multiplying by $v_L+t_{i'}$, the
@@ -276,7 +275,7 @@ residue of the quotient at $v_L=-t_{i'}$ is
 By induction this is the signed complementary minor on the determinant
 side, so the residues agree. After subtracting them, the difference is a
 polynomial in $v_L$ of degree at most $h-1$ and vanishes at the other
-$L-1$ variables; here $L-1=m+h-1\ge h$. For $h=0$ it tends to zero at
+$L-1\ge h$ variables $v_1,\ldots,v_{L-1}$. For $h=0$ it tends to zero at
 infinity. The case $m=0$ is the Vandermonde identity.
 
 The product of the four factors is
@@ -321,7 +320,7 @@ For an indeterminate $a$,
 \begin{proof}
 The denominators of a $C$ entry divide $d_{N_{\mathrm{den}}}$. An off-diagonal $B$ entry is
 a difference of harmonic sums divided by $j-i$, so its denominator divides
-$d_{N_{\mathrm{den}}}^2$; so does that of $b_i$. The denominators of a $V$ entry divide
+$d_{N_{\mathrm{den}}}^2$, and so does that of $b_i$. The denominators of a $V$ entry divide
 $d_U$.
 \end{proof}
 
@@ -355,12 +354,12 @@ modulo $p$, and $a^p\equiv a\pmod p$, so
 \]
 The scaled $C$ and $B$ entries vanish modulo $p$ between distinct residue
 classes modulo $p$. For a cross-class $B$ entry, the numerator is $p$-integral after
-the row scaling and the remaining factor $p/(j-i)$ is zero modulo $p$;
-within a class, for $j\ne i$, $j-i=p(l-k)$ with $0<|l-k|<p$, so the
-quotient denominator is a unit; diagonal entries have their displayed
+the row scaling and the remaining factor $p/(j-i)$ is zero modulo $p$.
+Within a class, for $j\ne i$, $j-i=p(l-k)$ with $0<|l-k|<p$, so the
+quotient denominator is a unit. Diagonal entries have their displayed
 separate values. Thus within a class they reduce to $a^uC_{kl}$ and
 $a^uB_{kl}$, and
-$-p^2TA\equiv0$. A $V$ row reduces to zero unless $\ell+u=pw$; then its
+$-p^2TA\equiv0$. A $V$ row reduces to zero unless $\ell+u=pw$. Then its
 entry is $1/(l+w)$, without the factor $a^u$. All displayed denominators
 are units because $p^2>U$. So, after permutations, the reduction has blocks
 with $2|K|+|W|$ rows and $|\mathcal L|$ columns.
@@ -410,12 +409,12 @@ $\ell_1,\ldots,\ell_5$, in their printed order, satisfy
 \]
 Every other distinct line in \eqref{eq:subdivision-lines} is $\le0$ at
 both endpoints or $\ge\rho$ at both endpoints. Affineness and distinctness
-make the ordering strict in the interior, apart from boundary lines; hence
+make the ordering strict in the interior, apart from boundary lines. Hence
 no intersection in $0\le x\le\rho$ is omitted.
 Table~\ref{tab:arithmetic} lists the $44$ intervals, the five lines in
 $0<x<\rho$ in increasing order, the values of $\mathfrak r$ on the six
 $x$-intervals, $\mathfrak c(\rho)$ and $\int \mathfrak c$. Each row can be checked by hand from
-\eqref{eq:residue-rank}; the table was computed and rechecked in exact
+\eqref{eq:residue-rank}. The table was also rechecked in exact
 rational arithmetic (Appendix~\ref{app:ver}). Summation gives
 \begin{equation}\label{eq:inner-integral}
  \int_{1/5}^{5/4}\mathfrak c(\rho)\,d\rho=\frac{1121513}{369600}.
@@ -471,7 +470,7 @@ pole when $p\mid j+\ell$. As $p^2>U$, there are no higher powers.
 In the first range every $B$ row has potential at least one, and two if
 $i\ge p$. A collision $j=i+p$ has $j\ge p+2n$, and its column gives the
 second unit. In the second range all $i<p$. The columns $j\ge p$ cover the
-simple $B$ poles and the $C$ poles; a collision needs $i+p<10n$, and its
+simple $B$ poles and the $C$ poles. A collision needs $i+p<10n$, and its
 row gives the other unit. In the third range $i<p$ and $i+p\ge10n$, so
 only simple $B$ poles remain. In these three ranges every $V$ row has
 potential one, which covers $j+\ell=p$ and $j+\ell=2p$. In the fourth range
@@ -670,11 +669,11 @@ finite absolute logarithmic energy.
 For a real signed measure $\sigma=\sigma_+-\sigma_-$ of mass zero, with
 positive compactly supported parts of finite absolute logarithmic
 self-integrals, write $I_{\rm ST}=-I$ for the sign convention in
-Saff--Totik. Their positivity lemma gives
+Saff--Totik. Their positivity lemma \cite[Lemma~I.1.8]{ST} gives
 \[
  \|\sigma\|^2=-I(\sigma,\sigma)\ge0.
 \]
-\cite[Lemma~I.1.8]{ST}. For smooth $\sigma$, the identity
+For smooth $\sigma$, the identity
 \[
  -I(\sigma,\sigma)=\frac1{2\pi}\int_{\mathbb C}
  |\nabla\mathcal U^\sigma|^2\,dA
@@ -750,8 +749,8 @@ The interval densities are at most $131,153,43$, and the Poisson densities
 \end{lemma}
 \begin{proof}
 The rational data of $\nu$ are printed in Tables~\ref{tab:reference-intervals}
-and~\ref{tab:reference-poisson}. An interval entry $(t_0,t_1,w)$ is
-$w\,dt/(t_1-t_0)$ on $[t_0,t_1]$. A Poisson entry
+and~\ref{tab:reference-poisson}. An interval $[t_0,t_1]$ of mass $w$ carries
+$w\,dt/(t_1-t_0)$. A Poisson entry
 $(c,w)$, $|c|<r$, is
 \[
  \frac{w(r^2-|c|^2)}{2\pi|re^{i\theta}-c|^2}\,d\theta
@@ -788,7 +787,7 @@ $g''(u)=\log|u|$. For the denominator,
 \qquad |R_{420}|\le\frac{2(1/2)^{421}}{421}.
 \]
 The pair decomposition and its outward enclosures are printed in
-Table~\ref{tab:q-certificate}. Since the total $x$--$v$ mass is $5/4$,
+Table~\ref{tab:q-certificate}. Since the product mass of $\nu_x\otimes\nu_v$ is $1\cdot(5/4)$,
 the integrated remainder is at most
 \[
 \frac54\frac{2(1/2)^{421}}{421}
@@ -799,35 +798,34 @@ The bounds for $F_x,F_v,F_z$ are proved by subdivision in Arb ball
 arithmetic \cite{Arb}. On a real subinterval, each interval-potential
 component is quasi-convex: away from $t_0,t_1$, its derivative has the sign of
 $\log|q-t_0|-\log|q-t_1|$, which changes from negative to positive at
-$(t_0+t_1)/2$, while the negative denominator term is convex. Each
-Poisson-entry potential is treated quasi-convexly across $|q|=r$ by comparing
-its one-sided derivative signs at $q=\pm r$; a row containing $r=3/5$
-includes evaluation at $q=r$ explicitly. Thus the component maximum is
+$(t_0+t_1)/2$, while the negative denominator term is convex. On each side of $|q|=r$ a
+Poisson-entry potential is the logarithm of the distance from $q$ to a fixed
+point, hence quasi-convex, and a row containing $r=3/5$ also evaluates $q=r$. Thus the component maximum is
 bounded by the relevant endpoint values. On a subarc of the circle, the
 largest distance to a pole is at an endpoint or at the antipodal point.
 Interval sign tests exclude the antipodal point when possible. If
 it lies on the subarc, or if a sign test is inconclusive, the full-circle
-upper bound is used; otherwise the endpoint values suffice. Table~\ref{tab:analytic-bounds}
-covers the real paths and the upper semicircle; conjugation covers the lower one.
+upper bound is used. Otherwise the endpoint values suffice. Table~\ref{tab:analytic-bounds}
+covers the real paths and the upper semicircle, and conjugation covers the lower one.
 On the subintervals
 meeting zero the positive term $\frac34\log|q|$ or $\frac14\log|q|$ is
 increasing in $|q|$ and equals $-\infty$ at zero. For a real pole $t$ and
 $q=re^{i\theta}$,
-$|re^{i\theta}-t|^2=r^2+t^2-2rt\cos\theta$; this is monotone in
+$|re^{i\theta}-t|^2=r^2+t^2-2rt\cos\theta$. This is monotone in
 $\theta\in[0,\pi]$ for each fixed sign of $t$, which justifies the endpoint
 or antipodal alternatives.
 
 On $|q|\le\delta$ use $|q-t|\le|t|+\delta$, $|2+qt|\ge2-\delta$ and
-$\log|r^2-q\overline c|-\log r\le\log(r+\delta)$ with the same primitives;
-this gives \eqref{eq:endpoint-bounds}. An interval has density
+$\log|r^2-q\overline c|-\log r\le\log(r+\delta)$ with the same primitives.
+This gives \eqref{eq:endpoint-bounds}. An interval has density
 $w/(t_1-t_0)$. With respect to arclength, a Poisson entry has density at
 most
 \begin{equation}\label{eq:poisson-density}
 H_c=\frac{w(r+|c|)}{2\pi r(r-|c|)}.
 \end{equation}
 The endpoint majorants and disk bounds are printed in
-Table~\ref{tab:endpoint-certificate}; the density checks are printed in
-Table~\ref{tab:density-certificate}. These density checks are rational, by an integer square-root bound for
+Table~\ref{tab:endpoint-certificate} and the density checks in
+Table~\ref{tab:density-certificate}. The density checks are rational, by an integer square-root bound for
 each $|c|^2$ and by $\pi>333/106$, which follows from Machin's formula:
 \[
  16\left(\frac15-\frac1{3\cdot5^3}
@@ -1018,7 +1016,7 @@ denominators are prime to $11$. Modulo $11$ the matrix
 \end{equation}
 Its determinant is $g(T)$. Reduction of \eqref{eq:g4-polynomial}, where
 $16336404000000000\equiv4\pmod{11}$, gives the same polynomial.
-Table~\ref{tab:g-mod-eleven} lists the values of $g$; none is zero.
+Table~\ref{tab:g-mod-eleven} lists the values of $g$. None is zero.
 \end{proof}
 
 \begin{table}[ht]
@@ -1044,7 +1042,7 @@ This is the determinant obtained after $T=W/Q_t^2$ by multiplying the $C$,
 $B$ and $V$ rows by $Q_t$, $Q_t^2$ and $Q_t$. Every nonzero index,
 difference and Cauchy denominator has absolute value less than $11Q_t$,
 hence $11$-adic valuation at most $t$. So $Q_tt_i$, $Q_t^2b_i$ and all
-entries of the scaled matrix lie in $\Z_{(11)}[W]$; in particular
+entries of the scaled matrix lie in $\Z_{(11)}[W]$. Hence
 $P_t\in\Z_{(11)}[W]$ and $\deg P_t\le m_t$.
 
 Let $a=-2$ and $0\le u<Q_t$. Only the summation indices divisible by $Q_t$
@@ -1054,14 +1052,14 @@ Q_t t_{Q_t j+u}\equiv a^ut_j,
 \qquad Q_t^2b_{Q_t j+u}\equiv a^ub_j\pmod {11}.
 \end{equation*}
 The scaled $C$ and $B$ entries vanish modulo $11$ between distinct residue
-classes modulo $Q_t$. In the class $u$ write $i=Q_t i_0+u$, $j=Q_t j_0+u$; then
+classes modulo $Q_t$. In the class $u$ write $i=Q_t i_0+u$, $j=Q_t j_0+u$. Then
 $2\le i_0\le5$ and $1\le j_0\le9$. The only $V$ row in this class is
 $\ell=Q_t-u$, with
 \[
-\frac{Q_t}{j+\ell}=\frac{1}{j_0+1};
+\frac{Q_t}{j+\ell}=\frac{1}{j_0+1}.
 \]
-Cross-class $C$ and $B$ entries have $11$-adic valuation at least $1$;
-within a class the nonzero differences $j_0-i_0$ satisfy $|j_0-i_0|\le7<11$
+Cross-class $C$ and $B$ entries have $11$-adic valuation at least $1$.
+Within a class the nonzero differences $j_0-i_0$ satisfy $|j_0-i_0|\le7<11$
 and are units. All other scaled $V$ entries vanish modulo $11$. So, after permutations,
 the matrix has $Q_t$ diagonal blocks
 \[
@@ -1113,14 +1111,14 @@ sequence. So $0<|Z_m|<1$ for large $t$, which is impossible.
 
 \section{Arithmetic integration}\label{app:arithmetic}
 In Table~\ref{tab:arithmetic} the second column lists the lines
-\eqref{eq:subdivision-lines} in $0<x<\rho$, in increasing order of $x$; the
+\eqref{eq:subdivision-lines} in $0<x<\rho$, in increasing order of $x$. The
 third column lists $\mathfrak r$ on the six $x$-intervals they cut from
 $[0,\rho)$. Then $\mathfrak c(\rho)=1+\sum\mathfrak r\cdot(\text{length})$. In the
 last three rows the fifth value includes the correction $-1$ of
 \eqref{eq:residue-rank}. By \eqref{eq:prime-exponents}, the values of $\mathfrak c$ at the cut points are not
 used. Of the lines
 \eqref{eq:subdivision-lines}, $25$ meet $0<x<\rho$ for some
-$\rho\in(1/5,5/4)$; $27$ meet the closed interval after adding $x=0$ and
+$\rho\in(1/5,5/4)$, and $27$ meet the closed interval after adding $x=0$ and
 $x=\rho$. The table has $44\cdot6=264$ regions and $66$ distinct
 triples $(K,\mathcal L,W)$.
 
@@ -1266,13 +1264,13 @@ numerical enclosures used in Lemma~\ref{lem:reference-bound}. Every displayed
 interval is outward rounded. The static row checks compare each upper endpoint
 with the printed bound.
 \begin{table}[ht]
-\centering\scriptsize
+\centering\footnotesize\renewcommand{\arraystretch}{1.2}\setlength{\tabcolsep}{8pt}
 \caption{The pair decomposition and its enclosures.}
 \label{tab:q-certificate}
-Here $I_{zr}$ is the real--real $z$ energy, $I_{zp}$ the real--Poisson
-cross term, and $I_{pp}$ the Poisson self-energy; $I_{vz}=I(\nu_v,\nu_z)$
+Here $I_{zr}$ is the energy of the real part of $\nu_z$, $I_{zp}$ the cross term
+of its real and Poisson parts, and $I_{pp}$ the Poisson self-energy. $I_{vz}=I(\nu_v,\nu_z)$
 includes both the real and Poisson parts of $\nu_z$.
-\begin{tabular}{@{}ll@{}}
+\begin{tabular}{@{}lr@{}}
 \hline term & outward enclosure\\\hline
 $I_{xx}$ & \texttt{[-1.546417482857900440,-1.546417482857900439]}\\
 $I_{vv}$ & \texttt{[-2.239637943680446541,-2.239637943680446540]}\\
@@ -1307,16 +1305,16 @@ The denominator expansion retains $420$ terms. Since $0\le xv/2\le1/2$ and the t
  =\frac{5}{2\cdot421\cdot2^{421}}<1.10\times10^{-129}.
 \]
 \begin{table}[ht]
-\centering\scriptsize
+\centering\footnotesize\renewcommand{\arraystretch}{1.2}\setlength{\tabcolsep}{8pt}
 \caption{Endpoint majorants and disk bounds for $\delta=1/250$.}
 \label{tab:endpoint-certificate}
-\begin{tabular}{@{}p{0.48\textwidth}p{0.48\textwidth}@{}}
+\begin{tabular}{@{}p{0.42\textwidth}p{0.48\textwidth}@{}}
 \hline quantity & outward enclosure\\\hline
 $A_x(\delta)$ & \texttt{[-0.638636770206138024,-0.638636770206138023]}\\
 $A_v(\delta)$ & \texttt{[-1.118528621477847036,-1.118528621477847035]}\\
 $A_{z,\mathrm{real}}(\delta)$ & \texttt{[0.148575311504214922,0.148575311504214923]}\\
 $W_P:=M_P\log(151/250)$ & \texttt{[-0.333515904969252,-0.333515904969250]}\\
-$M_P=26460009509/40000000000$ (157 Poisson weights) & \\
+$M_P$ (sum of the 157 Poisson weights) & 26460009509/40000000000\\
 $D_{x,\mathrm{low}}$ & \texttt{[0.691145177889270,0.691145177889275]}\\
 $D_{v,\mathrm{low}}$ & \texttt{[0.863931472361588,0.863931472361593]}\\
 $B_x$ & \texttt{[-6.28230070117056,-6.28230070117054]}\\
@@ -1325,7 +1323,7 @@ $B_v$ & \texttt{[-4.49350824377558,-4.49350824377554]}\\
 \end{tabular}
 \end{table}
 \begin{table}[ht]
-\centering\scriptsize
+\centering\footnotesize\renewcommand{\arraystretch}{1.2}\setlength{\tabcolsep}{8pt}
 \caption{Rational density checks from the printed reference tables.}
 \label{tab:density-certificate}
 \begin{tabular}{@{}lll@{}}
@@ -1337,364 +1335,299 @@ $z$ circle & $\sum H_c<24$ by the integer square-root and $\pi>333/106$ checks &
 \hline
 \end{tabular}
 \end{table}
-The first three bounds are rational comparisons of rows in
-Table~\ref{tab:reference-intervals}; the fourth is the corresponding rational
+The first three bounds in Table~\ref{tab:density-certificate} are rational comparisons of rows in
+Table~\ref{tab:reference-intervals}. The fourth is the corresponding rational
 sum over Table~\ref{tab:reference-poisson}.
 \section{Reference measure data}\label{app:reference-data}
-The rational tables specify the reference measure. An interval row $(a,b,w)$
-means $w\,dt/(b-a)$ on $[a,b]$. A Poisson row $(c_1,c_2,w)$ specifies the
-Poisson measure defined in the proof of Lemma~\ref{lem:reference-bound},
-with $c=c_1+ic_2$ and total mass $w$; its logarithmic potential is
-\eqref{eq:poisson-potential}. The ancillary
-JSON is an optional consistency copy of these printed tables.
-\begingroup\scriptsize
-\setlength{\tabcolsep}{3pt}
-\begin{longtable}{@{}rllll@{}}
-\caption{Interval data for the reference measure.}\label{tab:reference-intervals}\\
+The two tables specify the reference measure $\nu$. All entries are exact
+terminating decimals.
+
+Table~\ref{tab:reference-intervals} lists the intervals of $\nu$ on each real
+support in increasing order of the index, and each line holds two consecutive
+entries (odd index left, even index right). Entry $(a,w)$ is the interval
+$[a,b]$ carrying $w\,dt/(b-a)$, where $b$ is the $a$ of the entry with the next
+index in the same block. The last $b$ of each block is given in its heading.
+Outside these intervals $\nu$ has no mass. For example, $\nu_x$ vanishes on
+$[0,0.02653493525245)$.
+
+Table~\ref{tab:reference-poisson} lists the circular part of $\nu_z$. Every
+row is a measure on the circle $|q|=r=3/5$, whose upper half is the support $z_\circ$
+of Appendix~\ref{app:static-table}. It is the Poisson measure of the proof of
+Lemma~\ref{lem:reference-bound} with center $c=\operatorname{Re}c+i\operatorname{Im}c$,
+$|c|<3/5$, and total mass $w$. Its logarithmic potential is
+\eqref{eq:poisson-potential}. The $x$- and $v$-parts of $\nu$ have no Poisson
+rows.
+\begingroup\small
+\setlength{\tabcolsep}{6pt}\renewcommand{\arraystretch}{1.12}
+\begin{longtable}{@{}rll@{\hspace{2.2em}}rll@{}}
+\caption{Interval data for the reference measure: left endpoint $a$ and mass $w$ of each interval.}\label{tab:reference-intervals}\\
 \hline
-index & support & $a$ & $b$ & $w$\\
+index & $a$ & $w$ & index & $a$ & $w$\\
 \hline
 \endfirsthead
 \hline
-index & support & $a$ & $b$ & $w$\\
+index & $a$ & $w$ & index & $a$ & $w$\\
 \hline
 \endhead
-1 & x & $\frac{530698705049}{20000000000000}$ & $\frac{951505843609}{25000000000000}$ & $\frac{11}{1000000000000}$ \\
-2 & x & $\frac{951505843609}{25000000000000}$ & $\frac{2578181461683}{50000000000000}$ & $\frac{7}{125000000000}$ \\
-3 & x & $\frac{2578181461683}{50000000000000}$ & $\frac{3349364905389}{50000000000000}$ & $\frac{33}{500000000000}$ \\
-4 & x & $\frac{3349364905389}{50000000000000}$ & $\frac{8426519384873}{100000000000000}$ & $\frac{4523818023}{500000000000}$ \\
-5 & x & $\frac{8426519384873}{100000000000000}$ & $\frac{5166166492719}{50000000000000}$ & $\frac{16164978747}{1000000000000}$ \\
-6 & x & $\frac{5166166492719}{50000000000000}$ & $\frac{12408009626051}{100000000000000}$ & $\frac{9517172997}{500000000000}$ \\
-7 & x & $\frac{12408009626051}{100000000000000}$ & $\frac{14644660940673}{100000000000000}$ & $\frac{5266343043}{250000000000}$ \\
-8 & x & $\frac{14644660940673}{100000000000000}$ & $\frac{17032709244997}{100000000000000}$ & $\frac{2805946239}{125000000000}$ \\
-9 & x & $\frac{17032709244997}{100000000000000}$ & $\frac{4890482137391}{25000000000000}$ & $\frac{293172753}{12500000000}$ \\
-10 & x & $\frac{4890482137391}{25000000000000}$ & $\frac{1111074417451}{5000000000000}$ & $\frac{4840061623}{200000000000}$ \\
-11 & x & $\frac{1111074417451}{5000000000000}$ & $\frac{1}{4}$ & $\frac{154789091}{6250000000}$ \\
-12 & x & $\frac{1}{4}$ & $\frac{557711309781}{2000000000000}$ & $\frac{25199538621}{1000000000000}$ \\
-13 & x & $\frac{557711309781}{2000000000000}$ & $\frac{15432914190873}{50000000000000}$ & $\frac{2553284359}{100000000000}$ \\
-14 & x & $\frac{15432914190873}{50000000000000}$ & $\frac{16964013367421}{50000000000000}$ & $\frac{25790757407}{1000000000000}$ \\
-15 & x & $\frac{16964013367421}{50000000000000}$ & $\frac{18529523872437}{50000000000000}$ & $\frac{1299471847}{50000000000}$ \\
-16 & x & $\frac{18529523872437}{50000000000000}$ & $\frac{20122741949597}{50000000000000}$ & $\frac{13070488499}{500000000000}$ \\
-17 & x & $\frac{20122741949597}{50000000000000}$ & $\frac{43473690388997}{100000000000000}$ & $\frac{13127986227}{500000000000}$ \\
-18 & x & $\frac{43473690388997}{100000000000000}$ & $\frac{46729843538493}{100000000000000}$ & $\frac{5268275843}{200000000000}$ \\
-19 & x & $\frac{46729843538493}{100000000000000}$ & $\frac{1}{2}$ & $\frac{26402361973}{1000000000000}$ \\
-20 & x & $\frac{1}{2}$ & $\frac{53270156461507}{100000000000000}$ & $\frac{3305536679}{125000000000}$ \\
-21 & x & $\frac{53270156461507}{100000000000000}$ & $\frac{56526309611003}{100000000000000}$ & $\frac{13235441161}{500000000000}$ \\
-22 & x & $\frac{56526309611003}{100000000000000}$ & $\frac{29877258050403}{50000000000000}$ & $\frac{26484444361}{1000000000000}$ \\
-23 & x & $\frac{29877258050403}{50000000000000}$ & $\frac{31470476127563}{50000000000000}$ & $\frac{13243899017}{500000000000}$ \\
-24 & x & $\frac{31470476127563}{50000000000000}$ & $\frac{33035986632579}{50000000000000}$ & $\frac{13241782757}{500000000000}$ \\
-25 & x & $\frac{33035986632579}{50000000000000}$ & $\frac{34567085809127}{50000000000000}$ & $\frac{26473037339}{1000000000000}$ \\
-26 & x & $\frac{34567085809127}{50000000000000}$ & $\frac{1442288690219}{2000000000000}$ & $\frac{13228561001}{500000000000}$ \\
-27 & x & $\frac{1442288690219}{2000000000000}$ & $\frac{3}{4}$ & $\frac{26437395821}{1000000000000}$ \\
-28 & x & $\frac{3}{4}$ & $\frac{3888925582549}{5000000000000}$ & $\frac{5283060053}{200000000000}$ \\
-29 & x & $\frac{3888925582549}{5000000000000}$ & $\frac{20109517862609}{25000000000000}$ & $\frac{13195648853}{500000000000}$ \\
-30 & x & $\frac{20109517862609}{25000000000000}$ & $\frac{82967290755003}{100000000000000}$ & $\frac{13182868973}{500000000000}$ \\
-31 & x & $\frac{82967290755003}{100000000000000}$ & $\frac{85355339059327}{100000000000000}$ & $\frac{5267890361}{200000000000}$ \\
-32 & x & $\frac{85355339059327}{100000000000000}$ & $\frac{87591990373949}{100000000000000}$ & $\frac{26313133347}{1000000000000}$ \\
-33 & x & $\frac{87591990373949}{100000000000000}$ & $\frac{44833833507281}{50000000000000}$ & $\frac{5257393303}{200000000000}$ \\
-34 & x & $\frac{44833833507281}{50000000000000}$ & $\frac{91573480615127}{100000000000000}$ & $\frac{26260716757}{1000000000000}$ \\
-35 & x & $\frac{91573480615127}{100000000000000}$ & $\frac{46650635094611}{50000000000000}$ & $\frac{2623413097}{100000000000}$ \\
-36 & x & $\frac{46650635094611}{50000000000000}$ & $\frac{47421818538317}{50000000000000}$ & $\frac{3275900561}{125000000000}$ \\
-37 & x & $\frac{47421818538317}{50000000000000}$ & $\frac{24048494156391}{25000000000000}$ & $\frac{6544676903}{250000000000}$ \\
-38 & x & $\frac{24048494156391}{25000000000000}$ & $\frac{19469301294951}{20000000000000}$ & $\frac{6536512973}{250000000000}$ \\
-39 & x & $\frac{19469301294951}{20000000000000}$ & $\frac{98296291314453}{100000000000000}$ & $\frac{1631276689}{62500000000}$ \\
-40 & x & $\frac{98296291314453}{100000000000000}$ & $\frac{49519632010081}{50000000000000}$ & $\frac{13022779451}{500000000000}$ \\
-41 & x & $\frac{49519632010081}{50000000000000}$ & $\frac{99572243068691}{100000000000000}$ & $\frac{25800471869}{1000000000000}$ \\
-42 & x & $\frac{99572243068691}{100000000000000}$ & $\frac{9989294616193}{10000000000000}$ & $\frac{2600510817}{100000000000}$ \\
-43 & x & $\frac{9989294616193}{10000000000000}$ & $\frac{9989702065603}{10000000000000}$ & $\frac{101387447}{100000000000}$ \\
-44 & x & $\frac{9989702065603}{10000000000000}$ & $\frac{99908623833539}{100000000000000}$ & $\frac{1749595019}{1000000000000}$ \\
-45 & x & $\frac{99908623833539}{100000000000000}$ & $\frac{19985197843173}{20000000000000}$ & $\frac{644280239}{250000000000}$ \\
-46 & x & $\frac{19985197843173}{20000000000000}$ & $\frac{19989294616193}{20000000000000}$ & $\frac{3342459833}{1000000000000}$ \\
-47 & x & $\frac{19989294616193}{20000000000000}$ & $\frac{19993391389213}{20000000000000}$ & $\frac{4008718139}{1000000000000}$ \\
-48 & x & $\frac{19993391389213}{20000000000000}$ & $\frac{99984322328391}{100000000000000}$ & $\frac{910964729}{200000000000}$ \\
-49 & x & $\frac{99984322328391}{100000000000000}$ & $\frac{999959255059}{1000000000000}$ & $\frac{4774398867}{1000000000000}$ \\
-50 & x & $\frac{999959255059}{1000000000000}$ & $1$ & $\frac{5316651861}{1000000000000}$ \\
-51 & v & $\frac{480367989919}{50000000000000}$ & $\frac{1703708685547}{100000000000000}$ & $\frac{13858434309}{1000000000000}$ \\
-52 & v & $\frac{1703708685547}{100000000000000}$ & $\frac{530698705049}{20000000000000}$ & $\frac{2582377329}{125000000000}$ \\
-53 & v & $\frac{530698705049}{20000000000000}$ & $\frac{951505843609}{25000000000000}$ & $\frac{11378187207}{500000000000}$ \\
-54 & v & $\frac{951505843609}{25000000000000}$ & $\frac{2578181461683}{50000000000000}$ & $\frac{1502528193}{62500000000}$ \\
-55 & v & $\frac{2578181461683}{50000000000000}$ & $\frac{3349364905389}{50000000000000}$ & $\frac{24796480607}{1000000000000}$ \\
-56 & v & $\frac{3349364905389}{50000000000000}$ & $\frac{8426519384873}{100000000000000}$ & $\frac{6324591531}{250000000000}$ \\
-57 & v & $\frac{8426519384873}{100000000000000}$ & $\frac{5166166492719}{50000000000000}$ & $\frac{25649764501}{1000000000000}$ \\
-58 & v & $\frac{5166166492719}{50000000000000}$ & $\frac{12408009626051}{100000000000000}$ & $\frac{404845303}{15625000000}$ \\
-59 & v & $\frac{12408009626051}{100000000000000}$ & $\frac{14644660940673}{100000000000000}$ & $\frac{26113452847}{1000000000000}$ \\
-60 & v & $\frac{14644660940673}{100000000000000}$ & $\frac{17032709244997}{100000000000000}$ & $\frac{328515369}{12500000000}$ \\
-61 & v & $\frac{17032709244997}{100000000000000}$ & $\frac{4890482137391}{25000000000000}$ & $\frac{26427269003}{1000000000000}$ \\
-62 & v & $\frac{4890482137391}{25000000000000}$ & $\frac{1111074417451}{5000000000000}$ & $\frac{13280757619}{500000000000}$ \\
-63 & v & $\frac{1111074417451}{5000000000000}$ & $\frac{1}{4}$ & $\frac{26691316341}{1000000000000}$ \\
-64 & v & $\frac{1}{4}$ & $\frac{557711309781}{2000000000000}$ & $\frac{13410930633}{500000000000}$ \\
-65 & v & $\frac{557711309781}{2000000000000}$ & $\frac{15432914190873}{50000000000000}$ & $\frac{26957166859}{1000000000000}$ \\
-66 & v & $\frac{15432914190873}{50000000000000}$ & $\frac{16964013367421}{50000000000000}$ & $\frac{6775091647}{250000000000}$ \\
-67 & v & $\frac{16964013367421}{50000000000000}$ & $\frac{18529523872437}{50000000000000}$ & $\frac{27253308259}{1000000000000}$ \\
-68 & v & $\frac{18529523872437}{50000000000000}$ & $\frac{20122741949597}{50000000000000}$ & $\frac{27416681441}{1000000000000}$ \\
-69 & v & $\frac{20122741949597}{50000000000000}$ & $\frac{43473690388997}{100000000000000}$ & $\frac{27590343833}{1000000000000}$ \\
-70 & v & $\frac{43473690388997}{100000000000000}$ & $\frac{46729843538493}{100000000000000}$ & $\frac{3471644669}{125000000000}$ \\
-71 & v & $\frac{46729843538493}{100000000000000}$ & $\frac{1}{2}$ & $\frac{27962829423}{1000000000000}$ \\
-72 & v & $\frac{1}{2}$ & $\frac{53270156461507}{100000000000000}$ & $\frac{5631076523}{200000000000}$ \\
-73 & v & $\frac{53270156461507}{100000000000000}$ & $\frac{56526309611003}{100000000000000}$ & $\frac{1133958053}{40000000000}$ \\
-74 & v & $\frac{56526309611003}{100000000000000}$ & $\frac{29877258050403}{50000000000000}$ & $\frac{28512049639}{1000000000000}$ \\
-75 & v & $\frac{29877258050403}{50000000000000}$ & $\frac{31470476127563}{50000000000000}$ & $\frac{14352012457}{500000000000}$ \\
-76 & v & $\frac{31470476127563}{50000000000000}$ & $\frac{33035986632579}{50000000000000}$ & $\frac{2895179599}{100000000000}$ \\
-77 & v & $\frac{33035986632579}{50000000000000}$ & $\frac{34567085809127}{50000000000000}$ & $\frac{29147228949}{1000000000000}$ \\
-78 & v & $\frac{34567085809127}{50000000000000}$ & $\frac{1442288690219}{2000000000000}$ & $\frac{29330189043}{1000000000000}$ \\
-79 & v & $\frac{1442288690219}{2000000000000}$ & $\frac{3}{4}$ & $\frac{14748946677}{500000000000}$ \\
-80 & v & $\frac{3}{4}$ & $\frac{3888925582549}{5000000000000}$ & $\frac{29651492159}{1000000000000}$ \\
-81 & v & $\frac{3888925582549}{5000000000000}$ & $\frac{20109517862609}{25000000000000}$ & $\frac{14895661549}{500000000000}$ \\
-82 & v & $\frac{20109517862609}{25000000000000}$ & $\frac{82967290755003}{100000000000000}$ & $\frac{29918006281}{1000000000000}$ \\
-83 & v & $\frac{82967290755003}{100000000000000}$ & $\frac{85355339059327}{100000000000000}$ & $\frac{7507968041}{250000000000}$ \\
-84 & v & $\frac{85355339059327}{100000000000000}$ & $\frac{87591990373949}{100000000000000}$ & $\frac{30133175201}{1000000000000}$ \\
-85 & v & $\frac{87591990373949}{100000000000000}$ & $\frac{44833833507281}{50000000000000}$ & $\frac{30222548301}{1000000000000}$ \\
-86 & v & $\frac{44833833507281}{50000000000000}$ & $\frac{91573480615127}{100000000000000}$ & $\frac{3787535747}{125000000000}$ \\
-87 & v & $\frac{91573480615127}{100000000000000}$ & $\frac{46650635094611}{50000000000000}$ & $\frac{30366116749}{1000000000000}$ \\
-88 & v & $\frac{46650635094611}{50000000000000}$ & $\frac{47421818538317}{50000000000000}$ & $\frac{7604972321}{250000000000}$ \\
-89 & v & $\frac{47421818538317}{50000000000000}$ & $\frac{24048494156391}{25000000000000}$ & $\frac{15230196013}{500000000000}$ \\
-90 & v & $\frac{24048494156391}{25000000000000}$ & $\frac{19469301294951}{20000000000000}$ & $\frac{3810627207}{125000000000}$ \\
-91 & v & $\frac{19469301294951}{20000000000000}$ & $\frac{98296291314453}{100000000000000}$ & $\frac{30483706899}{1000000000000}$ \\
-92 & v & $\frac{98296291314453}{100000000000000}$ & $\frac{49519632010081}{50000000000000}$ & $\frac{30461131797}{1000000000000}$ \\
-93 & v & $\frac{49519632010081}{50000000000000}$ & $\frac{99572243068691}{100000000000000}$ & $\frac{7551284017}{250000000000}$ \\
-94 & v & $\frac{99572243068691}{100000000000000}$ & $\frac{9989294616193}{10000000000000}$ & $\frac{1904097433}{62500000000}$ \\
-95 & v & $\frac{9989294616193}{10000000000000}$ & $\frac{9989702065603}{10000000000000}$ & $\frac{1188270853}{1000000000000}$ \\
-96 & v & $\frac{9989702065603}{10000000000000}$ & $\frac{99908623833539}{100000000000000}$ & $\frac{82008949}{40000000000}$ \\
-97 & v & $\frac{99908623833539}{100000000000000}$ & $\frac{19985197843173}{20000000000000}$ & $\frac{1509954673}{500000000000}$ \\
-98 & v & $\frac{19985197843173}{20000000000000}$ & $\frac{19989294616193}{20000000000000}$ & $\frac{783374219}{200000000000}$ \\
-99 & v & $\frac{19989294616193}{20000000000000}$ & $\frac{19993391389213}{20000000000000}$ & $\frac{2348887521}{500000000000}$ \\
-100 & v & $\frac{19993391389213}{20000000000000}$ & $\frac{99984322328391}{100000000000000}$ & $\frac{1334479163}{250000000000}$ \\
-101 & v & $\frac{99984322328391}{100000000000000}$ & $\frac{999959255059}{1000000000000}$ & $\frac{5595394787}{1000000000000}$ \\
-102 & v & $\frac{999959255059}{1000000000000}$ & $1$ & $\frac{6230983047}{1000000000000}$ \\
-103 & z & $-2$ & $-\frac{9999714785413}{5000000000000}$ & $\frac{489180957}{200000000000}$ \\
-104 & z & $-\frac{9999714785413}{5000000000000}$ & $-\frac{199978051259747}{100000000000000}$ & $\frac{2196289941}{1000000000000}$ \\
-105 & z & $-\frac{199978051259747}{100000000000000}$ & $-\frac{199953739724491}{100000000000000}$ & $\frac{130941893}{62500000000}$ \\
-106 & z & $-\frac{199953739724491}{100000000000000}$ & $-\frac{199925062313351}{100000000000000}$ & $\frac{921855699}{500000000000}$ \\
-107 & z & $-\frac{199925062313351}{100000000000000}$ & $-\frac{199896384902211}{100000000000000}$ & $\frac{1537127441}{1000000000000}$ \\
-108 & z & $-\frac{199896384902211}{100000000000000}$ & $-\frac{39974414673391}{20000000000000}$ & $\frac{592554089}{500000000000}$ \\
-109 & z & $-\frac{39974414673391}{20000000000000}$ & $-\frac{99927914459221}{50000000000000}$ & $\frac{804636229}{1000000000000}$ \\
-110 & z & $-\frac{99927914459221}{50000000000000}$ & $-\frac{99925062313351}{50000000000000}$ & $\frac{466572663}{1000000000000}$ \\
-111 & z & $-\frac{99925062313351}{50000000000000}$ & $-\frac{199401140296167}{100000000000000}$ & $\frac{11949094627}{1000000000000}$ \\
-112 & z & $-\frac{199401140296167}{100000000000000}$ & $-\frac{99327484814113}{50000000000000}$ & $\frac{11829831253}{1000000000000}$ \\
-113 & z & $-\frac{99327484814113}{50000000000000}$ & $-\frac{39522961568047}{20000000000000}$ & $\frac{5952318039}{500000000000}$ \\
-114 & z & $-\frac{39522961568047}{20000000000000}$ & $-\frac{196285109064657}{100000000000000}$ & $\frac{1484922213}{125000000000}$ \\
-115 & z & $-\frac{196285109064657}{100000000000000}$ & $-\frac{19467156727579}{10000000000000}$ & $\frac{2959269833}{250000000000}$ \\
-116 & z & $-\frac{19467156727579}{10000000000000}$ & $-\frac{24097636488411}{12500000000000}$ & $\frac{1177589427}{100000000000}$ \\
-117 & z & $-\frac{24097636488411}{12500000000000}$ & $-\frac{190621778264911}{100000000000000}$ & $\frac{5849794997}{500000000000}$ \\
-118 & z & $-\frac{190621778264911}{100000000000000}$ & $-\frac{94101436430589}{50000000000000}$ & $\frac{11609193707}{1000000000000}$ \\
-119 & z & $-\frac{94101436430589}{50000000000000}$ & $-\frac{92767366910193}{50000000000000}$ & $\frac{11505113623}{1000000000000}$ \\
-120 & z & $-\frac{92767366910193}{50000000000000}$ & $-\frac{22828598315441}{12500000000000}$ & $\frac{11387043787}{1000000000000}$ \\
-121 & z & $-\frac{22828598315441}{12500000000000}$ & $-\frac{89748737341529}{50000000000000}$ & $\frac{11255100131}{1000000000000}$ \\
-122 & z & $-\frac{89748737341529}{50000000000000}$ & $-\frac{35230841411401}{20000000000000}$ & $\frac{11109018301}{1000000000000}$ \\
-123 & z & $-\frac{35230841411401}{20000000000000}$ & $-\frac{17261330003061}{10000000000000}$ & $\frac{10947966233}{1000000000000}$ \\
-124 & z & $-\frac{17261330003061}{10000000000000}$ & $-\frac{42222479077843}{25000000000000}$ & $\frac{215433561}{20000000000}$ \\
-125 & z & $-\frac{42222479077843}{25000000000000}$ & $-\frac{33}{20}$ & $\frac{1322493667}{125000000000}$ \\
-126 & z & $-\frac{33}{20}$ & $-\frac{16096020831533}{10000000000000}$ & $\frac{648250603}{62500000000}$ \\
-127 & z & $-\frac{16096020831533}{10000000000000}$ & $-\frac{39196960066389}{25000000000000}$ & $\frac{317098009}{31250000000}$ \\
-128 & z & $-\frac{39196960066389}{25000000000000}$ & $-\frac{152500762571221}{100000000000000}$ & $\frac{4952465203}{500000000000}$ \\
-129 & z & $-\frac{152500762571221}{100000000000000}$ & $-\frac{18514666644647}{12500000000000}$ & $\frac{602803971}{62500000000}$ \\
-130 & z & $-\frac{18514666644647}{12500000000000}$ & $-\frac{143656322541129}{100000000000000}$ & $\frac{4683135331}{500000000000}$ \\
-131 & z & $-\frac{143656322541129}{100000000000000}$ & $-\frac{34784208363851}{25000000000000}$ & $\frac{4534307153}{500000000000}$ \\
-132 & z & $-\frac{34784208363851}{25000000000000}$ & $-\frac{13457821904611}{10000000000000}$ & $\frac{875137721}{100000000000}$ \\
-133 & z & $-\frac{13457821904611}{10000000000000}$ & $-\frac{13}{10}$ & $\frac{8414043831}{1000000000000}$ \\
-134 & z & $-\frac{13}{10}$ & $-\frac{12542178095389}{10000000000000}$ & $\frac{2014096333}{250000000000}$ \\
-135 & z & $-\frac{12542178095389}{10000000000000}$ & $-\frac{30215791636149}{25000000000000}$ & $\frac{7678505629}{1000000000000}$ \\
-136 & z & $-\frac{30215791636149}{25000000000000}$ & $-\frac{116343677458871}{100000000000000}$ & $\frac{7280632319}{1000000000000}$ \\
-137 & z & $-\frac{116343677458871}{100000000000000}$ & $-\frac{13985333355353}{12500000000000}$ & $\frac{6863145229}{1000000000000}$ \\
-138 & z & $-\frac{13985333355353}{12500000000000}$ & $-\frac{107499237428779}{100000000000000}$ & $\frac{6426779891}{1000000000000}$ \\
-139 & z & $-\frac{107499237428779}{100000000000000}$ & $-\frac{25803039933611}{25000000000000}$ & $\frac{2986394009}{500000000000}$ \\
-140 & z & $-\frac{25803039933611}{25000000000000}$ & $-\frac{9903979168467}{10000000000000}$ & $\frac{1375785469}{250000000000}$ \\
-141 & z & $-\frac{9903979168467}{10000000000000}$ & $-\frac{19}{20}$ & $\frac{502059841}{100000000000}$ \\
-142 & z & $-\frac{19}{20}$ & $-\frac{22777520922157}{25000000000000}$ & $\frac{1132148811}{250000000000}$ \\
-143 & z & $-\frac{22777520922157}{25000000000000}$ & $-\frac{8738669996939}{10000000000000}$ & $\frac{503912277}{125000000000}$ \\
-144 & z & $-\frac{8738669996939}{10000000000000}$ & $-\frac{16769158588599}{20000000000000}$ & $\frac{353382249}{100000000000}$ \\
-145 & z & $-\frac{16769158588599}{20000000000000}$ & $-\frac{40251262658471}{50000000000000}$ & $\frac{1521295731}{500000000000}$ \\
-146 & z & $-\frac{40251262658471}{50000000000000}$ & $-\frac{9671401684559}{12500000000000}$ & $\frac{2564906577}{1000000000000}$ \\
-147 & z & $-\frac{9671401684559}{12500000000000}$ & $-\frac{37232633089807}{50000000000000}$ & $\frac{2108555487}{1000000000000}$ \\
-148 & z & $-\frac{37232633089807}{50000000000000}$ & $-\frac{35898563569411}{50000000000000}$ & $\frac{420437387}{250000000000}$ \\
-149 & z & $-\frac{35898563569411}{50000000000000}$ & $-\frac{69378221735089}{100000000000000}$ & $\frac{1293146877}{1000000000000}$ \\
-150 & z & $-\frac{69378221735089}{100000000000000}$ & $-\frac{8402363511589}{12500000000000}$ & $\frac{950929581}{1000000000000}$ \\
-151 & z & $-\frac{8402363511589}{12500000000000}$ & $-\frac{6532843272421}{10000000000000}$ & $\frac{661669911}{1000000000000}$ \\
-152 & z & $-\frac{6532843272421}{10000000000000}$ & $-\frac{63714890935343}{100000000000000}$ & $\frac{107457623}{250000000000}$ \\
-153 & z & $-\frac{63714890935343}{100000000000000}$ & $-\frac{12477038431953}{20000000000000}$ & $\frac{257484313}{1000000000000}$ \\
-154 & z & $-\frac{12477038431953}{20000000000000}$ & $-\frac{30672515185887}{50000000000000}$ & $\frac{143377053}{1000000000000}$ \\
-155 & z & $-\frac{30672515185887}{50000000000000}$ & $-\frac{60598859703833}{100000000000000}$ & $\frac{42271621}{500000000000}$ \\
-156 & z & $-\frac{60598859703833}{100000000000000}$ & $-\frac{30074937686649}{50000000000000}$ & $\frac{61123507}{1000000000000}$ \\
-157 & z & $-\frac{30074937686649}{50000000000000}$ & $-\frac{30072085540779}{50000000000000}$ & $\frac{351387}{250000000000}$ \\
-158 & z & $-\frac{30072085540779}{50000000000000}$ & $-\frac{12025585326609}{20000000000000}$ & $\frac{391031}{125000000000}$ \\
-159 & z & $-\frac{12025585326609}{20000000000000}$ & $-\frac{60103615097789}{100000000000000}$ & $\frac{14269}{3125000000}$ \\
-160 & z & $-\frac{60103615097789}{100000000000000}$ & $-\frac{60074937686649}{100000000000000}$ & $\frac{5613821}{1000000000000}$ \\
-161 & z & $-\frac{60074937686649}{100000000000000}$ & $-\frac{60046260275509}{100000000000000}$ & $\frac{309037}{50000000000}$ \\
-162 & z & $-\frac{60046260275509}{100000000000000}$ & $-\frac{60021948740253}{100000000000000}$ & $\frac{6409107}{1000000000000}$ \\
-163 & z & $-\frac{60021948740253}{100000000000000}$ & $-\frac{3000285214587}{5000000000000}$ & $\frac{617203}{100000000000}$ \\
-164 & z & $-\frac{3000285214587}{5000000000000}$ & $-\frac{3}{5}$ & $\frac{6452761}{1000000000000}$ \\
+\multicolumn{6}{@{}l}{\textit{$x$-intervals on $[0,1]$}: rows 1--50, last right endpoint $1$.}\\
+1 & 0.02653493525245 & 0.000000000011 & 2 & 0.03806023374436 & 0.000000000056 \\
+3 & 0.05156362923366 & 0.000000000066 & 4 & 0.06698729810778 & 0.009047636046 \\
+5 & 0.08426519384873 & 0.016164978747 & 6 & 0.10332332985438 & 0.019034345994 \\
+7 & 0.12408009626051 & 0.021065372172 & 8 & 0.14644660940673 & 0.022447569912 \\
+9 & 0.17032709244997 & 0.02345382024 & 10 & 0.19561928549564 & 0.024200308115 \\
+11 & 0.2222148834902 & 0.02476625456 & 12 & 0.25 & 0.025199538621 \\
+13 & 0.2788556548905 & 0.02553284359 & 14 & 0.30865828381746 & 0.025790757407 \\
+15 & 0.33928026734842 & 0.02598943694 & 16 & 0.37059047744874 & 0.026140976998 \\
+17 & 0.40245483899194 & 0.026255972454 & 18 & 0.43473690388997 & 0.026341379215 \\
+19 & 0.46729843538493 & 0.026402361973 & 20 & 0.5 & 0.026444293432 \\
+21 & 0.53270156461507 & 0.026470882322 & 22 & 0.56526309611003 & 0.026484444361 \\
+23 & 0.59754516100806 & 0.026487798034 & 24 & 0.62940952255126 & 0.026483565514 \\
+25 & 0.66071973265158 & 0.026473037339 & 26 & 0.69134171618254 & 0.026457122002 \\
+27 & 0.7211443451095 & 0.026437395821 & 28 & 0.75 & 0.026415300265 \\
+29 & 0.7777851165098 & 0.026391297706 & 30 & 0.80438071450436 & 0.026365737946 \\
+31 & 0.82967290755003 & 0.026339451805 & 32 & 0.85355339059327 & 0.026313133347 \\
+33 & 0.87591990373949 & 0.026286966515 & 34 & 0.89667667014562 & 0.026260716757 \\
+35 & 0.91573480615127 & 0.02623413097 & 36 & 0.93301270189222 & 0.026207204488 \\
+37 & 0.94843637076634 & 0.026178707612 & 38 & 0.96193976625564 & 0.026146051892 \\
+39 & 0.97346506474755 & 0.026100427024 & 40 & 0.98296291314453 & 0.026045558902 \\
+41 & 0.99039264020162 & 0.025800471869 & 42 & 0.99572243068691 & 0.02600510817 \\
+43 & 0.9989294616193 & 0.00101387447 & 44 & 0.9989702065603 & 0.001749595019 \\
+45 & 0.99908623833539 & 0.002577120956 & 46 & 0.99925989215865 & 0.003342459833 \\
+47 & 0.99946473080965 & 0.004008718139 & 48 & 0.99966956946065 & 0.004554823645 \\
+49 & 0.99984322328391 & 0.004774398867 & 50 & 0.999959255059 & 0.005316651861 \\
+\hline
+\multicolumn{6}{@{}l}{\textit{$v$-intervals on $[0,1]$}: rows 51--102, last right endpoint $1$.}\\
+51 & 0.00960735979838 & 0.013858434309 & 52 & 0.01703708685547 & 0.020659018632 \\
+53 & 0.02653493525245 & 0.022756374414 & 54 & 0.03806023374436 & 0.024040451088 \\
+55 & 0.05156362923366 & 0.024796480607 & 56 & 0.06698729810778 & 0.025298366124 \\
+57 & 0.08426519384873 & 0.025649764501 & 58 & 0.10332332985438 & 0.025910099392 \\
+59 & 0.12408009626051 & 0.026113452847 & 60 & 0.14644660940673 & 0.02628122952 \\
+61 & 0.17032709244997 & 0.026427269003 & 62 & 0.19561928549564 & 0.026561515238 \\
+63 & 0.2222148834902 & 0.026691316341 & 64 & 0.25 & 0.026821861266 \\
+65 & 0.2788556548905 & 0.026957166859 & 66 & 0.30865828381746 & 0.027100366588 \\
+67 & 0.33928026734842 & 0.027253308259 & 68 & 0.37059047744874 & 0.027416681441 \\
+69 & 0.40245483899194 & 0.027590343833 & 70 & 0.43473690388997 & 0.027773157352 \\
+71 & 0.46729843538493 & 0.027962829423 & 72 & 0.5 & 0.028155382615 \\
+73 & 0.53270156461507 & 0.028348951325 & 74 & 0.56526309611003 & 0.028512049639 \\
+75 & 0.59754516100806 & 0.028704024914 & 76 & 0.62940952255126 & 0.02895179599 \\
+77 & 0.66071973265158 & 0.029147228949 & 78 & 0.69134171618254 & 0.029330189043 \\
+79 & 0.7211443451095 & 0.029497893354 & 80 & 0.75 & 0.029651492159 \\
+81 & 0.7777851165098 & 0.029791323098 & 82 & 0.80438071450436 & 0.029918006281 \\
+83 & 0.82967290755003 & 0.030031872164 & 84 & 0.85355339059327 & 0.030133175201 \\
+85 & 0.87591990373949 & 0.030222548301 & 86 & 0.89667667014562 & 0.030300285976 \\
+87 & 0.91573480615127 & 0.030366116749 & 88 & 0.93301270189222 & 0.030419889284 \\
+89 & 0.94843637076634 & 0.030460392026 & 90 & 0.96193976625564 & 0.030485017656 \\
+91 & 0.97346506474755 & 0.030483706899 & 92 & 0.98296291314453 & 0.030461131797 \\
+93 & 0.99039264020162 & 0.030205136068 & 94 & 0.99572243068691 & 0.030465558928 \\
+95 & 0.9989294616193 & 0.001188270853 & 96 & 0.9989702065603 & 0.002050223725 \\
+97 & 0.99908623833539 & 0.003019909346 & 98 & 0.99925989215865 & 0.003916871095 \\
+99 & 0.99946473080965 & 0.004697775042 & 100 & 0.99966956946065 & 0.005337916652 \\
+101 & 0.99984322328391 & 0.005595394787 & 102 & 0.999959255059 & 0.006230983047 \\
+\hline
+\multicolumn{6}{@{}l}{\textit{$z$-intervals on $[-2,-3/5]$}: rows 103--164, last right endpoint $-3/5$.}\\
+103 & -2 & 0.002445904785 & 104 & -1.9999429570826 & 0.002196289941 \\
+105 & -1.99978051259747 & 0.002095070288 & 106 & -1.99953739724491 & 0.001843711398 \\
+107 & -1.99925062313351 & 0.001537127441 & 108 & -1.99896384902211 & 0.001185108178 \\
+109 & -1.99872073366955 & 0.000804636229 & 110 & -1.99855828918442 & 0.000466572663 \\
+111 & -1.99850124626702 & 0.011949094627 & 112 & -1.99401140296167 & 0.011829831253 \\
+113 & -1.98654969628226 & 0.011904636078 & 114 & -1.97614807840235 & 0.011879377704 \\
+115 & -1.96285109064657 & 0.011837079332 & 116 & -1.9467156727579 & 0.01177589427 \\
+117 & -1.92781091907288 & 0.011699589994 & 118 & -1.90621778264911 & 0.011609193707 \\
+119 & -1.88202872861178 & 0.011505113623 & 120 & -1.85534733820386 & 0.011387043787 \\
+121 & -1.82628786523528 & 0.011255100131 & 122 & -1.79497474683058 & 0.011109018301 \\
+123 & -1.76154207057005 & 0.010947966233 & 124 & -1.7261330003061 & 0.01077167805 \\
+125 & -1.68889916311372 & 0.010579949336 & 126 & -1.65 & 0.010372009648 \\
+127 & -1.6096020831533 & 0.010147136288 & 128 & -1.56787840265556 & 0.009904930406 \\
+129 & -1.52500762571221 & 0.009644863536 & 130 & -1.48117333157176 & 0.009366270662 \\
+131 & -1.43656322541129 & 0.009068614306 & 132 & -1.39136833455404 & 0.00875137721 \\
+133 & -1.3457821904611 & 0.008414043831 & 134 & -1.3 & 0.008056385332 \\
+135 & -1.2542178095389 & 0.007678505629 & 136 & -1.20863166544596 & 0.007280632319 \\
+137 & -1.16343677458871 & 0.006863145229 & 138 & -1.11882666842824 & 0.006426779891 \\
+139 & -1.07499237428779 & 0.005972788018 & 140 & -1.03212159734444 & 0.005503141876 \\
+141 & -0.9903979168467 & 0.00502059841 & 142 & -0.95 & 0.004528595244 \\
+143 & -0.91110083688628 & 0.004031298216 & 144 & -0.8738669996939 & 0.00353382249 \\
+145 & -0.83845792942995 & 0.003042591462 & 146 & -0.80502525316942 & 0.002564906577 \\
+147 & -0.77371213476472 & 0.002108555487 & 148 & -0.74465266179614 & 0.001681749548 \\
+149 & -0.71797127138822 & 0.001293146877 & 150 & -0.69378221735089 & 0.000950929581 \\
+151 & -0.67218908092712 & 0.000661669911 & 152 & -0.6532843272421 & 0.000429830492 \\
+153 & -0.63714890935343 & 0.000257484313 & 154 & -0.62385192159765 & 0.000143377053 \\
+155 & -0.61345030371774 & 0.000084543242 & 156 & -0.60598859703833 & 0.000061123507 \\
+157 & -0.60149875373298 & 0.000001405548 & 158 & -0.60144171081558 & 0.000003128248 \\
+159 & -0.60127926633045 & 0.00000456608 & 160 & -0.60103615097789 & 0.000005613821 \\
+161 & -0.60074937686649 & 0.00000618074 & 162 & -0.60046260275509 & 0.000006409107 \\
+163 & -0.60021948740253 & 0.00000617203 & 164 & -0.6000570429174 & 0.000006452761 \\
 \hline
 \end{longtable}
 \endgroup
-\begingroup\scriptsize
-\setlength{\tabcolsep}{3pt}
-\begin{longtable}{@{}rllll@{}}
-\caption{Poisson data for the circular part of the reference measure.}\label{tab:reference-poisson}\\
+\begingroup\small
+\setlength{\tabcolsep}{10pt}\renewcommand{\arraystretch}{1.15}
+\begin{longtable}{@{}rlll@{}}
+\caption{Poisson data for the circular part of the reference measure: center $c$ and mass $w$ of each Poisson measure.}\label{tab:reference-poisson}\\
 \hline
-index & support & $\operatorname{Re}c$ & $\operatorname{Im}c$ & $w$\\
+index & $\operatorname{Re}c$ & $\operatorname{Im}c$ & $w$\\
 \hline
 \endfirsthead
 \hline
-index & support & $\operatorname{Re}c$ & $\operatorname{Im}c$ & $w$\\
+index & $\operatorname{Re}c$ & $\operatorname{Im}c$ & $w$\\
 \hline
 \endhead
-1 & $z_\circ$ & $\frac{1228496352177}{2500000000000}$ & $\frac{16417100385729}{50000000000000}$ & $\frac{1}{200000000000}$ \\
-2 & $z_\circ$ & $\frac{12009809764841}{25000000000000}$ & $\frac{34424431884887}{100000000000000}$ & $\frac{9}{1000000000000}$ \\
-3 & $z_\circ$ & $\frac{11721795602803}{25000000000000}$ & $\frac{7195560090883}{20000000000000}$ & $\frac{1}{100000000000}$ \\
-4 & $z_\circ$ & $\frac{22842458896869}{50000000000000}$ & $\frac{37492643094071}{100000000000000}$ & $\frac{11}{1000000000000}$ \\
-5 & $z_\circ$ & $\frac{5554216577751}{12500000000000}$ & $\frac{19483668836207}{50000000000000}$ & $\frac{319352041}{500000000000}$ \\
-6 & $z_\circ$ & $\frac{21567483348221}{50000000000000}$ & $\frac{2525019065597}{6250000000000}$ & $\frac{173410523}{62500000000}$ \\
-7 & $z_\circ$ & $\frac{66864017229}{160000000000}$ & $\frac{66864017229}{160000000000}$ & $\frac{165542397}{62500000000}$ \\
-8 & $z_\circ$ & $\frac{2525019065597}{6250000000000}$ & $\frac{21567483348221}{50000000000000}$ & $\frac{3134952159}{1000000000000}$ \\
-9 & $z_\circ$ & $\frac{19483668836207}{50000000000000}$ & $\frac{5554216577751}{12500000000000}$ & $\frac{134844369}{40000000000}$ \\
-10 & $z_\circ$ & $\frac{37492643094071}{100000000000000}$ & $\frac{22842458896869}{50000000000000}$ & $\frac{45256593}{12500000000}$ \\
-11 & $z_\circ$ & $\frac{7195560090883}{20000000000000}$ & $\frac{11721795602803}{25000000000000}$ & $\frac{955771397}{250000000000}$ \\
-12 & $z_\circ$ & $\frac{34424431884887}{100000000000000}$ & $\frac{12009809764841}{25000000000000}$ & $\frac{4004693717}{1000000000000}$ \\
-13 & $z_\circ$ & $\frac{16417100385729}{50000000000000}$ & $\frac{1228496352177}{2500000000000}$ & $\frac{2082107511}{500000000000}$ \\
-14 & $z_\circ$ & $\frac{31208809973437}{100000000000000}$ & $\frac{50187848928221}{100000000000000}$ & $\frac{1076648351}{250000000000}$ \\
-15 & $z_\circ$ & $\frac{591}{2000}$ & $\frac{2559105068183}{5000000000000}$ & $\frac{1108507217}{250000000000}$ \\
-16 & $z_\circ$ & $\frac{1741221696651}{6250000000000}$ & $\frac{13030386680747}{25000000000000}$ & $\frac{142140453}{31250000000}$ \\
-17 & $z_\circ$ & $\frac{26139261591943}{100000000000000}$ & $\frac{26502589512291}{50000000000000}$ & $\frac{4651574501}{1000000000000}$ \\
-18 & $z_\circ$ & $\frac{76221829567}{312500000000}$ & $\frac{53832052052841}{100000000000000}$ & $\frac{4744445721}{1000000000000}$ \\
-19 & $z_\circ$ & $\frac{22616590852777}{100000000000000}$ & $\frac{54601280371417}{100000000000000}$ & $\frac{2414185377}{500000000000}$ \\
-20 & $z_\circ$ & $\frac{4163595566429}{20000000000000}$ & $\frac{27656020135679}{50000000000000}$ & $\frac{4904191893}{1000000000000}$ \\
-21 & $z_\circ$ & $\frac{18997072399417}{100000000000000}$ & $\frac{55963570653161}{100000000000000}$ & $\frac{4972725611}{1000000000000}$ \\
-22 & $z_\circ$ & $\frac{17155824425739}{100000000000000}$ & $\frac{28277586920887}{50000000000000}$ & $\frac{629314849}{125000000000}$ \\
-23 & $z_\circ$ & $\frac{15296205565559}{100000000000000}$ & $\frac{14271554083421}{25000000000000}$ & $\frac{2545027993}{500000000000}$ \\
-24 & $z_\circ$ & $\frac{13420207145331}{100000000000000}$ & $\frac{5755612947529}{10000000000000}$ & $\frac{2569944791}{500000000000}$ \\
-25 & $z_\circ$ & $\frac{11529838031153}{100000000000000}$ & $\frac{57964410071831}{100000000000000}$ & $\frac{2592193353}{500000000000}$ \\
-26 & $z_\circ$ & $\frac{481356123881}{5000000000000}$ & $\frac{7288827615777}{12500000000000}$ & $\frac{5223998617}{1000000000000}$ \\
-27 & $z_\circ$ & $\frac{1542819592041}{20000000000000}$ & $\frac{7324298913399}{12500000000000}$ & $\frac{5258940541}{1000000000000}$ \\
-28 & $z_\circ$ & $\frac{5792812993477}{100000000000000}$ & $\frac{58815417346327}{100000000000000}$ & $\frac{1057899139}{200000000000}$ \\
-29 & $z_\circ$ & $\frac{3865324937501}{100000000000000}$ & $\frac{58973462363401}{100000000000000}$ & $\frac{2657930209}{500000000000}$ \\
-30 & $z_\circ$ & $\frac{1933697794767}{100000000000000}$ & $\frac{59068357119853}{100000000000000}$ & $\frac{5338252913}{1000000000000}$ \\
-31 & $z_\circ$ & $0$ & $\frac{591}{1000}$ & $\frac{5356869923}{1000000000000}$ \\
-32 & $z_\circ$ & $-\frac{1933697794767}{100000000000000}$ & $\frac{59068357119853}{100000000000000}$ & $\frac{1074367931}{200000000000}$ \\
-33 & $z_\circ$ & $-\frac{3865324937501}{100000000000000}$ & $\frac{58973462363401}{100000000000000}$ & $\frac{67291239}{12500000000}$ \\
-34 & $z_\circ$ & $-\frac{5792812993477}{100000000000000}$ & $\frac{58815417346327}{100000000000000}$ & $\frac{2695647111}{500000000000}$ \\
-35 & $z_\circ$ & $-\frac{1542819592041}{20000000000000}$ & $\frac{7324298913399}{12500000000000}$ & $\frac{5395976833}{1000000000000}$ \\
-36 & $z_\circ$ & $-\frac{481356123881}{5000000000000}$ & $\frac{7288827615777}{12500000000000}$ & $\frac{1079472281}{200000000000}$ \\
-37 & $z_\circ$ & $-\frac{11529838031153}{100000000000000}$ & $\frac{57964410071831}{100000000000000}$ & $\frac{2697796109}{500000000000}$ \\
-38 & $z_\circ$ & $-\frac{13420207145331}{100000000000000}$ & $\frac{5755612947529}{10000000000000}$ & $\frac{2695317323}{500000000000}$ \\
-39 & $z_\circ$ & $-\frac{15296205565559}{100000000000000}$ & $\frac{14271554083421}{25000000000000}$ & $\frac{2691294491}{500000000000}$ \\
-40 & $z_\circ$ & $-\frac{17155824425739}{100000000000000}$ & $\frac{28277586920887}{50000000000000}$ & $\frac{5371424089}{1000000000000}$ \\
-41 & $z_\circ$ & $-\frac{18997072399417}{100000000000000}$ & $\frac{55963570653161}{100000000000000}$ & $\frac{2678583879}{500000000000}$ \\
-42 & $z_\circ$ & $-\frac{4163595566429}{20000000000000}$ & $\frac{27656020135679}{50000000000000}$ & $\frac{5339817089}{1000000000000}$ \\
-43 & $z_\circ$ & $-\frac{22616590852777}{100000000000000}$ & $\frac{54601280371417}{100000000000000}$ & $\frac{1063872139}{200000000000}$ \\
-44 & $z_\circ$ & $-\frac{76221829567}{312500000000}$ & $\frac{53832052052841}{100000000000000}$ & $\frac{5295824221}{1000000000000}$ \\
-45 & $z_\circ$ & $-\frac{26139261591943}{100000000000000}$ & $\frac{26502589512291}{50000000000000}$ & $\frac{5269193571}{1000000000000}$ \\
-46 & $z_\circ$ & $-\frac{1741221696651}{6250000000000}$ & $\frac{13030386680747}{25000000000000}$ & $\frac{2619728893}{500000000000}$ \\
-47 & $z_\circ$ & $-\frac{591}{2000}$ & $\frac{2559105068183}{5000000000000}$ & $\frac{2603278441}{500000000000}$ \\
-48 & $z_\circ$ & $-\frac{31208809973437}{100000000000000}$ & $\frac{50187848928221}{100000000000000}$ & $\frac{5170430831}{1000000000000}$ \\
-49 & $z_\circ$ & $-\frac{16417100385729}{50000000000000}$ & $\frac{1228496352177}{2500000000000}$ & $\frac{2565509397}{500000000000}$ \\
-50 & $z_\circ$ & $-\frac{34424431884887}{100000000000000}$ & $\frac{12009809764841}{25000000000000}$ & $\frac{5088322391}{1000000000000}$ \\
-51 & $z_\circ$ & $-\frac{7195560090883}{20000000000000}$ & $\frac{11721795602803}{25000000000000}$ & $\frac{126057723}{25000000000}$ \\
-52 & $z_\circ$ & $-\frac{37492643094071}{100000000000000}$ & $\frac{22842458896869}{50000000000000}$ & $\frac{2496487847}{500000000000}$ \\
-53 & $z_\circ$ & $-\frac{19483668836207}{50000000000000}$ & $\frac{5554216577751}{12500000000000}$ & $\frac{4940222961}{1000000000000}$ \\
-54 & $z_\circ$ & $-\frac{2525019065597}{6250000000000}$ & $\frac{21567483348221}{50000000000000}$ & $\frac{488399491}{100000000000}$ \\
-55 & $z_\circ$ & $-\frac{66864017229}{160000000000}$ & $\frac{66864017229}{160000000000}$ & $\frac{1206054551}{250000000000}$ \\
-56 & $z_\circ$ & $-\frac{21567483348221}{50000000000000}$ & $\frac{2525019065597}{6250000000000}$ & $\frac{4760895309}{1000000000000}$ \\
-57 & $z_\circ$ & $-\frac{5554216577751}{12500000000000}$ & $\frac{19483668836207}{50000000000000}$ & $\frac{4694049607}{1000000000000}$ \\
-58 & $z_\circ$ & $-\frac{22842458896869}{50000000000000}$ & $\frac{37492643094071}{100000000000000}$ & $\frac{577958261}{125000000000}$ \\
-59 & $z_\circ$ & $-\frac{11721795602803}{25000000000000}$ & $\frac{7195560090883}{20000000000000}$ & $\frac{181987309}{40000000000}$ \\
-60 & $z_\circ$ & $-\frac{12009809764841}{25000000000000}$ & $\frac{34424431884887}{100000000000000}$ & $\frac{894402727}{200000000000}$ \\
-61 & $z_\circ$ & $-\frac{1228496352177}{2500000000000}$ & $\frac{32834200771459}{100000000000000}$ & $\frac{2195305489}{500000000000}$ \\
-62 & $z_\circ$ & $-\frac{50187848928221}{100000000000000}$ & $\frac{31208809973437}{100000000000000}$ & $\frac{430554631}{100000000000}$ \\
-63 & $z_\circ$ & $-\frac{2559105068183}{5000000000000}$ & $\frac{591}{2000}$ & $\frac{1054221267}{250000000000}$ \\
-64 & $z_\circ$ & $-\frac{13030386680747}{25000000000000}$ & $\frac{1741221696651}{6250000000000}$ & $\frac{2062355327}{500000000000}$ \\
-65 & $z_\circ$ & $-\frac{26502589512291}{50000000000000}$ & $\frac{26139261591943}{100000000000000}$ & $\frac{805799493}{200000000000}$ \\
-66 & $z_\circ$ & $-\frac{53832052052841}{100000000000000}$ & $\frac{76221829567}{312500000000}$ & $\frac{7675307}{1953125000}$ \\
-67 & $z_\circ$ & $-\frac{54601280371417}{100000000000000}$ & $\frac{22616590852777}{100000000000000}$ & $\frac{1913514169}{500000000000}$ \\
-68 & $z_\circ$ & $-\frac{27656020135679}{50000000000000}$ & $\frac{4163595566429}{20000000000000}$ & $\frac{3720966921}{1000000000000}$ \\
-69 & $z_\circ$ & $-\frac{55963570653161}{100000000000000}$ & $\frac{18997072399417}{100000000000000}$ & $\frac{1805868511}{500000000000}$ \\
-70 & $z_\circ$ & $-\frac{28277586920887}{50000000000000}$ & $\frac{17155824425739}{100000000000000}$ & $\frac{174966551}{50000000000}$ \\
-71 & $z_\circ$ & $-\frac{14271554083421}{25000000000000}$ & $\frac{15296205565559}{100000000000000}$ & $\frac{3383865867}{1000000000000}$ \\
-72 & $z_\circ$ & $-\frac{5755612947529}{10000000000000}$ & $\frac{13420207145331}{100000000000000}$ & $\frac{3265638507}{1000000000000}$ \\
-73 & $z_\circ$ & $-\frac{57964410071831}{100000000000000}$ & $\frac{11529838031153}{100000000000000}$ & $\frac{1571694973}{500000000000}$ \\
-74 & $z_\circ$ & $-\frac{7288827615777}{12500000000000}$ & $\frac{481356123881}{5000000000000}$ & $\frac{3020584609}{1000000000000}$ \\
-75 & $z_\circ$ & $-\frac{7324298913399}{12500000000000}$ & $\frac{1542819592041}{20000000000000}$ & $\frac{2890212871}{1000000000000}$ \\
-76 & $z_\circ$ & $-\frac{58815417346327}{100000000000000}$ & $\frac{5792812993477}{100000000000000}$ & $\frac{690847589}{250000000000}$ \\
-77 & $z_\circ$ & $-\frac{58973462363401}{100000000000000}$ & $\frac{3865324937501}{100000000000000}$ & $\frac{2615447991}{1000000000000}$ \\
-78 & $z_\circ$ & $-\frac{59068357119853}{100000000000000}$ & $\frac{1933697794767}{100000000000000}$ & $\frac{1253241343}{500000000000}$ \\
-79 & $z_\circ$ & $-\frac{591}{1000}$ & $0$ & $\frac{2042234839}{1000000000000}$ \\
-80 & $z_\circ$ & $-\frac{59068357119853}{100000000000000}$ & $-\frac{1933697794767}{100000000000000}$ & $\frac{1253241343}{500000000000}$ \\
-81 & $z_\circ$ & $-\frac{58973462363401}{100000000000000}$ & $-\frac{3865324937501}{100000000000000}$ & $\frac{2615447991}{1000000000000}$ \\
-82 & $z_\circ$ & $-\frac{58815417346327}{100000000000000}$ & $-\frac{5792812993477}{100000000000000}$ & $\frac{690847589}{250000000000}$ \\
-83 & $z_\circ$ & $-\frac{7324298913399}{12500000000000}$ & $-\frac{1542819592041}{20000000000000}$ & $\frac{2890212871}{1000000000000}$ \\
-84 & $z_\circ$ & $-\frac{7288827615777}{12500000000000}$ & $-\frac{481356123881}{5000000000000}$ & $\frac{3020584609}{1000000000000}$ \\
-85 & $z_\circ$ & $-\frac{57964410071831}{100000000000000}$ & $-\frac{11529838031153}{100000000000000}$ & $\frac{1571694973}{500000000000}$ \\
-86 & $z_\circ$ & $-\frac{5755612947529}{10000000000000}$ & $-\frac{13420207145331}{100000000000000}$ & $\frac{3265638507}{1000000000000}$ \\
-87 & $z_\circ$ & $-\frac{14271554083421}{25000000000000}$ & $-\frac{15296205565559}{100000000000000}$ & $\frac{3383865867}{1000000000000}$ \\
-88 & $z_\circ$ & $-\frac{28277586920887}{50000000000000}$ & $-\frac{17155824425739}{100000000000000}$ & $\frac{174966551}{50000000000}$ \\
-89 & $z_\circ$ & $-\frac{55963570653161}{100000000000000}$ & $-\frac{18997072399417}{100000000000000}$ & $\frac{1805868511}{500000000000}$ \\
-90 & $z_\circ$ & $-\frac{27656020135679}{50000000000000}$ & $-\frac{4163595566429}{20000000000000}$ & $\frac{3720966921}{1000000000000}$ \\
-91 & $z_\circ$ & $-\frac{54601280371417}{100000000000000}$ & $-\frac{22616590852777}{100000000000000}$ & $\frac{1913514169}{500000000000}$ \\
-92 & $z_\circ$ & $-\frac{53832052052841}{100000000000000}$ & $-\frac{76221829567}{312500000000}$ & $\frac{7675307}{1953125000}$ \\
-93 & $z_\circ$ & $-\frac{26502589512291}{50000000000000}$ & $-\frac{26139261591943}{100000000000000}$ & $\frac{805799493}{200000000000}$ \\
-94 & $z_\circ$ & $-\frac{13030386680747}{25000000000000}$ & $-\frac{1741221696651}{6250000000000}$ & $\frac{2062355327}{500000000000}$ \\
-95 & $z_\circ$ & $-\frac{2559105068183}{5000000000000}$ & $-\frac{591}{2000}$ & $\frac{1054221267}{250000000000}$ \\
-96 & $z_\circ$ & $-\frac{50187848928221}{100000000000000}$ & $-\frac{31208809973437}{100000000000000}$ & $\frac{430554631}{100000000000}$ \\
-97 & $z_\circ$ & $-\frac{1228496352177}{2500000000000}$ & $-\frac{32834200771459}{100000000000000}$ & $\frac{2195305489}{500000000000}$ \\
-98 & $z_\circ$ & $-\frac{12009809764841}{25000000000000}$ & $-\frac{34424431884887}{100000000000000}$ & $\frac{894402727}{200000000000}$ \\
-99 & $z_\circ$ & $-\frac{11721795602803}{25000000000000}$ & $-\frac{7195560090883}{20000000000000}$ & $\frac{181987309}{40000000000}$ \\
-100 & $z_\circ$ & $-\frac{22842458896869}{50000000000000}$ & $-\frac{37492643094071}{100000000000000}$ & $\frac{577958261}{125000000000}$ \\
-101 & $z_\circ$ & $-\frac{5554216577751}{12500000000000}$ & $-\frac{19483668836207}{50000000000000}$ & $\frac{4694049607}{1000000000000}$ \\
-102 & $z_\circ$ & $-\frac{21567483348221}{50000000000000}$ & $-\frac{2525019065597}{6250000000000}$ & $\frac{4760895309}{1000000000000}$ \\
-103 & $z_\circ$ & $-\frac{66864017229}{160000000000}$ & $-\frac{66864017229}{160000000000}$ & $\frac{1206054551}{250000000000}$ \\
-104 & $z_\circ$ & $-\frac{2525019065597}{6250000000000}$ & $-\frac{21567483348221}{50000000000000}$ & $\frac{488399491}{100000000000}$ \\
-105 & $z_\circ$ & $-\frac{19483668836207}{50000000000000}$ & $-\frac{5554216577751}{12500000000000}$ & $\frac{4940222961}{1000000000000}$ \\
-106 & $z_\circ$ & $-\frac{37492643094071}{100000000000000}$ & $-\frac{22842458896869}{50000000000000}$ & $\frac{2496487847}{500000000000}$ \\
-107 & $z_\circ$ & $-\frac{7195560090883}{20000000000000}$ & $-\frac{11721795602803}{25000000000000}$ & $\frac{126057723}{25000000000}$ \\
-108 & $z_\circ$ & $-\frac{34424431884887}{100000000000000}$ & $-\frac{12009809764841}{25000000000000}$ & $\frac{5088322391}{1000000000000}$ \\
-109 & $z_\circ$ & $-\frac{16417100385729}{50000000000000}$ & $-\frac{1228496352177}{2500000000000}$ & $\frac{2565509397}{500000000000}$ \\
-110 & $z_\circ$ & $-\frac{31208809973437}{100000000000000}$ & $-\frac{50187848928221}{100000000000000}$ & $\frac{5170430831}{1000000000000}$ \\
-111 & $z_\circ$ & $-\frac{591}{2000}$ & $-\frac{2559105068183}{5000000000000}$ & $\frac{2603278441}{500000000000}$ \\
-112 & $z_\circ$ & $-\frac{1741221696651}{6250000000000}$ & $-\frac{13030386680747}{25000000000000}$ & $\frac{2619728893}{500000000000}$ \\
-113 & $z_\circ$ & $-\frac{26139261591943}{100000000000000}$ & $-\frac{26502589512291}{50000000000000}$ & $\frac{5269193571}{1000000000000}$ \\
-114 & $z_\circ$ & $-\frac{76221829567}{312500000000}$ & $-\frac{53832052052841}{100000000000000}$ & $\frac{5295824221}{1000000000000}$ \\
-115 & $z_\circ$ & $-\frac{22616590852777}{100000000000000}$ & $-\frac{54601280371417}{100000000000000}$ & $\frac{1063872139}{200000000000}$ \\
-116 & $z_\circ$ & $-\frac{4163595566429}{20000000000000}$ & $-\frac{27656020135679}{50000000000000}$ & $\frac{5339817089}{1000000000000}$ \\
-117 & $z_\circ$ & $-\frac{18997072399417}{100000000000000}$ & $-\frac{55963570653161}{100000000000000}$ & $\frac{2678583879}{500000000000}$ \\
-118 & $z_\circ$ & $-\frac{17155824425739}{100000000000000}$ & $-\frac{28277586920887}{50000000000000}$ & $\frac{5371424089}{1000000000000}$ \\
-119 & $z_\circ$ & $-\frac{15296205565559}{100000000000000}$ & $-\frac{14271554083421}{25000000000000}$ & $\frac{2691294491}{500000000000}$ \\
-120 & $z_\circ$ & $-\frac{13420207145331}{100000000000000}$ & $-\frac{5755612947529}{10000000000000}$ & $\frac{2695317323}{500000000000}$ \\
-121 & $z_\circ$ & $-\frac{11529838031153}{100000000000000}$ & $-\frac{57964410071831}{100000000000000}$ & $\frac{2697796109}{500000000000}$ \\
-122 & $z_\circ$ & $-\frac{481356123881}{5000000000000}$ & $-\frac{7288827615777}{12500000000000}$ & $\frac{1079472281}{200000000000}$ \\
-123 & $z_\circ$ & $-\frac{1542819592041}{20000000000000}$ & $-\frac{7324298913399}{12500000000000}$ & $\frac{5395976833}{1000000000000}$ \\
-124 & $z_\circ$ & $-\frac{5792812993477}{100000000000000}$ & $-\frac{58815417346327}{100000000000000}$ & $\frac{2695647111}{500000000000}$ \\
-125 & $z_\circ$ & $-\frac{3865324937501}{100000000000000}$ & $-\frac{58973462363401}{100000000000000}$ & $\frac{67291239}{12500000000}$ \\
-126 & $z_\circ$ & $-\frac{1933697794767}{100000000000000}$ & $-\frac{59068357119853}{100000000000000}$ & $\frac{1074367931}{200000000000}$ \\
-127 & $z_\circ$ & $0$ & $-\frac{591}{1000}$ & $\frac{5356869923}{1000000000000}$ \\
-128 & $z_\circ$ & $\frac{1933697794767}{100000000000000}$ & $-\frac{59068357119853}{100000000000000}$ & $\frac{5338252913}{1000000000000}$ \\
-129 & $z_\circ$ & $\frac{3865324937501}{100000000000000}$ & $-\frac{58973462363401}{100000000000000}$ & $\frac{2657930209}{500000000000}$ \\
-130 & $z_\circ$ & $\frac{5792812993477}{100000000000000}$ & $-\frac{58815417346327}{100000000000000}$ & $\frac{1057899139}{200000000000}$ \\
-131 & $z_\circ$ & $\frac{1542819592041}{20000000000000}$ & $-\frac{7324298913399}{12500000000000}$ & $\frac{5258940541}{1000000000000}$ \\
-132 & $z_\circ$ & $\frac{481356123881}{5000000000000}$ & $-\frac{7288827615777}{12500000000000}$ & $\frac{5223998617}{1000000000000}$ \\
-133 & $z_\circ$ & $\frac{11529838031153}{100000000000000}$ & $-\frac{57964410071831}{100000000000000}$ & $\frac{2592193353}{500000000000}$ \\
-134 & $z_\circ$ & $\frac{13420207145331}{100000000000000}$ & $-\frac{5755612947529}{10000000000000}$ & $\frac{2569944791}{500000000000}$ \\
-135 & $z_\circ$ & $\frac{15296205565559}{100000000000000}$ & $-\frac{14271554083421}{25000000000000}$ & $\frac{2545027993}{500000000000}$ \\
-136 & $z_\circ$ & $\frac{17155824425739}{100000000000000}$ & $-\frac{28277586920887}{50000000000000}$ & $\frac{629314849}{125000000000}$ \\
-137 & $z_\circ$ & $\frac{18997072399417}{100000000000000}$ & $-\frac{55963570653161}{100000000000000}$ & $\frac{4972725611}{1000000000000}$ \\
-138 & $z_\circ$ & $\frac{4163595566429}{20000000000000}$ & $-\frac{27656020135679}{50000000000000}$ & $\frac{4904191893}{1000000000000}$ \\
-139 & $z_\circ$ & $\frac{22616590852777}{100000000000000}$ & $-\frac{54601280371417}{100000000000000}$ & $\frac{2414185377}{500000000000}$ \\
-140 & $z_\circ$ & $\frac{76221829567}{312500000000}$ & $-\frac{53832052052841}{100000000000000}$ & $\frac{4744445721}{1000000000000}$ \\
-141 & $z_\circ$ & $\frac{26139261591943}{100000000000000}$ & $-\frac{26502589512291}{50000000000000}$ & $\frac{4651574501}{1000000000000}$ \\
-142 & $z_\circ$ & $\frac{1741221696651}{6250000000000}$ & $-\frac{13030386680747}{25000000000000}$ & $\frac{142140453}{31250000000}$ \\
-143 & $z_\circ$ & $\frac{591}{2000}$ & $-\frac{2559105068183}{5000000000000}$ & $\frac{1108507217}{250000000000}$ \\
-144 & $z_\circ$ & $\frac{31208809973437}{100000000000000}$ & $-\frac{50187848928221}{100000000000000}$ & $\frac{1076648351}{250000000000}$ \\
-145 & $z_\circ$ & $\frac{16417100385729}{50000000000000}$ & $-\frac{1228496352177}{2500000000000}$ & $\frac{2082107511}{500000000000}$ \\
-146 & $z_\circ$ & $\frac{34424431884887}{100000000000000}$ & $-\frac{12009809764841}{25000000000000}$ & $\frac{4004693717}{1000000000000}$ \\
-147 & $z_\circ$ & $\frac{7195560090883}{20000000000000}$ & $-\frac{11721795602803}{25000000000000}$ & $\frac{955771397}{250000000000}$ \\
-148 & $z_\circ$ & $\frac{37492643094071}{100000000000000}$ & $-\frac{22842458896869}{50000000000000}$ & $\frac{45256593}{12500000000}$ \\
-149 & $z_\circ$ & $\frac{19483668836207}{50000000000000}$ & $-\frac{5554216577751}{12500000000000}$ & $\frac{134844369}{40000000000}$ \\
-150 & $z_\circ$ & $\frac{2525019065597}{6250000000000}$ & $-\frac{21567483348221}{50000000000000}$ & $\frac{3134952159}{1000000000000}$ \\
-151 & $z_\circ$ & $\frac{66864017229}{160000000000}$ & $-\frac{66864017229}{160000000000}$ & $\frac{165542397}{62500000000}$ \\
-152 & $z_\circ$ & $\frac{21567483348221}{50000000000000}$ & $-\frac{2525019065597}{6250000000000}$ & $\frac{173410523}{62500000000}$ \\
-153 & $z_\circ$ & $\frac{5554216577751}{12500000000000}$ & $-\frac{19483668836207}{50000000000000}$ & $\frac{319352041}{500000000000}$ \\
-154 & $z_\circ$ & $\frac{22842458896869}{50000000000000}$ & $-\frac{37492643094071}{100000000000000}$ & $\frac{11}{1000000000000}$ \\
-155 & $z_\circ$ & $\frac{11721795602803}{25000000000000}$ & $-\frac{7195560090883}{20000000000000}$ & $\frac{1}{100000000000}$ \\
-156 & $z_\circ$ & $\frac{12009809764841}{25000000000000}$ & $-\frac{34424431884887}{100000000000000}$ & $\frac{9}{1000000000000}$ \\
-157 & $z_\circ$ & $\frac{1228496352177}{2500000000000}$ & $-\frac{16417100385729}{50000000000000}$ & $\frac{1}{200000000000}$ \\
+1 & 0.4913985408708 & 0.32834200771458 & 0.000000000005 \\
+2 & 0.48039239059364 & 0.34424431884887 & 0.000000000009 \\
+3 & 0.46887182411212 & 0.35977800454415 & 0.00000000001 \\
+4 & 0.45684917793738 & 0.37492643094071 & 0.000000000011 \\
+5 & 0.44433732622008 & 0.38967337672414 & 0.000638704082 \\
+6 & 0.43134966696442 & 0.40400305049552 & 0.002774568368 \\
+7 & 0.41790010768125 & 0.41790010768125 & 0.002648678352 \\
+8 & 0.40400305049552 & 0.43134966696442 & 0.003134952159 \\
+9 & 0.38967337672414 & 0.44433732622008 & 0.003371109225 \\
+10 & 0.37492643094071 & 0.45684917793738 & 0.00362052744 \\
+11 & 0.35977800454415 & 0.46887182411212 & 0.003823085588 \\
+12 & 0.34424431884887 & 0.48039239059364 & 0.004004693717 \\
+13 & 0.32834200771458 & 0.4913985408708 & 0.004164215022 \\
+14 & 0.31208809973437 & 0.50187848928221 & 0.004306593404 \\
+15 & 0.2955 & 0.5118210136366 & 0.004434028868 \\
+16 & 0.27859547146416 & 0.52121546722988 & 0.004548494496 \\
+17 & 0.26139261591943 & 0.53005179024582 & 0.004651574501 \\
+18 & 0.2439098546144 & 0.53832052052841 & 0.004744445721 \\
+19 & 0.22616590852777 & 0.54601280371417 & 0.004828370754 \\
+20 & 0.20817977832145 & 0.55312040271358 & 0.004904191893 \\
+21 & 0.18997072399417 & 0.55963570653161 & 0.004972725611 \\
+22 & 0.17155824425739 & 0.56555173841774 & 0.005034518792 \\
+23 & 0.15296205565559 & 0.57086216333684 & 0.005090055986 \\
+24 & 0.13420207145331 & 0.5755612947529 & 0.005139889582 \\
+25 & 0.11529838031153 & 0.57964410071831 & 0.005184386706 \\
+26 & 0.0962712247762 & 0.58310620926216 & 0.005223998617 \\
+27 & 0.07714097960205 & 0.58594391307192 & 0.005258940541 \\
+28 & 0.05792812993477 & 0.58815417346327 & 0.005289495695 \\
+29 & 0.03865324937501 & 0.58973462363401 & 0.005315860418 \\
+30 & 0.01933697794767 & 0.59068357119853 & 0.005338252913 \\
+31 & 0 & 0.591 & 0.005356869923 \\
+32 & -0.01933697794767 & 0.59068357119853 & 0.005371839655 \\
+33 & -0.03865324937501 & 0.58973462363401 & 0.00538329912 \\
+34 & -0.05792812993477 & 0.58815417346327 & 0.005391294222 \\
+35 & -0.07714097960205 & 0.58594391307192 & 0.005395976833 \\
+36 & -0.0962712247762 & 0.58310620926216 & 0.005397361405 \\
+37 & -0.11529838031153 & 0.57964410071831 & 0.005395592218 \\
+38 & -0.13420207145331 & 0.5755612947529 & 0.005390634646 \\
+39 & -0.15296205565559 & 0.57086216333684 & 0.005382588982 \\
+40 & -0.17155824425739 & 0.56555173841774 & 0.005371424089 \\
+41 & -0.18997072399417 & 0.55963570653161 & 0.005357167758 \\
+42 & -0.20817977832145 & 0.55312040271358 & 0.005339817089 \\
+43 & -0.22616590852777 & 0.54601280371417 & 0.005319360695 \\
+44 & -0.2439098546144 & 0.53832052052841 & 0.005295824221 \\
+45 & -0.26139261591943 & 0.53005179024582 & 0.005269193571 \\
+46 & -0.27859547146416 & 0.52121546722988 & 0.005239457786 \\
+47 & -0.2955 & 0.5118210136366 & 0.005206556882 \\
+48 & -0.31208809973437 & 0.50187848928221 & 0.005170430831 \\
+49 & -0.32834200771458 & 0.4913985408708 & 0.005131018794 \\
+50 & -0.34424431884887 & 0.48039239059364 & 0.005088322391 \\
+51 & -0.35977800454415 & 0.46887182411212 & 0.00504230892 \\
+52 & -0.37492643094071 & 0.45684917793738 & 0.004992975694 \\
+53 & -0.38967337672414 & 0.44433732622008 & 0.004940222961 \\
+54 & -0.40400305049552 & 0.43134966696442 & 0.00488399491 \\
+55 & -0.41790010768125 & 0.41790010768125 & 0.004824218204 \\
+56 & -0.43134966696442 & 0.40400305049552 & 0.004760895309 \\
+57 & -0.44433732622008 & 0.38967337672414 & 0.004694049607 \\
+58 & -0.45684917793738 & 0.37492643094071 & 0.004623666088 \\
+59 & -0.46887182411212 & 0.35977800454415 & 0.004549682725 \\
+60 & -0.48039239059364 & 0.34424431884887 & 0.004472013635 \\
+61 & -0.4913985408708 & 0.32834200771459 & 0.004390610978 \\
+62 & -0.50187848928221 & 0.31208809973437 & 0.00430554631 \\
+63 & -0.5118210136366 & 0.2955 & 0.004216885068 \\
+64 & -0.52121546722988 & 0.27859547146416 & 0.004124710654 \\
+65 & -0.53005179024582 & 0.26139261591943 & 0.004028997465 \\
+66 & -0.53832052052841 & 0.2439098546144 & 0.003929757184 \\
+67 & -0.54601280371417 & 0.22616590852777 & 0.003827028338 \\
+68 & -0.55312040271358 & 0.20817977832145 & 0.003720966921 \\
+69 & -0.55963570653161 & 0.18997072399417 & 0.003611737022 \\
+70 & -0.56555173841774 & 0.17155824425739 & 0.00349933102 \\
+71 & -0.57086216333684 & 0.15296205565559 & 0.003383865867 \\
+72 & -0.5755612947529 & 0.13420207145331 & 0.003265638507 \\
+73 & -0.57964410071831 & 0.11529838031153 & 0.003143389946 \\
+74 & -0.58310620926216 & 0.0962712247762 & 0.003020584609 \\
+75 & -0.58594391307192 & 0.07714097960205 & 0.002890212871 \\
+76 & -0.58815417346327 & 0.05792812993477 & 0.002763390356 \\
+77 & -0.58973462363401 & 0.03865324937501 & 0.002615447991 \\
+78 & -0.59068357119853 & 0.01933697794767 & 0.002506482686 \\
+79 & -0.591 & 0 & 0.002042234839 \\
+80 & -0.59068357119853 & -0.01933697794767 & 0.002506482686 \\
+81 & -0.58973462363401 & -0.03865324937501 & 0.002615447991 \\
+82 & -0.58815417346327 & -0.05792812993477 & 0.002763390356 \\
+83 & -0.58594391307192 & -0.07714097960205 & 0.002890212871 \\
+84 & -0.58310620926216 & -0.0962712247762 & 0.003020584609 \\
+85 & -0.57964410071831 & -0.11529838031153 & 0.003143389946 \\
+86 & -0.5755612947529 & -0.13420207145331 & 0.003265638507 \\
+87 & -0.57086216333684 & -0.15296205565559 & 0.003383865867 \\
+88 & -0.56555173841774 & -0.17155824425739 & 0.00349933102 \\
+89 & -0.55963570653161 & -0.18997072399417 & 0.003611737022 \\
+90 & -0.55312040271358 & -0.20817977832145 & 0.003720966921 \\
+91 & -0.54601280371417 & -0.22616590852777 & 0.003827028338 \\
+92 & -0.53832052052841 & -0.2439098546144 & 0.003929757184 \\
+93 & -0.53005179024582 & -0.26139261591943 & 0.004028997465 \\
+94 & -0.52121546722988 & -0.27859547146416 & 0.004124710654 \\
+95 & -0.5118210136366 & -0.2955 & 0.004216885068 \\
+96 & -0.50187848928221 & -0.31208809973437 & 0.00430554631 \\
+97 & -0.4913985408708 & -0.32834200771459 & 0.004390610978 \\
+98 & -0.48039239059364 & -0.34424431884887 & 0.004472013635 \\
+99 & -0.46887182411212 & -0.35977800454415 & 0.004549682725 \\
+100 & -0.45684917793738 & -0.37492643094071 & 0.004623666088 \\
+101 & -0.44433732622008 & -0.38967337672414 & 0.004694049607 \\
+102 & -0.43134966696442 & -0.40400305049552 & 0.004760895309 \\
+103 & -0.41790010768125 & -0.41790010768125 & 0.004824218204 \\
+104 & -0.40400305049552 & -0.43134966696442 & 0.00488399491 \\
+105 & -0.38967337672414 & -0.44433732622008 & 0.004940222961 \\
+106 & -0.37492643094071 & -0.45684917793738 & 0.004992975694 \\
+107 & -0.35977800454415 & -0.46887182411212 & 0.00504230892 \\
+108 & -0.34424431884887 & -0.48039239059364 & 0.005088322391 \\
+109 & -0.32834200771458 & -0.4913985408708 & 0.005131018794 \\
+110 & -0.31208809973437 & -0.50187848928221 & 0.005170430831 \\
+111 & -0.2955 & -0.5118210136366 & 0.005206556882 \\
+112 & -0.27859547146416 & -0.52121546722988 & 0.005239457786 \\
+113 & -0.26139261591943 & -0.53005179024582 & 0.005269193571 \\
+114 & -0.2439098546144 & -0.53832052052841 & 0.005295824221 \\
+115 & -0.22616590852777 & -0.54601280371417 & 0.005319360695 \\
+116 & -0.20817977832145 & -0.55312040271358 & 0.005339817089 \\
+117 & -0.18997072399417 & -0.55963570653161 & 0.005357167758 \\
+118 & -0.17155824425739 & -0.56555173841774 & 0.005371424089 \\
+119 & -0.15296205565559 & -0.57086216333684 & 0.005382588982 \\
+120 & -0.13420207145331 & -0.5755612947529 & 0.005390634646 \\
+121 & -0.11529838031153 & -0.57964410071831 & 0.005395592218 \\
+122 & -0.0962712247762 & -0.58310620926216 & 0.005397361405 \\
+123 & -0.07714097960205 & -0.58594391307192 & 0.005395976833 \\
+124 & -0.05792812993477 & -0.58815417346327 & 0.005391294222 \\
+125 & -0.03865324937501 & -0.58973462363401 & 0.00538329912 \\
+126 & -0.01933697794767 & -0.59068357119853 & 0.005371839655 \\
+127 & 0 & -0.591 & 0.005356869923 \\
+128 & 0.01933697794767 & -0.59068357119853 & 0.005338252913 \\
+129 & 0.03865324937501 & -0.58973462363401 & 0.005315860418 \\
+130 & 0.05792812993477 & -0.58815417346327 & 0.005289495695 \\
+131 & 0.07714097960205 & -0.58594391307192 & 0.005258940541 \\
+132 & 0.0962712247762 & -0.58310620926216 & 0.005223998617 \\
+133 & 0.11529838031153 & -0.57964410071831 & 0.005184386706 \\
+134 & 0.13420207145331 & -0.5755612947529 & 0.005139889582 \\
+135 & 0.15296205565559 & -0.57086216333684 & 0.005090055986 \\
+136 & 0.17155824425739 & -0.56555173841774 & 0.005034518792 \\
+137 & 0.18997072399417 & -0.55963570653161 & 0.004972725611 \\
+138 & 0.20817977832145 & -0.55312040271358 & 0.004904191893 \\
+139 & 0.22616590852777 & -0.54601280371417 & 0.004828370754 \\
+140 & 0.2439098546144 & -0.53832052052841 & 0.004744445721 \\
+141 & 0.26139261591943 & -0.53005179024582 & 0.004651574501 \\
+142 & 0.27859547146416 & -0.52121546722988 & 0.004548494496 \\
+143 & 0.2955 & -0.5118210136366 & 0.004434028868 \\
+144 & 0.31208809973437 & -0.50187848928221 & 0.004306593404 \\
+145 & 0.32834200771458 & -0.4913985408708 & 0.004164215022 \\
+146 & 0.34424431884887 & -0.48039239059364 & 0.004004693717 \\
+147 & 0.35977800454415 & -0.46887182411212 & 0.003823085588 \\
+148 & 0.37492643094071 & -0.45684917793738 & 0.00362052744 \\
+149 & 0.38967337672414 & -0.44433732622008 & 0.003371109225 \\
+150 & 0.40400305049552 & -0.43134966696442 & 0.003134952159 \\
+151 & 0.41790010768125 & -0.41790010768125 & 0.002648678352 \\
+152 & 0.43134966696442 & -0.40400305049552 & 0.002774568368 \\
+153 & 0.44433732622008 & -0.38967337672414 & 0.000638704082 \\
+154 & 0.45684917793738 & -0.37492643094071 & 0.000000000011 \\
+155 & 0.46887182411212 & -0.35977800454415 & 0.00000000001 \\
+156 & 0.48039239059364 & -0.34424431884887 & 0.000000000009 \\
+157 & 0.4913985408708 & -0.32834200771458 & 0.000000000005 \\
 \hline
 \end{longtable}
 \endgroup
@@ -1702,15 +1635,17 @@ The interval and Poisson weights sum to masses $1$, $5/4$, and $1$ as stated
 in Lemma~\ref{lem:reference-bound}.
 
 \section{Dyadic subdivisions}\label{app:static-table}
-On each support $s$, the leaves are ordered from left to right. Their
+The supports are $x,v\in[0,1]$, $z_-=[-2,-3/5]$, $z_+=[3/5,1]$ and
+$z_\circ=\{|z|=3/5,\ \operatorname{Im}z\ge0\}$ (by conjugation symmetry the
+upper half suffices). On each support $s$, the leaves are ordered from left to right. Their
 depths $d_{s,1},\ldots,d_{s,n_s}$ are listed in run-length form: an entry
 $d:r$ means that depth $d$ occurs on $r$ consecutive leaves. Set
 $t_{s,0}=0$ and $t_{s,j}=\sum_{i=1}^j2^{-d_{s,i}}$. The printed sequence
 satisfies $\sum_{j=1}^{n_s}2^{-d_{s,j}}=1$ for each support. On a real
 support $[A_s,B_s]$ the $j$th interval is
-$[A_s+(B_s-A_s)t_{s,j-1},A_s+(B_s-A_s)t_{s,j}]$; on $z_\circ$ it is
+$[A_s+(B_s-A_s)t_{s,j-1},A_s+(B_s-A_s)t_{s,j}]$. On $z_\circ$ it is
 $q=(3/5)e^{i\pi t}$ for $t\in[t_{s,j-1},t_{s,j}]$. On each leaf, the Arb upper bound for
-$\sup F_s$ is strictly below its cap in Table~\ref{tab:analytic-bounds};
+$\sup F_s$ is strictly below its cap in Table~\ref{tab:analytic-bounds}, and
 that table keeps the worst leaf for each support. The full leafwise Arb
 upper bounds are in \texttt{anc/verification/analytic/leaves.json.gz}.
 
@@ -1726,8 +1661,9 @@ server.
 
 \begin{center}\footnotesize
 \begin{minipage}{\textwidth}\centering
-\captionof{table}{Scripts in \texttt{anc/}; times in seconds.}\label{tab:checks}
+\captionof{table}{Scripts in \texttt{anc/} and their running times in seconds.}\label{tab:checks}
 \begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.25\textwidth}>{\raggedright\arraybackslash}p{0.62\textwidth}r@{}}
+\hline
 script & statements checked & time\\\hline
 \texttt{check\_determinant.py}&\eqref{eq:g4-polynomial} and
 Table~\ref{tab:g4-coefficients}; \eqref{eq:laurent-moments} for $d\ne0$ and the four
@@ -1738,7 +1674,7 @@ Table~\ref{tab:arithmetic}; \eqref{eq:inner-integral}, $5/48$, $45/32$ and
 $\tau$; $N_m$ in Lemma~\ref{lem:formal-divisor}; the potentials of
 Lemma~\ref{lem:outer-bound} for $n\le12$.&$<10$\\
 \texttt{check\_analytic.py}&Lemma~\ref{lem:reference-bound}:
-Tables~\ref{tab:analytic-bounds} and~\ref{tab:analytic-constants},
+Tables~\ref{tab:analytic-bounds}, \ref{tab:analytic-constants}, \ref{tab:reference-intervals} and~\ref{tab:reference-poisson},
 \eqref{eq:Q-enclosure}, \eqref{eq:alpha-enclosure},
 \eqref{eq:endpoint-bounds}; the constants of
 Lemma~\ref{lem:analytic-bound}.&$<90$\\
@@ -1802,8 +1738,7 @@ $\mathrm{Li}_2$}, Mosc. J. Comb. Number Theory \textbf{8} (2019), no.~1,
 \bibitem{ST}
 E.~B. Saff and V.~Totik, \emph{Logarithmic Potentials with External Fields},
 Grundlehren der Mathematischen Wissenschaften, vol.~316, 1st ed., Springer, 1997,
-doi:10.1007/978-3-662-03329-6,
-Lemma~I.1.8.
+\url{https://doi.org/10.1007/978-3-662-03329-6}.
 
 \bibitem{VZ}
 C.~Viola and W.~Zudilin, \emph{Linear independence of dilogarithmic values},

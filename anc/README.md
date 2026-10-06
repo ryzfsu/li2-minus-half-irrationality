@@ -17,7 +17,7 @@ python3 -m venv /tmp/li2-paper-venv
 /tmp/li2-paper-venv/bin/python -m pip install python-flint==0.9.0
 ```
 
-The included PDF was built with pdfTeX 1.40.25 (TeX Live 2023/Debian), in
+The included PDF was built with pdfTeX 1.40.29 (TeX Live 2026), in
 three passes; the third pass confirmed stable cross-references.
 
 ## Checks
@@ -52,7 +52,8 @@ Machine-readable results for all four checkers are included in
   correction, the prime-price constants, and the formal dyadic exponent.
 - `check_mod11.py` checks the displayed $9\times9$ matrix, its determinant,
   the polynomial $g(T)$, and the printed residues.
-- `check_analytic.py` checks Lemma 4.2, Tables B.1--B.2, the energy and
+- `check_analytic.py` checks Lemma 4.2, Tables B.1--B.2, the reference-measure
+  Tables D.1--D.2 against `anc/analytic/reference.json`, the energy and
   endpoint enclosures, the depth-sequence table, and the constants in
   Lemma 4.4.
 

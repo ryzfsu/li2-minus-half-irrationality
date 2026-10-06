@@ -1,8 +1,8 @@
 {
   "ok": true,
   "scope": "exact computation modulo 11; the uniform argument is Section 5",
-  "tex": "/tmp/li2-negative-half-paper-v11-work-20261006/release/upload/main.tex",
-  "expanded_tex_sha256": "5c98335bb2baaeda95a8babd552cb80d9e52c1a0621300b1e459430153d1f283",
+  "tex": "/tmp/v12regen/main.tex",
+  "expanded_tex_sha256": "94f75b5f5ea0e86297ff1bb16c7efbddce541e936d7b918770bef73152677706",
   "python": "3.12.3",
   "platform": "Linux-6.17.0-1020-oracle-aarch64-with-glibc2.39",
   "modulus": 11,
@@ -55,5 +55,5 @@
   ],
   "printed_matrix_checked": true,
   "root_free": true,
-  "seconds": 0.02849
+  "seconds": 0.027318
 }

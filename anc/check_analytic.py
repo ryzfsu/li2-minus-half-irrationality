@@ -3,7 +3,7 @@
 
 The subdivision and endpoint routines (analytic/original_*.py) are unchanged
 copies of the original implementation.  This wrapper also checks the exact
-geometry and masses of the measure, the literal entries of Tables B.1 and B.2,
+geometry and masses of the measure, the literal entries of Tables B.1, B.2, D.1 and D.2,
 the enclosures (B.1)-(B.2), and the rational constants of Lemma 4.4.
 The passage to all matrix sizes is the written proof of Lemma 4.4.
 """
@@ -124,25 +124,60 @@ def literal_fraction(cell):
     return number(cell)
 
 
+HEADING = re.compile(r"\\multicolumn\{6\}\{@\{\}l\}\{\\textit\{\$(x|v|z)\$-intervals on "
+                     r"\$\[([^]]*)\]\$\}: rows (\d+)--(\d+), last right endpoint \$([^$]*)\$\.\}")
+
+
 def check_reference_tables(source, data):
     """Require the printed Appendix D rows to equal reference.json exactly."""
-    interval_rows = {"x": [], "v": [], "z": []}
-    for row in table(source, "tab:reference-intervals"):
-        if len(row) != 5 or not compact(row[0]).isdigit():
+    # Two entries (index, a, w) per printed line; b is the a of the next entry
+    # of the same support, and the last b is stated in the block heading.
+    body = re.findall(r"\\label\{tab:reference-intervals\}(.*?)\\end\{longtable\}", source, re.S)
+    require(len(body) == 1, "expected one printed interval table")
+    spec = {"x": ("x", "0,1", F(1)), "v": ("y", "0,1", F(1)), "z": ("z_real", "-2,-3/5", F(-3, 5))}
+    blocks = []
+    for raw in re.split(r"\\\\(?:\[[^]]*\])?", body[0]):
+        line = re.sub(r"\\(?:hline|endfirsthead|endhead)\b", "", raw).strip()
+        if not line:
             continue
-        support = compact(row[1])
-        require(support in interval_rows, ("printed interval support", support))
-        interval_rows[support].append(tuple(literal_fraction(x) for x in row[2:]))
-    for support, key in (("x", "x"), ("v", "y"), ("z", "z_real")):
+        heading = HEADING.fullmatch(line)
+        if heading:
+            key, support, last_b = spec[heading[1]]
+            require(compact(heading[2]) == support and number(heading[5]) == last_b,
+                    ("printed interval block heading", line))
+            blocks.append((key, int(heading[3]), int(heading[4]), last_b, []))
+            continue
+        cells = [cell.strip() for cell in line.split("&")]
+        require(len(cells) == 6, ("interval line must have six cells", line))
+        if [compact(c) for c in cells] == ["index", "a", "w"] * 2:
+            continue
+        require(blocks, ("interval row before a block heading", line))
+        for k in (0, 3):
+            if k == 3 and not any(compact(c) for c in cells[3:]):
+                continue
+            require(compact(cells[k]).isdigit(), ("invalid interval index", cells[k]))
+            blocks[-1][4].append((int(compact(cells[k])), literal_fraction(cells[k + 1]),
+                                  literal_fraction(cells[k + 2])))
+    require([b[0] for b in blocks] == ["x", "y", "z_real"], "interval blocks must be x, v, z")
+    first = 1
+    for key, lo, hi, last_b, rows in blocks:
         expected = [(F(x["a"]), F(x["b"]), F(x["w"])) for x in data[key]]
-        require(interval_rows[support] == expected,
-                ("printed interval table differs from reference.json", support))
+        indices = list(range(first, first + len(expected)))
+        require([r[0] for r in rows] == indices and (lo, hi) == (indices[0], indices[-1]),
+                ("printed interval indices", key))
+        printed = [(a, rows[j + 1][1] if j + 1 < len(rows) else last_b, w)
+                   for j, (_, a, w) in enumerate(rows)]
+        require(printed == expected,
+                ("printed interval table differs from reference.json", key))
+        first += len(expected)
 
     poisson_rows = []
     for row in table(source, "tab:reference-poisson"):
-        if len(row) != 5 or not compact(row[0]).isdigit():
+        if compact(row[0]) == "index":
             continue
-        poisson_rows.append(tuple(literal_fraction(x) for x in row[2:]))
+        require(len(row) == 4 and compact(row[0]) == str(len(poisson_rows) + 1),
+                ("invalid Poisson row", row))
+        poisson_rows.append(tuple(literal_fraction(x) for x in row[1:]))
     expected_poisson = [(F(x["re"]), F(x["im"]), F(x["w"]))
                        for x in data["z_poisson"]]
     require(poisson_rows == expected_poisson,

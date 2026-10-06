@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "seconds": 58.20395310502499,
+  "seconds": 58.32684978609905,
   "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
   "python_flint": "0.9.0",
   "platform": "Linux-6.17.0-1020-oracle-aarch64-with-glibc2.39",
@@ -12,7 +12,7 @@
     "original_endpoint.py": "13d7900affa247a432d48e921137279ace1d99b146f95fb9b34c22d76dfd2973"
   },
   "tex_sha256": {
-    "main.tex": "29384aab53344fe4326506ec47affcf90d116b664f524ce20ba4f0cc093a52ff",
+    "main.tex": "671245a227ce7103d955afd7f2aa29fbaec082fd845e291a90e2a5e6df931be4",
     "anc/analytic/depth_sequences.tex": "bdb41cde86bbb99fb5661094da79b8574c14242ce4d263bd673cd3a93e3de872"
   },
   "scope": "Finite interval certificate plus exact constants; uniform lemmas are proved in Section 4.",
