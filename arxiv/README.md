@@ -5,8 +5,8 @@
 
     arXiv:submit/8190086 [math.NT] 6 Oct 2026
 
-Submitted to arXiv on 2026-10-06. A submission identifier is not an arXiv paper
-identifier. The file is kept unchanged as a record of what was submitted.
+Submitted to arXiv on 2026-10-06. The submission was not announced, so the paper has no
+arXiv identifier. The file is kept unchanged as a record of what was submitted.
 
 - 26 pages. The submitted manuscript is a later revision than the one at the repository
   root (23 pages); its `main.tex` has SHA-256
