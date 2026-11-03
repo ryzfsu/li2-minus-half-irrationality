@@ -2,7 +2,7 @@
 
 Ruiyi Zhang
 
-DOI: [10.5281/zenodo.23247749](https://doi.org/10.5281/zenodo.23247749)
+DOI: [10.5281/zenodo.23247748](https://doi.org/10.5281/zenodo.23247748)
 
 This repository contains the manuscript proving that Li_2(-1/2) is irrational, its LaTeX source, and the ancillary verification files.
 
@@ -17,7 +17,7 @@ Checks: see `anc/README.md`.
 
 ## Citation
 
-Ruiyi Zhang, *Irrationality of the dilogarithm at -1/2*, preprint, Zenodo, 2026. https://doi.org/10.5281/zenodo.23247749
+Ruiyi Zhang, *Irrationality of the dilogarithm at -1/2*, preprint, Zenodo, 2026. https://doi.org/10.5281/zenodo.23247748
 
 ```bibtex
 @misc{zhang2026li2minushalf,
@@ -26,7 +26,7 @@ Ruiyi Zhang, *Irrationality of the dilogarithm at -1/2*, preprint, Zenodo, 2026.
   year      = {2026},
   publisher = {Zenodo},
   note      = {Preprint},
-  doi       = {10.5281/zenodo.23247749},
-  url       = {https://doi.org/10.5281/zenodo.23247749}
+  doi       = {10.5281/zenodo.23247748},
+  url       = {https://doi.org/10.5281/zenodo.23247748}
 }
 ```
